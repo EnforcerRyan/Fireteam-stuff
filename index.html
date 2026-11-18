@@ -571,7 +571,7 @@
             <input type="text" id="inpBungieName" placeholder="e.g. IkoraRey#4821" class="d2-input w-full font-mono-tech" autocomplete="off">
           </div>
 
-<div class="lg:col-span-4">
+         <div class="lg:col-span-4">
   <label for="inpBungieApiKey" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">
     Bungie API Key
   </label>
@@ -936,24 +936,46 @@
   </div>
 
   <!-- Toast Container -->
-  <div id="toastBox"></div>
+ let BUNGIE_API_KEY = "";
+const BUNGIE_API_ORIGIN = "https://www.bungie.net";
 
-<script>
-/**
- * ============================================================================
- * DESTINY 2 FIRETEAM WEAPON & LOADOUT CHART GENERATOR
- * Complete Built-In Dataset (Weapons w/ Origin Traits, Exotic Armor, Subclasses,
- * Aspects, Fragments) + Bungie Manifest API + Bungie Vault/Profile Reader
- * ============================================================================
- */
+function confirmBungieApiKey() {
+  const input = document.getElementById("inpBungieApiKey");
+  const key = input.value.trim();
 
+  if (!key) {
+    showVaultAlert("Enter your Bungie API key, then select Confirm.", "warn");
+    return;
+  }
+
+  BUNGIE_API_KEY = key;
+  input.value = "";
+  document.getElementById("apiKeyStatus").textContent =
+    "API key confirmed for this page session.";
+  showToast("Bungie API key confirmed for this page session.");
+}
+
+async function bungieApiFetch(path, options = {}) {
+  if (!BUNGIE_API_KEY) {
+    throw new Error("Enter and confirm your Bungie API key first.");
+  }
+
+  return fetch(new URL(path, BUNGIE_API_ORIGIN), {
+    ...options,
+    headers: {
+      ...(options.headers || {}),
+      Accept: "application/json",
+      "X-API-Key": BUNGIE_API_KEY,
+    },
+  });
+}
 const STORAGE_KEY = 'd2_fireteam_chart_v3';
 
 // PROXY CONFIG
 const BUNGIE_PROXY_URL =
   "https://script.google.com/macros/s/AKfycbwOqu-pDY-C6gzYMV6lX0NQg89MuXfV_5qleQyjTyePTk0m666DkEY37E_-1IzBtFGr/exec";
 
-function bungieProxyUrl(path) {
+function bungieApiFetch(path) {
   // path begins with a slash, e.g. "/Platform/Destiny2/Manifest/"
   return `${BUNGIE_PROXY_URL}?path=${encodeURIComponent(path)}`;
 }
@@ -1385,8 +1407,9 @@ function saveState() {
     appState.damageFilter = document.getElementById('selDamageFilter').value;
     appState.originFilterMode = document.getElementById('selOriginFilterMode').value;
     appState.bungieName = document.getElementById('inpBungieName').value.trim();
-    appState.bungieApiKey = ""; // API key is injected server-side by the proxy
+    
     appState.restrictToVault = document.getElementById('chkVaultOnly').checked;
+    delete appState.bungieApiKey;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
   } catch (err) {
     console.warn("Save state error:", err);
@@ -1443,14 +1466,14 @@ async function importBungieManifest() {
   label.textContent = "Querying Bungie Manifest...";
 
   try {
-    const manifestRes = await fetch(bungieProxyUrl("/Platform/Destiny2/Manifest/"));
+    const manifestRes = await fetch(bungieApiFetch("/Platform/Destiny2/Manifest/"));
     if (!manifestRes.ok) throw new Error(`Manifest HTTP ${manifestRes.status}`);
     const manifestJson = await manifestRes.json();
     const invPath = manifestJson?.Response?.jsonWorldComponentContentPaths?.en?.DestinyInventoryItemDefinition;
     if (!invPath) throw new Error("DestinyInventoryItemDefinition path missing");
 
     label.textContent = "Downloading Item Definitions...";
-    const itemsRes = await fetch(bungieProxyUrl(invPath));
+    const itemsRes = await fetch(bungieApiFetch(invPath));
     if (!itemsRes.ok) throw new Error(`Items HTTP ${itemsRes.status}`);
     const items = await itemsRes.json();
 
@@ -1679,7 +1702,7 @@ async function fetchBungieVault() {
     const headers: { 'Content-Type': 'text/plain;charset=UTF-8' };
 
     // Step 1: SearchDestinyPlayerByBungieName
-    const searchRes = await fetch(bungieProxyUrl("/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/"), {
+    const searchRes = await fetch(bungieApiFetch("/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/"), {
       method: "POST",
       headers,
       body: JSON.stringify({ displayName, displayNameCode })
@@ -1707,7 +1730,7 @@ async function fetchBungieVault() {
 
     // Step 3: Fetch Profile Vault (102), Character Inventories (201), and Character Equipment (205)
     label.textContent = "Reading Vault & Characters...";
-    const profRes = await fetch(bungieProxyUrl(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=102,201,205`), { headers: { 'Content-Type': 'application/json' } });
+    const profRes = await fetch(bungieApiFetch(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=102,201,205`), { headers: { 'Content-Type': 'application/json' } });
     const profJson = await profRes.json();
 
     if (!profRes.ok || profJson.ErrorCode !== 1) {

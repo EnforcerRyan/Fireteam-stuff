@@ -1,0 +1,38 @@
+name: Update Destiny 2 Manifest data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 8 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build static Manifest data
+        run: node scripts/build-manifest.mjs
+        env:
+          BUNGIE_KEY: ${{ secrets.BUNGIE_KEY }}
+
+      - name: Commit generated data if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add manifest-data.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Destiny 2 Manifest data"
+            git push
+          else
+            echo "Manifest data is already up to date."
+          fi
