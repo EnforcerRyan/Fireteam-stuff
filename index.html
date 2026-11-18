@@ -1665,7 +1665,7 @@ async function fetchBungieVault() {
 
   try {
     // Proxy (server.js / Apps Script) injects X-API-Key server-side; the key never reaches this page.
-    const headers = { 'Content-Type': 'application/json' };
+    const headers: { 'Content-Type': 'text/plain;charset=UTF-8' };
 
     // Step 1: SearchDestinyPlayerByBungieName
     const searchRes = await fetch(bungieProxyUrl("/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/"), {
