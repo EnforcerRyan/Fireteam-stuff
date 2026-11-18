@@ -1407,8 +1407,9 @@ function saveState() {
     appState.damageFilter = document.getElementById('selDamageFilter').value;
     appState.originFilterMode = document.getElementById('selOriginFilterMode').value;
     appState.bungieName = document.getElementById('inpBungieName').value.trim();
-    appState.bungieApiKey = ""; // API key is injected server-side by the proxy
+    
     appState.restrictToVault = document.getElementById('chkVaultOnly').checked;
+    delete appState.bungieApiKey;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
   } catch (err) {
     console.warn("Save state error:", err);
