@@ -1,0 +1,2715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destiny 2 Fireteam Weapon & Loadout Chart</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-void: #0a0b0e;
+    --bg-panel: #12151c;
+    --bg-elevated: #161a23;
+    --bg-input: #0d0f13;
+    --border-dim: #252a36;
+    --border-brass: #c7a86e;
+    --brass-bright: #d4af37;
+    --brass-muted: #8a7346;
+    --text-primary: #eceae4;
+    --text-secondary: #9aa2b2;
+    --text-muted: #60687a;
+    --exotic-gold: #ceae33;
+    --legendary-purple: #522f65;
+    --solar-orange: #f0631e;
+    --arc-cyan: #79bbe8;
+    --void-purple: #b185db;
+    --stasis-blue: #4d88ff;
+    --strand-green: #35e366;
+    --prismatic-pink: #f272b8;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--bg-void);
+    background-image:
+      radial-gradient(ellipse at 50% 0%, rgba(199, 168, 110, 0.055) 0%, transparent 55%),
+      radial-gradient(circle at 50% 50%, transparent 45%, rgba(5, 6, 8, 0.85) 100%),
+      linear-gradient(rgba(199, 168, 110, 0.024) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(199, 168, 110, 0.024) 1px, transparent 1px),
+      linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-variant-numeric: tabular-nums;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  .font-destiny {
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .font-mono-tech {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Vex Corner-Bracket Panel Aesthetic (Sharp 1px Architectural Corners) */
+  .vex-panel {
+    position: relative;
+    background: linear-gradient(180deg, rgba(18, 21, 28, 0.96) 0%, rgba(13, 15, 19, 0.98) 100%);
+    border: 1px solid var(--border-dim);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(199, 168, 110, 0.06);
+    border-radius: 1px;
+  }
+
+  .vex-panel::before,
+  .vex-panel::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .vex-panel::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid var(--border-brass);
+    border-left: 2px solid var(--border-brass);
+  }
+
+  .vex-panel::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid var(--border-brass);
+    border-right: 2px solid var(--border-brass);
+  }
+
+  .vex-corners-alt {
+    position: relative;
+  }
+  .vex-corners-alt::before,
+  .vex-corners-alt::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .vex-corners-alt::before {
+    top: -1px;
+    right: -1px;
+    border-top: 2px solid var(--border-brass);
+    border-right: 2px solid var(--border-brass);
+  }
+  .vex-corners-alt::after {
+    bottom: -1px;
+    left: -1px;
+    border-bottom: 2px solid var(--border-brass);
+    border-left: 2px solid var(--border-brass);
+  }
+
+  /* Inner Vex Card (Guardian Loadout Cards) */
+  .vex-subcard {
+    position: relative;
+    background-color: #12151c;
+    border: 1px solid #252a36;
+    border-radius: 1px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+  .vex-subcard::before,
+  .vex-subcard::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    pointer-events: none;
+  }
+  .vex-subcard::before {
+    top: -1px;
+    left: -1px;
+    border-top: 1.5px solid var(--border-brass);
+    border-left: 1.5px solid var(--border-brass);
+  }
+  .vex-subcard::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 1.5px solid var(--border-brass);
+    border-right: 1.5px solid var(--border-brass);
+  }
+
+  /* Inputs & Selects */
+  .d2-input,
+  .d2-select {
+    background-color: var(--bg-input);
+    border: 1px solid #252a36;
+    color: var(--text-primary);
+    border-radius: 1px;
+    padding: 0.46rem 0.68rem;
+    font-size: 0.85rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    outline: none;
+  }
+
+  .d2-input:focus,
+  .d2-select:focus {
+    border-color: var(--border-brass);
+    box-shadow: 0 0 0 1px rgba(199, 168, 110, 0.35);
+  }
+
+  .d2-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%23c7a86e' stroke-width='2.2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.6rem center;
+    padding-right: 1.9rem;
+  }
+
+  /* Buttons (Sharp Architectural Edges) */
+  .btn-brass {
+    background: linear-gradient(180deg, #c7a86e 0%, #9b7e48 100%);
+    color: #0a0b0e;
+    font-weight: 700;
+    border: 1px solid #e2c792;
+    border-radius: 1px;
+    padding: 0.48rem 0.95rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    box-shadow: 0 2px 10px rgba(199, 168, 110, 0.2);
+  }
+
+  .btn-brass:hover:not(:disabled) {
+    background: linear-gradient(180deg, #d8ba82 0%, #ae8f54 100%);
+    box-shadow: 0 0 14px rgba(199, 168, 110, 0.38);
+  }
+
+  .btn-brass:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .btn-ghost {
+    background: #161a23;
+    color: var(--text-primary);
+    font-weight: 600;
+    border: 1px solid #2b3140;
+    border-radius: 1px;
+    padding: 0.46rem 0.85rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    border-color: var(--border-brass);
+    color: var(--border-brass);
+    background: #1b202b;
+  }
+
+  .btn-danger {
+    background: rgba(84, 22, 26, 0.45);
+    color: #f39c9c;
+    font-weight: 600;
+    border: 1px solid #75252b;
+    border-radius: 1px;
+    padding: 0.46rem 0.85rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+  }
+
+  .btn-danger:hover {
+    background: rgba(128, 30, 36, 0.65);
+    border-color: #d9534f;
+    color: #ffffff;
+  }
+
+  /* Autocomplete Dropdown (sugwrap + sugs) */
+  .sugwrap {
+    position: relative;
+    width: 100%;
+  }
+
+  .sugs {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    background: #0d0f13;
+    border: 1px solid var(--border-brass);
+    border-radius: 1px;
+    z-index: 60;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.9);
+    display: none;
+  }
+
+  .sugs.open {
+    display: block;
+  }
+
+  .sug-item {
+    padding: 0.46rem 0.68rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    cursor: pointer;
+    border-bottom: 1px solid #1b202b;
+    font-size: 0.82rem;
+    transition: background 0.1s ease;
+  }
+
+  .sug-item:last-child {
+    border-bottom: none;
+  }
+
+  .sug-item:hover,
+  .sug-item.active {
+    background: rgba(199, 168, 110, 0.18);
+    color: #fff;
+  }
+
+  /* Active Weapon Chips (wlist) */
+  .wchip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.28rem 0.55rem;
+    border-radius: 1px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    border: 1px solid #252a36;
+    background: #161a23;
+    transition: all 0.15s ease;
+  }
+
+  .wchip.exotic {
+    border-color: rgba(206, 174, 51, 0.65);
+    background: linear-gradient(90deg, rgba(206, 174, 51, 0.14) 0%, rgba(22, 26, 35, 0.98) 100%);
+  }
+
+  .wchip.legendary {
+    border-color: rgba(139, 92, 246, 0.55);
+    background: linear-gradient(90deg, rgba(82, 47, 101, 0.28) 0%, rgba(22, 26, 35, 0.98) 100%);
+  }
+
+  /* Subclass Element Indicator Stripe */
+  .sub-solar { border-left: 2px solid var(--solar-orange); }
+  .sub-arc { border-left: 2px solid var(--arc-cyan); }
+  .sub-void { border-left: 2px solid var(--void-purple); }
+  .sub-stasis { border-left: 2px solid var(--stasis-blue); }
+  .sub-strand { border-left: 2px solid var(--strand-green); }
+  .sub-prismatic { border-left: 2px solid var(--prismatic-pink); }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0b0e;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #252a36;
+    border-radius: 0px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--border-brass);
+  }
+
+  /* Toast Notification Box */
+  #toastBox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: none;
+  }
+
+  .toast-msg {
+    background: #12151c;
+    border: 1px solid var(--border-brass);
+    color: var(--text-primary);
+    padding: 0.65rem 1rem;
+    border-radius: 1px;
+    font-size: 0.82rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85);
+    animation: slideIn 0.2s ease-out;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Toggle Switch (Sharp Architectural Vex Styling) */
+  .vex-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  .vex-toggle input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .vex-toggle-track {
+    width: 34px;
+    height: 18px;
+    background: #0d0f13;
+    border: 1px solid #2b3140;
+    border-radius: 1px;
+    position: relative;
+    transition: all 0.15s ease;
+  }
+  .vex-toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    background: #60687a;
+    border-radius: 0px;
+    transition: all 0.15s ease;
+  }
+  .vex-toggle input:checked + .vex-toggle-track {
+    border-color: var(--border-brass);
+    background: rgba(199, 168, 110, 0.18);
+  }
+  .vex-toggle input:checked + .vex-toggle-track .vex-toggle-thumb {
+    transform: translateX(16px);
+    background: var(--border-brass);
+  }
+
+  /* Collapsible Section Chevron */
+  .sec-chevron {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: #0d0f13;
+    border: 1px solid #2b3140;
+    color: var(--border-brass);
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+    flex-shrink: 0;
+  }
+  .sec-chevron:hover {
+    border-color: var(--border-brass);
+  }
+  .sec-header-click {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  /* Origin Trait Pill Badge */
+  .origin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.28rem;
+    padding: 0.12rem 0.42rem;
+    font-size: 0.68rem;
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(199, 168, 110, 0.08);
+    border: 1px solid rgba(199, 168, 110, 0.35);
+    color: #dfc38d;
+    border-radius: 1px;
+    letter-spacing: 0.02em;
+  }
+
+  @media print {
+    body {
+      background: #ffffff !important;
+      color: #111827 !important;
+    }
+    .no-print {
+      display: none !important;
+    }
+    .vex-panel, .vex-subcard {
+      background: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: none !important;
+      color: #111827 !important;
+    }
+    .vex-panel::before, .vex-panel::after,
+    .vex-corners-alt::before, .vex-corners-alt::after,
+    .vex-subcard::before, .vex-subcard::after {
+      display: none !important;
+    }
+    .origin-badge {
+      border-color: #94a3b8 !important;
+      color: #334155 !important;
+      background: #f8fafc !important;
+    }
+  }
+</style>
+</head>
+<body class="antialiased selection:bg-[#c7a86e] selection:text-[#0a0b0e]">
+
+  <!-- Main Container -->
+  <div class="max-w-[1440px] mx-auto px-3 sm:px-6 py-6 space-y-6">
+
+    <!-- Header Banner -->
+    <header class="vex-panel p-4 sm:p-6">
+      <div class="vex-corners-alt flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2.5 text-xs font-mono-tech uppercase tracking-[0.2em] text-[#c7a86e] mb-1">
+            <span class="inline-block w-2 h-2 bg-[#c7a86e] rotate-45"></span>
+            <span>Vanguard Tactical Telemetry // Raid &amp; Dungeon Matrix</span>
+          </div>
+          <h1 class="font-destiny text-xl sm:text-2xl lg:text-3xl font-bold text-[#eceae4] tracking-wider">
+            Destiny 2 Fireteam Weapon &amp; Loadout Chart
+          </h1>
+          <p class="text-xs sm:text-sm text-[#9aa2b2] mt-1 max-w-3xl">
+            Configure Guardian subclasses, exotic armor, aspects, fragments, per-player Bungie Vault restrictions (up to 6 vaults, one assignable per Guardian), and Origin Trait filters to generate randomized fireteam loadouts.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5 no-print">
+          <button id="btnImportManifest" onclick="importBungieManifest()" class="btn-brass" title="Fetch live weapons, origin traits, exotic armors, subclasses, aspects &amp; fragments from Bungie.net Manifest">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span id="manifestBtnLabel">Import Destiny 2 API Data</span>
+          </button>
+          <button onclick="resetAllData()" class="btn-danger" title="Reset saved state to defaults">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Telemetry Status Strip -->
+      <div class="mt-4 pt-3 border-t border-[#252a36] flex flex-wrap items-center justify-between gap-2 text-xs font-mono-tech text-[#9aa2b2]">
+        <div class="flex flex-wrap items-center gap-4">
+          <span id="dbStatusBadge" class="inline-flex items-center gap-1.5 text-[#c7a86e]">
+            <span class="w-1.5 h-1.5 bg-[#c7a86e]"></span>
+            DB: BUILT-IN ARCHIVE READY
+          </span>
+          <span id="dbCountsText">WEAPONS: 0 | EXOTIC ARMOR: 0 | SUBCLASSES: 18 | ORIGIN TRAITS: 0</span>
+        </div>
+        <div id="vaultStatusStrip" class="text-[#9aa2b2]">
+          VAULT LINK: <span class="text-[#60687a]">OFFLINE (ALL ITEMS ENABLED)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 1. BUNGIE VAULT & INVENTORY LOOKUP PANEL -->
+    <section class="vex-panel p-4 sm:p-5 no-print" aria-label="Bungie Vault and Inventory Lookup">
+      <div class="vex-corners-alt">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 pb-3 mb-4 border-b border-[#252a36]">
+          <div class="flex items-center gap-2.5 sec-header-click" onclick="toggleSection('vault')" title="Click to expand / collapse">
+            <span class="w-2 h-2 bg-[#c7a86e]"></span>
+            <h2 class="font-destiny text-sm sm:text-base font-bold text-[#eceae4]">Bungie Vault &amp; Inventory Lookup</h2>
+            <span class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] text-[#c7a86e]">API v2 // PROFILE 102·201·205</span>
+            <span class="sec-chevron" data-chevron="vault" title="Collapse / Expand">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </div>
+          <div class="flex items-center gap-3">
+            <label class="vex-toggle gap-2.5" title="When active, weapons and exotic armor randomize only from each Guardian's assigned vault (per-card Vault Restriction selector). Supports up to 6 vaults, one per player.">
+              <input type="checkbox" id="chkVaultOnly" onchange="saveState(); updatePoolReadout(); renderGuardianCards();">
+              <span class="vex-toggle-track"><span class="vex-toggle-thumb"></span></span>
+              <span class="text-xs font-semibold uppercase tracking-wider text-[#eceae4]">Restrict Randomization to Assigned Vault Per Guardian</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="secBody-vault">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-end">
+          <!-- Bungie Name Input -->
+          <div class="lg:col-span-4">
+            <label for="inpBungieName" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">
+              Bungie Name (Name#1234)
+            </label>
+            <input type="text" id="inpBungieName" placeholder="e.g. IkoraRey#4821" class="d2-input w-full font-mono-tech" autocomplete="off">
+          </div>
+
+          <!-- API Key handled server-side by proxy -->
+          <div class="lg:col-span-4">
+            <label class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">
+              Bungie API Access
+            </label>
+            <div class="px-3 py-2 bg-[#0d0f13] border border-[#252a36] text-xs text-[#9aa2b2] font-mono-tech">
+              <span class="text-[#35e366]">PROXY MODE:</span> No API key needed — server.js injects it securely. Visitors just type their Bungie Name.<br>
+              <span class="text-[#60687a]">Host offline? Demo Vault / JSON / DIM paste still work.</span>
+            </div>
+          </div>
+
+          <!-- Vault Action Buttons -->
+          <div class="lg:col-span-4 flex flex-wrap items-center gap-2">
+            <button id="btnFetchVault" onclick="fetchBungieVault()" class="btn-brass flex-1 min-w-[165px]">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="16" rx="1"/>
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 4v3M12 17v3M4 12h3M17 12h3"/>
+              </svg>
+              <span id="vaultBtnLabel">Fetch Vault &amp; Inventory</span>
+            </button>
+            <button onclick="loadDemoVault()" class="btn-ghost" title="Load a realistic sample Vault &amp; Character inventory to test Vault filtering immediately">
+              Demo Vault
+            </button>
+            <button onclick="toggleVaultImportDrawer()" class="btn-ghost" title="Paste DIM CSV or Bungie Profile JSON">
+              JSON / DIM
+            </button>
+          </div>
+        </div>
+
+        <!-- Optional JSON / DIM Paste Drawer -->
+        <div id="vaultImportDrawer" class="hidden mt-3 p-3 bg-[#0d0f13] border border-[#252a36]">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+            <span class="text-xs font-mono-tech text-[#c7a86e]">OFFLINE / DIM FALLBACK: Paste Bungie Profile JSON (components 102/201/205) or DIM Weapon/Armor List</span>
+            <button onclick="toggleVaultImportDrawer()" class="text-xs text-[#9aa2b2] hover:text-white self-end sm:self-auto">Close [X]</button>
+          </div>
+          <textarea id="txtVaultPaste" rows="3" placeholder='Paste JSON response from Bungie GetProfile OR paste item names separated by commas/newlines (e.g. "Apex Predator, Zaouli&apos;s Bane, Celestial Nighthawk...")' class="d2-input w-full font-mono-tech text-xs"></textarea>
+          <div class="mt-2 flex justify-end gap-2">
+            <button onclick="parseManualVaultPaste()" class="btn-brass text-xs py-1.5 px-3">Import Pasted Vault Data</button>
+          </div>
+        </div>
+
+        <!-- Vault Diagnostic / Privacy Notice Box -->
+        <div id="vaultAlertBox" class="hidden mt-3 p-3 bg-[#161a23] border-l-2 border-[#c7a86e] text-xs text-[#eceae4]"></div>
+
+        <!-- Vault Summary: Loaded Vaults (up to 6) & Interactive Browser -->
+        <div id="vaultSummaryPanel" class="hidden mt-4 pt-3 border-t border-[#252a36]">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+            <div class="flex flex-col gap-1.5">
+              <span class="text-[10px] font-mono-tech uppercase text-[#60687a]" id="vaultListCaption">LOADED VAULTS (0/6):</span>
+              <div id="vaultListContainer" class="flex flex-wrap gap-1.5"></div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="toggleVaultBrowser()" class="btn-ghost text-xs py-1 px-2.5" id="btnToggleVaultBrowser">
+                Browse Vault Items
+              </button>
+              <button onclick="clearAllVaults()" class="btn-danger text-xs py-1 px-2.5">
+                Clear All Vaults
+              </button>
+            </div>
+          </div>
+
+          <!-- Vault -> Player Assignment -->
+          <div class="mt-3 pt-3 border-t border-[#252a36]">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-[10px] font-mono-tech uppercase text-[#60687a]" id="vaultAssignCaption">VAULT ASSIGNMENTS (0 VAULTS READY):</span>
+              <span class="text-[10px] font-mono-tech text-[#60687a]">ASSIGN EACH VAULT TO A PLAYER — USED WHEN VAULT RESTRICTION IS ACTIVE</span>
+            </div>
+            <div id="vaultAssignList" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2"></div>
+          </div>
+
+          <!-- Collapsible Vault Item Browser -->
+          <div id="vaultBrowserDrawer" class="hidden mt-3 p-3 bg-[#0d0f13] border border-[#252a36]">
+            <div class="flex flex-col sm:flex-row gap-2 mb-3">
+              <input type="text" id="inpVaultBrowserSearch" oninput="renderVaultBrowser()" placeholder="Search fetched Vault weapons, armor, or origin traits..." class="d2-input flex-1 text-xs">
+              <select id="selVaultBrowserCategory" onchange="renderVaultBrowser()" class="d2-select text-xs sm:w-48">
+                <option value="ALL">All Vault Categories</option>
+                <option value="Kinetic">Kinetic Slot Weapons</option>
+                <option value="Energy">Energy Slot Weapons</option>
+                <option value="Power">Power Slot Weapons</option>
+                <option value="Armor">Exotic Armor</option>
+              </select>
+            </div>
+            <div id="vaultBrowserList" class="max-h-56 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 pr-1"></div>
+          </div>
+        </div>
+        </div><!-- /secBody-vault -->
+      </div>
+    </section>
+
+    <!-- 2. WEAPON RULES, ORIGIN TRAIT SEARCH & EXCLUSIONS -->
+    <section class="vex-panel p-4 sm:p-5 no-print" aria-label="Weapon Rules and Origin Trait Filtering">
+      <div class="vex-corners-alt">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-4 border-b border-[#252a36]">
+          <div class="flex items-center gap-2.5 sec-header-click" onclick="toggleSection('rules')" title="Click to expand / collapse">
+            <span class="w-2 h-2 bg-[#c7a86e]"></span>
+            <h2 class="font-destiny text-sm sm:text-base font-bold text-[#eceae4]">Arsenal Rules, Origin Traits &amp; Exclusions</h2>
+            <span class="sec-chevron" data-chevron="rules" title="Collapse / Expand">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </div>
+          <div class="text-xs font-mono-tech text-[#9aa2b2]" id="eligiblePoolReadout">
+            ELIGIBLE POOL: -- KINETIC | -- ENERGY | -- POWER
+          </div>
+        </div>
+
+        <div id="secBody-rules">
+        <!-- Primary Rule Controls -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-4">
+          <div>
+            <label for="selFireteamSize" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Fireteam Size</label>
+            <select id="selFireteamSize" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <option value="6">6 Guardians (Raid)</option>
+              <option value="3">3 Guardians (Dungeon / GM)</option>
+              <option value="4">4 Guardians (Gambit / Comp)</option>
+              <option value="2">2 Guardians (Duo Challenge)</option>
+              <option value="1">1 Guardian (Solo)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="selExoticRule" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Exotic Weapon Limit</label>
+            <select id="selExoticRule" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <option value="enforce1">Enforce Max 1 Exotic (D2 Legal)</option>
+              <option value="guarantee1">Guarantee 1 Exotic Per Guardian</option>
+              <option value="legendaryOnly">Legendary Weapons Only</option>
+              <option value="unrestricted">Unrestricted (Ignore Limit)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="selDuplicateRule" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Fireteam Duplicates</label>
+            <select id="selDuplicateRule" onchange="saveState();" class="d2-select w-full">
+              <option value="allow">Allow Duplicate Weapons</option>
+              <option value="uniquePerSlot">Unique Weapon Per Slot</option>
+              <option value="uniqueGlobal">Strictly Unique Across Team</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="selTypeFilter" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Weapon Archetype / Type</label>
+            <select id="selTypeFilter" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <option value="ALL">All Weapon Types</option>
+              <option value="Auto Rifle">Auto Rifle</option>
+              <option value="Hand Cannon">Hand Cannon</option>
+              <option value="Pulse Rifle">Pulse Rifle</option>
+              <option value="Scout Rifle">Scout Rifle</option>
+              <option value="Submachine Gun">Submachine Gun</option>
+              <option value="Sidearm">Sidearm</option>
+              <option value="Bow">Combat Bow</option>
+              <option value="Shotgun">Shotgun</option>
+              <option value="Sniper Rifle">Sniper Rifle</option>
+              <option value="Fusion Rifle">Fusion Rifle</option>
+              <option value="Grenade Launcher">Grenade Launcher</option>
+              <option value="Glaive">Glaive</option>
+              <option value="Trace Rifle">Trace Rifle</option>
+              <option value="Rocket Launcher">Rocket Launcher</option>
+              <option value="Linear Fusion Rifle">Linear Fusion Rifle</option>
+              <option value="Machine Gun">Machine Gun</option>
+              <option value="Sword">Sword</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="selDamageFilter" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Element / Damage Type</label>
+            <select id="selDamageFilter" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <option value="ALL">All Elements</option>
+              <option value="Kinetic">Kinetic</option>
+              <option value="Stasis">Stasis</option>
+              <option value="Strand">Strand</option>
+              <option value="Solar">Solar</option>
+              <option value="Arc">Arc</option>
+              <option value="Void">Void</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Origin Trait Search & Weapon Exclusion Split Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-3 border-t border-[#252a36]">
+
+          <!-- Origin Trait Search & Filter Panel -->
+          <div class="bg-[#0d0f13] border border-[#252a36] p-3">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <label for="inpOriginTraitSearch" class="text-xs font-mono-tech uppercase tracking-wider text-[#c7a86e] font-semibold">
+                Origin Trait Search &amp; Filter
+              </label>
+              <select id="selOriginFilterMode" onchange="saveState(); updatePoolReadout();" class="d2-select text-xs py-1 px-2">
+                <option value="require">Mode: Require Selected Traits</option>
+                <option value="exclude">Mode: Exclude Selected Traits</option>
+              </select>
+            </div>
+
+            <div class="sugwrap">
+              <input type="text" id="inpOriginTraitSearch" placeholder="Search Origin Traits (e.g. Veist Stinger, Suros Synergy, Runneth Over, Cursed Thrall)..." class="d2-input w-full text-xs" autocomplete="off">
+              <div id="sugOriginTraits" class="sugs"></div>
+            </div>
+
+            <!-- Quick-Select Popular Origin Trait Pills -->
+            <div class="mt-2 flex flex-wrap items-center gap-1.5">
+              <span class="text-[10px] font-mono-tech uppercase text-[#60687a]">Quick Add:</span>
+              <button type="button" onclick="addOriginTraitFilter('Veist Stinger')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Veist Stinger</button>
+              <button type="button" onclick="addOriginTraitFilter('Suros Synergy')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Suros Synergy</button>
+              <button type="button" onclick="addOriginTraitFilter('Runneth Over')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Runneth Over</button>
+              <button type="button" onclick="addOriginTraitFilter('Cursed Thrall')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Cursed Thrall</button>
+              <button type="button" onclick="addOriginTraitFilter('Souldrinker')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Souldrinker</button>
+              <button type="button" onclick="addOriginTraitFilter('Bray Inheritance')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Bray Inheritance</button>
+            </div>
+
+            <!-- Active Origin Trait Chips -->
+            <div id="activeOriginTraitList" class="mt-2.5 flex flex-wrap gap-1.5 min-h-[28px] items-center">
+              <span class="text-xs text-[#60687a] italic">No Origin Trait filter active (all traits included).</span>
+            </div>
+          </div>
+
+          <!-- Specific Weapon Exclusions Search -->
+          <div class="bg-[#0d0f13] border border-[#252a36] p-3">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <label for="inpExcludeWeapon" class="text-xs font-mono-tech uppercase tracking-wider text-[#c7a86e] font-semibold">
+                Exclude Specific Weapons
+              </label>
+              <button type="button" onclick="clearExcludedWeapons()" class="text-[11px] font-mono-tech text-[#9aa2b2] hover:text-[#c7a86e] uppercase">
+                Clear Exclusions
+              </button>
+            </div>
+
+            <div class="sugwrap">
+              <input type="text" id="inpExcludeWeapon" placeholder="Search weapon by name, type, or origin trait to exclude..." class="d2-input w-full text-xs" autocomplete="off">
+              <div id="sugExcludeWeapons" class="sugs"></div>
+            </div>
+
+            <div class="mt-2 flex flex-wrap items-center gap-1.5">
+              <span class="text-[10px] font-mono-tech uppercase text-[#60687a]">Browse Pool:</span>
+              <select id="selQuickWeaponBrowse" onchange="if(this.value){ excludeWeaponByName(this.value); this.value=''; }" class="d2-select text-xs py-0.5 px-2 flex-1">
+                <option value="">Select a weapon from database to exclude...</option>
+              </select>
+            </div>
+
+            <!-- Active Excluded Weapons Chips -->
+            <div id="excludedWeaponList" class="mt-2.5 flex flex-wrap gap-1.5 min-h-[28px] items-center">
+              <span class="text-xs text-[#60687a] italic">No specific weapons excluded.</span>
+            </div>
+          </div>
+        </div>
+        </div><!-- /secBody-rules -->
+      </div>
+    </section>
+
+    <!-- 3. TEAM LOADOUTS & GUARDIAN CONFIGURATOR -->
+    <section class="vex-panel p-4 sm:p-5 no-print" aria-label="Team Loadouts Configurator">
+      <div class="vex-corners-alt">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-3 mb-4 border-b border-[#252a36]">
+          <div class="flex flex-wrap items-center gap-2.5 sec-header-click" onclick="toggleSection('guardians')" title="Click to expand / collapse">
+            <span class="w-2 h-2 bg-[#c7a86e]"></span>
+            <h2 class="font-destiny text-sm sm:text-base font-bold text-[#eceae4]">Fireteam Guardian Loadouts</h2>
+            <span class="text-xs font-mono-tech text-[#9aa2b2]">(Class · Subclass · Exotic Armor · Aspects · Fragments)</span>
+            <span class="sec-chevron" data-chevron="guardians" title="Collapse / Expand">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="randomizeAllLoadouts(false)" class="btn-ghost">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
+                <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
+                <line x1="4" y1="4" x2="9" y2="9"/>
+              </svg>
+              Randomize All Loadouts
+            </button>
+            <button onclick="randomizeAllLoadouts(true)" class="btn-brass">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+              Randomize Loadouts + Regenerate Chart
+            </button>
+          </div>
+        </div>
+
+        <div id="secBody-guardians">
+        <!-- 6 Guardian Cards Grid -->
+        <div id="guardianCardsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+        </div><!-- /secBody-guardians -->
+      </div>
+    </section>
+
+    <!-- 4. PRIMARY CHART GENERATION & EXPORT BAR -->
+    <section class="vex-panel p-4 sm:p-5 no-print" aria-label="Chart Generation Controls">
+      <div class="vex-corners-alt">
+        <div class="flex items-center gap-2.5 pb-3 mb-3 border-b border-[#252a36] sec-header-click" onclick="toggleSection('generate')" title="Click to expand / collapse">
+          <span class="w-2 h-2 bg-[#c7a86e]"></span>
+          <h2 class="font-destiny text-sm sm:text-base font-bold text-[#eceae4]">Chart Generation &amp; Export</h2>
+          <span class="sec-chevron" data-chevron="generate" title="Collapse / Expand">
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+        </div>
+        <div id="secBody-generate" class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div class="flex flex-wrap items-center gap-2.5">
+          <button onclick="generateFireteamChart()" class="btn-brass text-sm py-2.5 px-5">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            </svg>
+            Generate Fireteam Weapon &amp; Loadout Chart
+          </button>
+          <button onclick="rerollWeaponsOnly()" class="btn-ghost py-2.5 px-4">
+            Re-Roll Weapons Only
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="copyChartSummary()" class="btn-ghost">
+            Copy Text Summary
+          </button>
+          <button onclick="exportChartCSV()" class="btn-ghost">
+            Export CSV
+          </button>
+          <button onclick="window.print()" class="btn-ghost">
+            Print Chart
+          </button>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. GENERATED FIRETEAM MATRIX & BREAKDOWN -->
+    <section id="chartOutputSection" class="vex-panel p-4 sm:p-6" aria-label="Generated Fireteam Chart">
+      <div class="vex-corners-alt">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-4 border-b border-[#252a36]">
+          <div class="flex flex-wrap items-center gap-2.5 sec-header-click" onclick="toggleSection('chart')" title="Click to expand / collapse">
+            <span class="text-[11px] font-mono-tech uppercase tracking-[0.18em] text-[#c7a86e]">Tactical Assignment Output</span>
+            <h2 class="font-destiny text-lg sm:text-xl font-bold text-[#eceae4]">Fireteam Loadout &amp; Arsenal Matrix</h2>
+            <span class="sec-chevron" data-chevron="chart" title="Collapse / Expand">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </div>
+          <div id="chartTimestamp" class="text-xs font-mono-tech text-[#9aa2b2]">
+            READY TO GENERATE
+          </div>
+        </div>
+
+        <div id="secBody-chart">
+        <!-- Matrix Cards / Table Output -->
+        <div id="chartMatrixContainer" class="space-y-6">
+          <div class="p-8 text-center border border-dashed border-[#252a36] bg-[#0d0f13]">
+            <p class="font-destiny text-sm text-[#c7a86e] mb-1">Awaiting Tactical Generation</p>
+            <p class="text-xs text-[#9aa2b2]">Configure your fireteam above and click <strong class="text-[#eceae4]">Generate Fireteam Weapon &amp; Loadout Chart</strong>.</p>
+          </div>
+        </div>
+        </div><!-- /secBody-chart -->
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastBox"></div>
+
+<script>
+/**
+ * ============================================================================
+ * DESTINY 2 FIRETEAM WEAPON & LOADOUT CHART GENERATOR
+ * Complete Built-In Dataset (Weapons w/ Origin Traits, Exotic Armor, Subclasses,
+ * Aspects, Fragments) + Bungie Manifest API + Bungie Vault/Profile Reader
+ * ============================================================================
+ */
+
+const STORAGE_KEY = 'd2_fireteam_chart_v3';
+
+// PROXY CONFIG
+// - Google Apps Script mode: HtmlService injects the web app URL (<?= webAppUrl ?>).
+// - Node server.js mode: left empty, fetches fall back to the /proxy/... path prefix.
+const BUNGIE_PROXY_URL = ("<?= webAppUrl ?>".startsWith("http")) ? "<?= webAppUrl ?>" : "";
+
+function bungieProxyUrl(path) {
+  // path begins with a slash, e.g. "/Platform/Destiny2/Manifest/"
+  return BUNGIE_PROXY_URL
+    ? `${BUNGIE_PROXY_URL}?path=${encodeURIComponent(path)}`
+    : `/proxy${path}`;
+}
+
+function bungieProxyModeIsAppsScript() {
+  return Boolean(BUNGIE_PROXY_URL);
+}
+
+// Comprehensive Built-In Weapon Database with Origin Traits
+const BUILTIN_WEAPONS = [
+  // KINETIC SLOT (Kinetic, Stasis, Strand)
+  { name: "The Call", slot: "Kinetic", type: "Sidearm", damage: "Strand", rarity: "Legendary", originTrait: "Dealer's Choice" },
+  { name: "Mountaintop", slot: "Kinetic", type: "Grenade Launcher", damage: "Kinetic", rarity: "Legendary", originTrait: "Indomitability" },
+  { name: "Succession", slot: "Kinetic", type: "Sniper Rifle", damage: "Kinetic", rarity: "Legendary", originTrait: "Bray Inheritance" },
+  { name: "Heritage", slot: "Kinetic", type: "Shotgun", damage: "Kinetic", rarity: "Legendary", originTrait: "Bray Inheritance" },
+  { name: "Rufus's Fury", slot: "Kinetic", type: "Auto Rifle", damage: "Strand", rarity: "Legendary", originTrait: "Harmonic Resonance" },
+  { name: "Conditional Finality", slot: "Kinetic", type: "Shotgun", damage: "Stasis", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Witherhoard", slot: "Kinetic", type: "Grenade Launcher", damage: "Kinetic", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Izanagi's Burden", slot: "Kinetic", type: "Sniper Rifle", damage: "Kinetic", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Outbreak Perfected", slot: "Kinetic", type: "Pulse Rifle", damage: "Kinetic", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Khvostov 7G-0X", slot: "Kinetic", type: "Auto Rifle", damage: "Kinetic", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Supremacy", slot: "Kinetic", type: "Sniper Rifle", damage: "Kinetic", rarity: "Legendary", originTrait: "Explosive Pact" },
+  { name: "Scatter Signal", slot: "Kinetic", type: "Fusion Rifle", damage: "Strand", rarity: "Legendary", originTrait: "Dragon's Vengeance" },
+  { name: "Riptide", slot: "Kinetic", type: "Fusion Rifle", damage: "Stasis", rarity: "Legendary", originTrait: "One Quiet Moment" },
+  { name: "Deliverance", slot: "Kinetic", type: "Fusion Rifle", damage: "Stasis", rarity: "Legendary", originTrait: "Souldrinker" },
+  { name: "Submission", slot: "Kinetic", type: "Submachine Gun", damage: "Kinetic", rarity: "Legendary", originTrait: "Souldrinker" },
+  { name: "Fatebringer", slot: "Kinetic", type: "Hand Cannon", damage: "Kinetic", rarity: "Legendary", originTrait: "Timelost Magazine" },
+  { name: "Midnight Coup", slot: "Kinetic", type: "Hand Cannon", damage: "Kinetic", rarity: "Legendary", originTrait: "Indomitability" },
+  { name: "Hung Jury SR4", slot: "Kinetic", type: "Scout Rifle", damage: "Kinetic", rarity: "Legendary", originTrait: "Omolon Fluid Dynamics" },
+  { name: "Blast Furnace", slot: "Kinetic", type: "Pulse Rifle", damage: "Kinetic", rarity: "Legendary", originTrait: "Indomitability" },
+  { name: "Smite of Merain", slot: "Kinetic", type: "Pulse Rifle", damage: "Kinetic", rarity: "Legendary", originTrait: "Runneth Over" },
+  { name: "Imminence", slot: "Kinetic", type: "Submachine Gun", damage: "Strand", rarity: "Legendary", originTrait: "Collective Purpose" },
+  { name: "Breachlight", slot: "Kinetic", type: "Sidearm", damage: "Strand", rarity: "Legendary", originTrait: "Radiolaria Transposer" },
+  { name: "Lost Signal", slot: "Kinetic", type: "Grenade Launcher", damage: "Stasis", rarity: "Legendary", originTrait: "Radiolaria Transposer" },
+  { name: "Liturgy", slot: "Kinetic", type: "Grenade Launcher", damage: "Stasis", rarity: "Legendary", originTrait: "Dark Ether Reaper" },
+  { name: "Tinasha's Mastery", slot: "Kinetic", type: "Sidearm", damage: "Stasis", rarity: "Legendary", originTrait: "Skulking Wolf" },
+  { name: "Rake Angle", slot: "Kinetic", type: "Glaive", damage: "Stasis", rarity: "Legendary", originTrait: "Vanguard's Vindication" },
+  { name: "Osteo Striga", slot: "Kinetic", type: "Submachine Gun", damage: "Kinetic", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Quicksilver Storm", slot: "Kinetic", type: "Auto Rifle", damage: "Strand", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Wish-Ender", slot: "Kinetic", type: "Bow", damage: "Kinetic", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Ace of Spades", slot: "Kinetic", type: "Hand Cannon", damage: "Kinetic", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Euphony", slot: "Kinetic", type: "Linear Fusion Rifle", damage: "Strand", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Lingering Dread", slot: "Kinetic", type: "Grenade Launcher", damage: "Stasis", rarity: "Legendary", originTrait: "Bitterspite" },
+  { name: "New Pacific Epitaph", slot: "Kinetic", type: "Grenade Launcher", damage: "Stasis", rarity: "Legendary", originTrait: "Restoration Ritual" },
+  { name: "Appetence", slot: "Kinetic", type: "Trace Rifle", damage: "Stasis", rarity: "Legendary", originTrait: "Dragon's Vengeance" },
+
+  // ENERGY SLOT (Solar, Arc, Void)
+  { name: "Zaouli's Bane", slot: "Energy", type: "Hand Cannon", damage: "Solar", rarity: "Legendary", originTrait: "Runneth Over" },
+  { name: "Sunshot", slot: "Energy", type: "Hand Cannon", damage: "Solar", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Forbearance", slot: "Energy", type: "Grenade Launcher", damage: "Arc", rarity: "Legendary", originTrait: "Souldrinker" },
+  { name: "Indebted Kindness", slot: "Energy", type: "Sidearm", damage: "Arc", rarity: "Legendary", originTrait: "Sundering" },
+  { name: "Aberrant Action", slot: "Energy", type: "Sidearm", damage: "Solar", rarity: "Legendary", originTrait: "Radiolaria Transposer" },
+  { name: "Velocity Baton", slot: "Energy", type: "Grenade Launcher", damage: "Void", rarity: "Legendary", originTrait: "Bray Legacy" },
+  { name: "Choir of One", slot: "Energy", type: "Auto Rifle", damage: "Void", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Still Hunt", slot: "Energy", type: "Sniper Rifle", damage: "Solar", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Graviton Lance", slot: "Energy", type: "Pulse Rifle", damage: "Void", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Trinity Ghoul", slot: "Energy", type: "Bow", damage: "Arc", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Divinity", slot: "Energy", type: "Trace Rifle", damage: "Arc", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Cloudstrike", slot: "Energy", type: "Sniper Rifle", damage: "Arc", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Buried Bloodline", slot: "Energy", type: "Sidearm", damage: "Void", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Calus Mini-Tool", slot: "Energy", type: "Submachine Gun", damage: "Solar", rarity: "Legendary", originTrait: "To Excess" },
+  { name: "Funnelweb", slot: "Energy", type: "Submachine Gun", damage: "Void", rarity: "Legendary", originTrait: "Veist Stinger" },
+  { name: "IKELOS_SMG_v1.0.3", slot: "Energy", type: "Submachine Gun", damage: "Arc", rarity: "Legendary", originTrait: "Rasputin's Arsenal" },
+  { name: "The Recluse", slot: "Energy", type: "Submachine Gun", damage: "Void", rarity: "Legendary", originTrait: "Indomitability" },
+  { name: "Luna's Howl", slot: "Energy", type: "Hand Cannon", damage: "Solar", rarity: "Legendary", originTrait: "Indomitability" },
+  { name: "Word of Crota", slot: "Energy", type: "Hand Cannon", damage: "Void", rarity: "Legendary", originTrait: "Cursed Thrall" },
+  { name: "Abyss Defiant", slot: "Energy", type: "Auto Rifle", damage: "Solar", rarity: "Legendary", originTrait: "Cursed Thrall" },
+  { name: "Oversoul Edict", slot: "Energy", type: "Pulse Rifle", damage: "Arc", rarity: "Legendary", originTrait: "Cursed Thrall" },
+  { name: "Nullify", slot: "Energy", type: "Pulse Rifle", damage: "Solar", rarity: "Legendary", originTrait: "Collective Purpose" },
+  { name: "Non-Denouement", slot: "Energy", type: "Bow", damage: "Arc", rarity: "Legendary", originTrait: "Collective Purpose" },
+  { name: "No Hesitation", slot: "Energy", type: "Auto Rifle", damage: "Solar", rarity: "Legendary", originTrait: "Dealer's Choice" },
+  { name: "The Eremite", slot: "Energy", type: "Fusion Rifle", damage: "Solar", rarity: "Legendary", originTrait: "Head Rush" },
+  { name: "Cartesian Coordinate", slot: "Energy", type: "Fusion Rifle", damage: "Solar", rarity: "Legendary", originTrait: "Suros Synergy" },
+  { name: "Techeun Force", slot: "Energy", type: "Fusion Rifle", damage: "Arc", rarity: "Legendary", originTrait: "Explosive Pact" },
+  { name: "Nation of Beasts", slot: "Energy", type: "Hand Cannon", damage: "Arc", rarity: "Legendary", originTrait: "Explosive Pact" },
+  { name: "Tyranny of Heaven", slot: "Energy", type: "Bow", damage: "Solar", rarity: "Legendary", originTrait: "Explosive Pact" },
+  { name: "Summoner", slot: "Energy", type: "Auto Rifle", damage: "Solar", rarity: "Legendary", originTrait: "Alacrity" },
+  { name: "Igneous Hammer", slot: "Energy", type: "Hand Cannon", damage: "Solar", rarity: "Legendary", originTrait: "Alacrity" },
+  { name: "Acasia's Dejection", slot: "Energy", type: "Trace Rifle", damage: "Solar", rarity: "Legendary", originTrait: "Harmonic Resonance" },
+  { name: "Heliocentric QSc", slot: "Energy", type: "Sidearm", damage: "Solar", rarity: "Legendary", originTrait: "Nadir Focus" },
+  { name: "Ros Arago IV", slot: "Energy", type: "Auto Rifle", damage: "Void", rarity: "Legendary", originTrait: "Wild Card" },
+  { name: "VS Pyroelectric Propellant", slot: "Energy", type: "Auto Rifle", damage: "Arc", rarity: "Legendary", originTrait: "Bray Legacy" },
+  { name: "Chroma Rush", slot: "Energy", type: "Auto Rifle", damage: "Solar", rarity: "Legendary", originTrait: "Splicer" },
+  { name: "Trustee", slot: "Energy", type: "Scout Rifle", damage: "Solar", rarity: "Legendary", originTrait: "Bray Inheritance" },
+  { name: "Posterity", slot: "Energy", type: "Hand Cannon", damage: "Arc", rarity: "Legendary", originTrait: "Bray Inheritance" },
+
+  // POWER SLOT (Solar, Arc, Void, Stasis, Strand)
+  { name: "Apex Predator", slot: "Power", type: "Rocket Launcher", damage: "Solar", rarity: "Legendary", originTrait: "Explosive Pact" },
+  { name: "Edge Transit", slot: "Power", type: "Grenade Launcher", damage: "Void", rarity: "Legendary", originTrait: "Indomitability" },
+  { name: "Gjallarhorn", slot: "Power", type: "Rocket Launcher", damage: "Solar", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Tractor Cannon", slot: "Power", type: "Shotgun", damage: "Void", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "The Lament", slot: "Power", type: "Sword", damage: "Solar", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Whisper of the Worm", slot: "Power", type: "Sniper Rifle", damage: "Solar", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Leviathan's Breath", slot: "Power", type: "Bow", damage: "Void", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Thunderlord", slot: "Power", type: "Machine Gun", damage: "Arc", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Microcosm", slot: "Power", type: "Trace Rifle", damage: "Kinetic", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Dragon's Breath", slot: "Power", type: "Rocket Launcher", damage: "Solar", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Parasite", slot: "Power", type: "Grenade Launcher", damage: "Solar", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Xenophage", slot: "Power", type: "Machine Gun", damage: "Solar", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Anarchy", slot: "Power", type: "Grenade Launcher", damage: "Arc", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
+  { name: "Cold Comfort", slot: "Power", type: "Rocket Launcher", damage: "Stasis", rarity: "Legendary", originTrait: "Restoration Ritual" },
+  { name: "Hothead", slot: "Power", type: "Rocket Launcher", damage: "Arc", rarity: "Legendary", originTrait: "Vanguard's Vindication" },
+  { name: "Crux Termination IV", slot: "Power", type: "Rocket Launcher", damage: "Arc", rarity: "Legendary", originTrait: "Wild Card" },
+  { name: "Faith-Keeper", slot: "Power", type: "Rocket Launcher", damage: "Void", rarity: "Legendary", originTrait: "Radiolaria Transposer" },
+  { name: "Cataphract GL3", slot: "Power", type: "Grenade Launcher", damage: "Strand", rarity: "Legendary", originTrait: "Alacrity" },
+  { name: "VS Chill Inhibitor", slot: "Power", type: "Grenade Launcher", damage: "Stasis", rarity: "Legendary", originTrait: "Bray Legacy" },
+  { name: "Wicked Sister", slot: "Power", type: "Grenade Launcher", damage: "Strand", rarity: "Legendary", originTrait: "Vanguard's Vindication" },
+  { name: "Bitter/Sweet", slot: "Power", type: "Grenade Launcher", damage: "Arc", rarity: "Legendary", originTrait: "Dark Ether Reaper" },
+  { name: "Cataclysmic", slot: "Power", type: "Linear Fusion Rifle", damage: "Solar", rarity: "Legendary", originTrait: "Souldrinker" },
+  { name: "Briar's Contempt", slot: "Power", type: "Linear Fusion Rifle", damage: "Solar", rarity: "Legendary", originTrait: "Harmonic Resonance" },
+  { name: "Doomed Petitioner", slot: "Power", type: "Linear Fusion Rifle", damage: "Void", rarity: "Legendary", originTrait: "Dragon's Vengeance" },
+  { name: "Scintillation", slot: "Power", type: "Linear Fusion Rifle", damage: "Strand", rarity: "Legendary", originTrait: "Vanguard's Vindication" },
+  { name: "Taipan-4fr", slot: "Power", type: "Linear Fusion Rifle", damage: "Void", rarity: "Legendary", originTrait: "Veist Stinger" },
+  { name: "Stormchaser", slot: "Power", type: "Linear Fusion Rifle", damage: "Arc", rarity: "Legendary", originTrait: "Bitterspite" },
+  { name: "Commemoration", slot: "Power", type: "Machine Gun", damage: "Void", rarity: "Legendary", originTrait: "Bray Inheritance" },
+  { name: "Song of Ir Yût", slot: "Power", type: "Machine Gun", damage: "Arc", rarity: "Legendary", originTrait: "Cursed Thrall" },
+  { name: "Hammerhead", slot: "Power", type: "Machine Gun", damage: "Void", rarity: "Legendary", originTrait: "Indomitability" },
+  { name: "Pro Memoria", slot: "Power", type: "Machine Gun", damage: "Strand", rarity: "Legendary", originTrait: "Dealer's Choice" },
+  { name: "Fixed Odds", slot: "Power", type: "Machine Gun", damage: "Solar", rarity: "Legendary", originTrait: "To Excess" },
+  { name: "Falling Guillotine", slot: "Power", type: "Sword", damage: "Void", rarity: "Legendary", originTrait: "Indomitability" },
+  { name: "Bequest", slot: "Power", type: "Sword", damage: "Arc", rarity: "Legendary", originTrait: "Bray Inheritance" },
+  { name: "Summum Bonum", slot: "Power", type: "Sword", damage: "Arc", rarity: "Legendary", originTrait: "Collective Purpose" },
+  { name: "The Other Half", slot: "Power", type: "Sword", damage: "Void", rarity: "Legendary", originTrait: "Hot Swap" }
+];
+
+// Built-in Exotic Armor Database
+const BUILTIN_EXOTIC_ARMOR = [
+  // Hunter
+  { name: "Celestial Nighthawk", classType: "Hunter", slot: "Helmet" },
+  { name: "Star-Eater Scales", classType: "Hunter", slot: "Legs" },
+  { name: "Orpheus Rig", classType: "Hunter", slot: "Legs" },
+  { name: "Gyrfalcon's Hauberk", classType: "Hunter", slot: "Chest" },
+  { name: "Omnioculus", classType: "Hunter", slot: "Chest" },
+  { name: "Liar's Handshake", classType: "Hunter", slot: "Arms" },
+  { name: "Assassin's Cowl", classType: "Hunter", slot: "Helmet" },
+  { name: "Lucky Pants", classType: "Hunter", slot: "Legs" },
+  { name: "Renewal Grasps", classType: "Hunter", slot: "Arms" },
+  { name: "Cyrtarachne's Facade", classType: "Hunter", slot: "Helmet" },
+  { name: "Shards of Galanor", classType: "Hunter", slot: "Arms" },
+  { name: "Mothkeeper's Wraps", classType: "Hunter", slot: "Arms" },
+  { name: "Relativism (Exotic Class Item)", classType: "Hunter", slot: "Class Item" },
+  { name: "Mask of Fealty", classType: "Hunter", slot: "Helmet" },
+  { name: "Gifted Conviction", classType: "Hunter", slot: "Chest" },
+  // Titan
+  { name: "Cuirass of the Falling Star", classType: "Titan", slot: "Chest" },
+  { name: "Synthoceps", classType: "Titan", slot: "Arms" },
+  { name: "Pyrogale Gauntlets", classType: "Titan", slot: "Arms" },
+  { name: "Loreley Splendor Helm", classType: "Titan", slot: "Helmet" },
+  { name: "Heart of Inmost Light", classType: "Titan", slot: "Chest" },
+  { name: "Precious Scars", classType: "Titan", slot: "Helmet" },
+  { name: "Abeyant Leap", classType: "Titan", slot: "Legs" },
+  { name: "Banner of War / Wormgod Caress", classType: "Titan", slot: "Arms" },
+  { name: "Helm of Saint-14", classType: "Titan", slot: "Helmet" },
+  { name: "Ursa Furiosa", classType: "Titan", slot: "Arms" },
+  { name: "Stronghold", classType: "Titan", slot: "Arms" },
+  { name: "Hazardous Propulsion", classType: "Titan", slot: "Chest" },
+  { name: "Wishful Ignorance", classType: "Titan", slot: "Arms" },
+  { name: "Stoicism (Exotic Class Item)", classType: "Titan", slot: "Class Item" },
+  // Warlock
+  { name: "Speaker's Sight", classType: "Warlock", slot: "Helmet" },
+  { name: "Starfire Protocol", classType: "Warlock", slot: "Chest" },
+  { name: "Phoenix Protocol", classType: "Warlock", slot: "Chest" },
+  { name: "Sunbracers", classType: "Warlock", slot: "Arms" },
+  { name: "Lunafaction Boots", classType: "Warlock", slot: "Legs" },
+  { name: "Cenotaph Mask", classType: "Warlock", slot: "Helmet" },
+  { name: "Getaway Artist", classType: "Warlock", slot: "Arms" },
+  { name: "Osmiomancy Gloves", classType: "Warlock", slot: "Arms" },
+  { name: "Contraverse Hold", classType: "Warlock", slot: "Arms" },
+  { name: "Nezarec's Sin", classType: "Warlock", slot: "Helmet" },
+  { name: "Briarbinds", classType: "Warlock", slot: "Arms" },
+  { name: "Swarmers", classType: "Warlock", slot: "Legs" },
+  { name: "Fallen Sunstar", classType: "Warlock", slot: "Helmet" },
+  { name: "Geomag Stabilizers", classType: "Warlock", slot: "Legs" },
+  { name: "Mataiodoxía", classType: "Warlock", slot: "Chest" },
+  { name: "Solipsism (Exotic Class Item)", classType: "Warlock", slot: "Class Item" }
+];
+
+// Subclasses, Aspects, and Fragments Matrix
+const SUBCLASS_DATA = {
+  Hunter: [
+    {
+      name: "Gunslinger (Solar)",
+      element: "Solar",
+      aspects: ["Knock 'Em Down", "On Your Mark", "Gunpowder Gamble"],
+      fragments: ["Ember of Torches", "Ember of Empyrean", "Ember of Solace", "Ember of Ashes", "Ember of Singeing", "Ember of Char", "Ember of Mercy", "Ember of Benevolence"]
+    },
+    {
+      name: "Arcstrider (Arc)",
+      element: "Arc",
+      aspects: ["Flow State", "Lethal Current", "Tempest Strike", "Ascension"],
+      fragments: ["Spark of Resistance", "Spark of Shock", "Spark of Ions", "Spark of Feedback", "Spark of Amplitude", "Spark of Haste", "Spark of Beacons"]
+    },
+    {
+      name: "Nightstalker (Void)",
+      element: "Void",
+      aspects: ["Vanishing Step", "Stylish Executioner", "Trapper's Ambush", "On the Prowl"],
+      fragments: ["Echo of Persistence", "Echo of Undermining", "Echo of Starvation", "Echo of Obscurity", "Echo of Reprisal", "Echo of Cessation", "Echo of Instability"]
+    },
+    {
+      name: "Revenant (Stasis)",
+      element: "Stasis",
+      aspects: ["Grim Harvest", "Touch of Winter", "Shatterdive", "Winter's Shroud"],
+      fragments: ["Whisper of Durance", "Whisper of Hedrons", "Whisper of Shards", "Whisper of Rime", "Whisper of Torment", "Whisper of Fissures", "Whisper of Conduction"]
+    },
+    {
+      name: "Threadrunner (Strand)",
+      element: "Strand",
+      aspects: ["Widow's Silk", "Ensnaring Slam", "Threaded Specter", "Whirling Maelstrom"],
+      fragments: ["Thread of Generation", "Thread of Warding", "Thread of Ascent", "Thread of Continuity", "Thread of Mind", "Thread of Transmutation", "Thread of Fury"]
+    },
+    {
+      name: "Prismatic Hunter",
+      element: "Prismatic",
+      aspects: ["Stylish Executioner", "Winter's Shroud", "Gunpowder Gamble", "Threaded Specter", "Ascension"],
+      fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Dawn", "Facet of Courage", "Facet of Balance", "Facet of Ruin", "Facet of Hope", "Facet of Dominance"]
+    }
+  ],
+  Titan: [
+    {
+      name: "Sunbreaker (Solar)",
+      element: "Solar",
+      aspects: ["Sol Invictus", "Roaring Flames", "Consecration"],
+      fragments: ["Ember of Torches", "Ember of Empyrean", "Ember of Solace", "Ember of Ashes", "Ember of Searing", "Ember of Singeing", "Ember of Mercy"]
+    },
+    {
+      name: "Striker (Arc)",
+      element: "Arc",
+      aspects: ["Touch of Thunder", "Knockout", "Juggernaut", "Storm's Keep"],
+      fragments: ["Spark of Resistance", "Spark of Shock", "Spark of Magnitude", "Spark of Ions", "Spark of Feedback", "Spark of Recharge", "Spark of Haste"]
+    },
+    {
+      name: "Sentinel (Void)",
+      element: "Void",
+      aspects: ["Controlled Demolition", "Bastion", "Offensive Bulwark", "Unbreakable"],
+      fragments: ["Echo of Undermining", "Echo of Persistence", "Echo of Starvation", "Echo of Leeching", "Echo of Instability", "Echo of Vigilance", "Echo of Expulsion"]
+    },
+    {
+      name: "Behemoth (Stasis)",
+      element: "Stasis",
+      aspects: ["Tectonic Harvest", "Diamond Lance", "Howl of the Storm", "Cryoclasm"],
+      fragments: ["Whisper of Shards", "Whisper of Rime", "Whisper of Fissures", "Whisper of Conduction", "Whisper of Chains", "Whisper of Torment", "Whisper of Hunger"]
+    },
+    {
+      name: "Berserker (Strand)",
+      element: "Strand",
+      aspects: ["Banner of War", "Into the Fray", "Drengr's Lash", "Flechette Storm"],
+      fragments: ["Thread of Warding", "Thread of Generation", "Thread of Fury", "Thread of Transmutation", "Thread of Continuity", "Thread of Mind", "Thread of Ascent"]
+    },
+    {
+      name: "Prismatic Titan",
+      element: "Prismatic",
+      aspects: ["Consecration", "Knockout", "Diamond Lance", "Drengr's Lash", "Unbreakable"],
+      fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Balance", "Facet of Dawn", "Facet of Ruin", "Facet of Courage", "Facet of Sacrifice", "Facet of Blessing"]
+    }
+  ],
+  Warlock: [
+    {
+      name: "Dawnblade (Solar)",
+      element: "Solar",
+      aspects: ["Touch of Flame", "Icarus Dash", "Heat Rises", "Hellion"],
+      fragments: ["Ember of Empyrean", "Ember of Torches", "Ember of Benevolence", "Ember of Ashes", "Ember of Solace", "Ember of Singeing", "Ember of Mercy"]
+    },
+    {
+      name: "Stormcaller (Arc)",
+      element: "Arc",
+      aspects: ["Arc Soul", "Electrostatic Mind", "Lightning Surge", "Ionic Sentry"],
+      fragments: ["Spark of Ions", "Spark of Shock", "Spark of Resistance", "Spark of Beacons", "Spark of Amplitude", "Spark of Discharge", "Spark of Haste"]
+    },
+    {
+      name: "Voidwalker (Void)",
+      element: "Void",
+      aspects: ["Feed the Void", "Child of the Old Gods", "Chaos Accelerant"],
+      fragments: ["Echo of Undermining", "Echo of Persistence", "Echo of Instability", "Echo of Expulsion", "Echo of Remnants", "Echo of Harvest", "Echo of Obscurity"]
+    },
+    {
+      name: "Shadebinder (Stasis)",
+      element: "Stasis",
+      aspects: ["Bleak Watcher", "Iceflare Bolts", "Glacial Harvest", "Frostpulse"],
+      fragments: ["Whisper of Durance", "Whisper of Torment", "Whisper of Chains", "Whisper of Shards", "Whisper of Refraction", "Whisper of Fissures", "Whisper of Conduction"]
+    },
+    {
+      name: "Broodweaver (Strand)",
+      element: "Strand",
+      aspects: ["Mindspun Invocation", "Weaver's Call", "The Wanderer", "Weavewalk"],
+      fragments: ["Thread of Generation", "Thread of Evolution", "Thread of Warding", "Thread of Continuity", "Thread of Rebirth", "Thread of Ascent", "Thread of Mind"]
+    },
+    {
+      name: "Prismatic Warlock",
+      element: "Prismatic",
+      aspects: ["Feed the Void", "Bleak Watcher", "Hellion", "Lightning Surge", "Weaver's Call"],
+      fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Dominance", "Facet of Balance", "Facet of Awakening", "Facet of Courage", "Facet of Dawn", "Facet of Devotion"]
+    }
+  ]
+};
+
+// Runtime Databases
+let WEAPON_DB = [...BUILTIN_WEAPONS];
+let EXOTIC_ARMOR_DB = [...BUILTIN_EXOTIC_ARMOR];
+let MANIFEST_HASH_MAP = {}; // itemHash -> { name, category, slot, type, damage, rarity, originTrait, classType }
+
+// Valid damage types per weapon slot (fix: prevents Kinetic/Stasis/Strand appearing in
+// Energy slot and Solar/Arc/Void appearing in Kinetic slot)
+const VALID_SLOT_DAMAGE = {
+  Kinetic: new Set(["Kinetic", "Stasis", "Strand"]),
+  Energy: new Set(["Solar", "Arc", "Void"]),
+  Power: new Set(["Solar", "Arc", "Void", "Stasis", "Strand"])
+};
+
+function sanitizeWeaponDb() {
+  WEAPON_DB = WEAPON_DB.filter(w => {
+    const validSet = VALID_SLOT_DAMAGE[w.slot];
+    if (!validSet) return false; // unknown slot
+    const isExotic = w.rarity === "Exotic";
+    const valid = validSet.has(w.damage) || (isExotic && w.damage === "Kinetic"); // rare kinetic-damage exotics (e.g. Microcosm)
+    if (!valid) {
+      console.warn("Excluded weapon with impossible slot/damage combination:", w.name, "|", w.slot, "slot /", w.damage, "damage");
+    }
+    return valid;
+  });
+}
+
+// Application State
+let appState = {
+  fireteamSize: 6,
+  exoticRule: "enforce1",
+  duplicateRule: "allow",
+  typeFilter: "ALL",
+  damageFilter: "ALL",
+  originFilterMode: "require",
+  selectedOriginTraits: [],
+  excludedWeapons: [],
+  bungieName: "",
+  bungieApiKey: "",
+  restrictToVault: false,
+  vaults: [], // up to 6: [{ id, displayName, weaponNames: [], armorNames: [] }]
+  vaultSeq: 0,
+  collapsedSections: {},
+  guardians: [
+    { name: "Guardian 1", classType: "Warlock", subclass: "Dawnblade (Solar)", exoticArmor: "Speaker's Sight", armorSlotFilter: "ALL", vaultScope: "ANY", aspects: ["Touch of Flame", "Hellion"], fragments: ["Ember of Benevolence", "Ember of Empyrean", "Ember of Torches", "Ember of Ashes"] },
+    { name: "Guardian 2", classType: "Hunter", subclass: "Gunslinger (Solar)", exoticArmor: "Celestial Nighthawk", armorSlotFilter: "ALL", vaultScope: "ANY", aspects: ["Knock 'Em Down", "On Your Mark"], fragments: ["Ember of Torches", "Ember of Empyrean", "Ember of Solace", "Ember of Ashes"] },
+    { name: "Guardian 3", classType: "Titan", subclass: "Prismatic Titan", exoticArmor: "Cuirass of the Falling Star", armorSlotFilter: "ALL", vaultScope: "ANY", aspects: ["Consecration", "Knockout"], fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Balance", "Facet of Dawn", "Facet of Courage"] },
+    { name: "Guardian 4", classType: "Warlock", subclass: "Prismatic Warlock", exoticArmor: "Getaway Artist", armorSlotFilter: "ALL", vaultScope: "ANY", aspects: ["Feed the Void", "Bleak Watcher"], fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Dominance", "Facet of Balance", "Facet of Courage"] },
+    { name: "Guardian 5", classType: "Hunter", subclass: "Nightstalker (Void)", exoticArmor: "Orpheus Rig", armorSlotFilter: "ALL", vaultScope: "ANY", aspects: ["Vanishing Step", "Stylish Executioner"], fragments: ["Echo of Persistence", "Echo of Undermining", "Echo of Starvation", "Echo of Obscurity"] },
+    { name: "Guardian 6", classType: "Titan", subclass: "Berserker (Strand)", exoticArmor: "Synthoceps", armorSlotFilter: "ALL", vaultScope: "ANY", aspects: ["Banner of War", "Into the Fray"], fragments: ["Thread of Warding", "Thread of Generation", "Thread of Fury", "Thread of Continuity"] }
+  ],
+  lastGeneratedChart: null
+};
+
+// ============================================================================
+// INITIALIZATION & PERSISTENCE
+// ============================================================================
+
+window.onload = function () {
+  loadState();
+  sanitizeWeaponDb();
+  syncControlsFromState();
+  populateQuickWeaponBrowse();
+  renderOriginTraitChips();
+  renderExcludedWeaponChips();
+  renderGuardianCards();
+  updateDatabaseStatus();
+  updateVaultUI();
+  updatePoolReadout();
+  setupAutocompleteListeners();
+  applyCollapsedSections();
+  if (appState.lastGeneratedChart) {
+    renderGeneratedChart(appState.lastGeneratedChart);
+  }
+};
+
+// ============================================================================
+// COLLAPSIBLE SECTIONS
+// ============================================================================
+
+function toggleSection(sectionKey) {
+  appState.collapsedSections = appState.collapsedSections || {};
+  appState.collapsedSections[sectionKey] = !appState.collapsedSections[sectionKey];
+  saveState();
+  applyCollapsedSections();
+}
+
+function applyCollapsedSections() {
+  const map = appState.collapsedSections || {};
+  Object.keys(map).forEach(key => {
+    const body = document.getElementById(`secBody-${key}`);
+    const chevrons = document.querySelectorAll(`[data-chevron="${key}"]`);
+    if (body) body.classList.toggle('hidden', Boolean(map[key]));
+    chevrons.forEach(c => {
+      c.style.transform = map[key] ? 'rotate(-90deg)' : 'rotate(0deg)';
+    });
+  });
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === 'object') {
+      appState = {
+        ...appState,
+        ...parsed,
+        guardians: Array.isArray(parsed.guardians) && parsed.guardians.length === 6 ? parsed.guardians : appState.guardians
+      };
+      // Migration: single legacy vaultData -> vaults array (max 6)
+      if ((!Array.isArray(appState.vaults) || appState.vaults.length === 0) && parsed.vaultData) {
+        const legacy = parsed.vaultData;
+        if (legacy && ((legacy.weaponNames || []).length || (legacy.armorNames || []).length)) {
+          appState.vaults = [{
+            id: 'vault-migrated-1',
+            displayName: legacy.displayName || 'Imported Vault',
+            weaponNames: legacy.weaponNames || [],
+            armorNames: legacy.armorNames || []
+          }];
+          appState.vaultSeq = 1;
+        }
+      }
+      appState.vaults = (Array.isArray(appState.vaults) ? appState.vaults : []).slice(0, 6);
+      appState.collapsedSections = appState.collapsedSections || {};
+      appState.guardians = appState.guardians.map(g => ({ vaultScope: 'ANY', ...g }));
+    }
+  } catch (err) {
+    console.warn("Could not restore saved state:", err);
+  }
+}
+
+function saveState() {
+  try {
+    appState.fireteamSize = parseInt(document.getElementById('selFireteamSize').value, 10) || 6;
+    appState.exoticRule = document.getElementById('selExoticRule').value;
+    appState.duplicateRule = document.getElementById('selDuplicateRule').value;
+    appState.typeFilter = document.getElementById('selTypeFilter').value;
+    appState.damageFilter = document.getElementById('selDamageFilter').value;
+    appState.originFilterMode = document.getElementById('selOriginFilterMode').value;
+    appState.bungieName = document.getElementById('inpBungieName').value.trim();
+    appState.bungieApiKey = ""; // API key is injected server-side by the proxy
+    appState.restrictToVault = document.getElementById('chkVaultOnly').checked;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+  } catch (err) {
+    console.warn("Save state error:", err);
+  }
+}
+
+function syncControlsFromState() {
+  document.getElementById('selFireteamSize').value = String(appState.fireteamSize || 6);
+  document.getElementById('selExoticRule').value = appState.exoticRule || "enforce1";
+  document.getElementById('selDuplicateRule').value = appState.duplicateRule || "allow";
+  document.getElementById('selTypeFilter').value = appState.typeFilter || "ALL";
+  document.getElementById('selDamageFilter').value = appState.damageFilter || "ALL";
+  document.getElementById('selOriginFilterMode').value = appState.originFilterMode || "require";
+  document.getElementById('inpBungieName').value = appState.bungieName || "";
+  // API key field removed in proxy mode; legacy saved keys are ignored.
+  document.getElementById('chkVaultOnly').checked = Boolean(appState.restrictToVault);
+}
+
+function resetAllData() {
+  localStorage.removeItem(STORAGE_KEY);
+  showToast("Resetting Fireteam Configuration to factory defaults...");
+  setTimeout(() => location.reload(), 400);
+}
+
+function showToast(msg) {
+  const box = document.getElementById('toastBox');
+  const el = document.createElement('div');
+  el.className = 'toast-msg';
+  el.innerHTML = `<span class="text-[#c7a86e] font-mono-tech mr-2">◆</span>${escapeHtml(msg)}`;
+  box.appendChild(el);
+  setTimeout(() => {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 0.25s ease';
+    setTimeout(() => el.remove(), 260);
+  }, 3400);
+}
+
+function escapeHtml(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// ============================================================================
+// BUNGIE MANIFEST API IMPORTER (WEAPONS + ORIGIN TRAITS + EXOTIC ARMOR)
+// ============================================================================
+
+async function importBungieManifest() {
+  const btn = document.getElementById('btnImportManifest');
+  const label = document.getElementById('manifestBtnLabel');
+  btn.disabled = true;
+  label.textContent = "Querying Bungie Manifest...";
+
+  try {
+    const manifestRes = await fetch(bungieProxyUrl("/Platform/Destiny2/Manifest/"));
+    if (!manifestRes.ok) throw new Error(`Manifest HTTP ${manifestRes.status}`);
+    const manifestJson = await manifestRes.json();
+    const invPath = manifestJson?.Response?.jsonWorldComponentContentPaths?.en?.DestinyInventoryItemDefinition;
+    if (!invPath) throw new Error("DestinyInventoryItemDefinition path missing");
+
+    label.textContent = "Downloading Item Definitions...";
+    const itemsRes = await fetch(bungieProxyUrl(invPath));
+    if (!itemsRes.ok) throw new Error(`Items HTTP ${itemsRes.status}`);
+    const items = await itemsRes.json();
+
+    // First pass: collect plug/trait names (socket category 3993098925 = Origin Traits)
+    const plugNameMap = {};
+    for (const [hash, def] of Object.entries(items)) {
+      if (def?.displayProperties?.name && (def.itemType === 19 || def.plug)) {
+        plugNameMap[hash] = def.displayProperties.name;
+      }
+    }
+
+    const parsedWeapons = [];
+    const parsedArmor = [];
+    const seenWeaponNames = new Set();
+    const seenArmorNames = new Set();
+
+    const slotBucketMap = {
+      1498876634: "Kinetic",
+      2465295065: "Energy",
+      953998645: "Power"
+    };
+
+    const damageMap = {
+      3373582085: "Kinetic",
+      1847026933: "Solar",
+      2303181850: "Arc",
+      3454344768: "Void",
+      151347233: "Stasis",
+      3949783978: "Strand"
+    };
+
+    const classMap = { 0: "Titan", 1: "Hunter", 2: "Warlock" };
+    const armorSlotMap = {
+      3448274439: "Helmet",
+      3551918588: "Arms",
+      14239492: "Chest",
+      20886954: "Legs",
+      1585787867: "Class Item"
+    };
+
+    for (const [hash, def] of Object.entries(items)) {
+      const name = def?.displayProperties?.name?.trim();
+      if (!name || def.redacted) continue;
+
+      // ItemType 3 = Weapon
+      if (def.itemType === 3) {
+        const tier = def.inventory?.tierTypeName;
+        if (tier !== "Legendary" && tier !== "Exotic") continue;
+        const slot = slotBucketMap[def.inventory?.bucketTypeHash];
+        if (!slot) continue;
+
+        // Resolve damage type. Some weapons (e.g. Refurbished A499) omit
+        // defaultDamageTypeHash, so fall back to the enum; if still unknown,
+        // skip the weapon rather than mislabeling it (e.g. "Energy" + "Kinetic").
+        const damageEnumMap = { 1: "Kinetic", 2: "Arc", 3: "Solar", 4: "Void", 5: "Stasis", 6: "Strand" };
+        let damage = damageMap[def.defaultDamageTypeHash] || damageEnumMap[def.defaultDamageType];
+        const type = def.itemTypeDisplayName || "Weapon";
+        if (!damage) {
+          console.info("Skipped weapon without a resolvable damage type:", name, "|", slot, "slot");
+          continue;
+        }
+
+        // Extract Origin Trait from socketCategories (3993098925 = ORIGIN TRAITS)
+        let originTrait = tier === "Exotic" ? "Exotic Intrinsic" : "Standard Frame";
+        const originCat = def.sockets?.socketCategories?.find(c => c.socketCategoryHash === 3993098925);
+        if (originCat && Array.isArray(originCat.socketIndexes)) {
+          for (const idx of originCat.socketIndexes) {
+            const sockEntry = def.sockets?.socketEntries?.[idx];
+            const plugHash = sockEntry?.singleInitialItemHash || sockEntry?.reusablePlugItems?.[0]?.plugItemHash;
+            if (plugHash && plugNameMap[plugHash]) {
+              originTrait = plugNameMap[plugHash];
+              break;
+            }
+          }
+        }
+
+        MANIFEST_HASH_MAP[hash] = {
+          name,
+          category: "Weapon",
+          slot,
+          type,
+          damage,
+          rarity: tier,
+          originTrait
+        };
+
+        const dedupeKey = `${name.toLowerCase()}|${slot}`;
+        if (!seenWeaponNames.has(dedupeKey)) {
+          seenWeaponNames.add(dedupeKey);
+          parsedWeapons.push({ name, slot, type, damage, rarity: tier, originTrait });
+        }
+      }
+
+      // ItemType 2 = Armor (Exotic only)
+      if (def.itemType === 2 && def.inventory?.tierTypeName === "Exotic") {
+        const classType = classMap[def.classType];
+        const slot = armorSlotMap[def.inventory?.bucketTypeHash];
+        if (!classType || !slot) continue;
+
+        MANIFEST_HASH_MAP[hash] = {
+          name,
+          category: "Armor",
+          classType,
+          slot,
+          rarity: "Exotic"
+        };
+
+        if (!seenArmorNames.has(name.toLowerCase())) {
+          seenArmorNames.add(name.toLowerCase());
+          parsedArmor.push({ name, classType, slot });
+        }
+      }
+    }
+
+    if (parsedWeapons.length > 50) {
+      WEAPON_DB = parsedWeapons;
+      sanitizeWeaponDb();
+      if (parsedArmor.length > 20) EXOTIC_ARMOR_DB = parsedArmor;
+      populateQuickWeaponBrowse();
+      renderGuardianCards();
+      updateDatabaseStatus(true);
+      updatePoolReadout();
+      showToast(`Imported ${WEAPON_DB.length} weapons & ${EXOTIC_ARMOR_DB.length} exotic armors from Bungie Manifest!`);
+    } else {
+      throw new Error("Insufficient items parsed from Manifest.");
+    }
+  } catch (err) {
+    console.warn("Manifest fetch fallback:", err);
+    updateDatabaseStatus(false);
+    showToast("Bungie Manifest blocked by browser/CORS — using complete built-in Destiny 2 dataset.");
+  } finally {
+    btn.disabled = false;
+    label.textContent = "Import Destiny 2 API Data";
+  }
+}
+
+function getAllOriginTraits() {
+  const set = new Set();
+  WEAPON_DB.forEach(w => {
+    if (w.originTrait && w.originTrait !== "Exotic Intrinsic" && w.originTrait !== "Standard Frame") {
+      set.add(w.originTrait);
+    }
+  });
+  return Array.from(set).sort((a, b) => a.localeCompare(b));
+}
+
+function updateDatabaseStatus(isLive = false) {
+  const badge = document.getElementById('dbStatusBadge');
+  const counts = document.getElementById('dbCountsText');
+  const traits = getAllOriginTraits();
+  badge.innerHTML = isLive
+    ? `<span class="w-1.5 h-1.5 bg-[#35e366]"></span> DB: BUNGIE MANIFEST LIVE`
+    : `<span class="w-1.5 h-1.5 bg-[#c7a86e]"></span> DB: BUILT-IN ARCHIVE READY`;
+  counts.textContent = `WEAPONS: ${WEAPON_DB.length} | EXOTIC ARMOR: ${EXOTIC_ARMOR_DB.length} | SUBCLASSES: 18 | ORIGIN TRAITS: ${traits.length}`;
+}
+
+// ============================================================================
+// 1. BUNGIE VAULT & INVENTORY LOOKUP (API + DEMO + DIM/JSON IMPORT)
+// ============================================================================
+
+function toggleApiKeyVisibility() {
+  // No-op in proxy mode (API key input was removed).
+}
+
+function toggleVaultImportDrawer() {
+  document.getElementById('vaultImportDrawer').classList.toggle('hidden');
+}
+
+function toggleVaultBrowser() {
+  const drawer = document.getElementById('vaultBrowserDrawer');
+  drawer.classList.toggle('hidden');
+  if (!drawer.classList.contains('hidden')) {
+    renderVaultBrowser();
+  }
+}
+
+function toggleVaultRestriction(checked) {
+  if (checked && (!appState.vaults || appState.vaults.length === 0)) {
+    showToast("Fetch a Bungie Vault or load Demo Vault first to restrict randomization.");
+    document.getElementById('chkVaultOnly').checked = false;
+    appState.restrictToVault = false;
+    return;
+  }
+  appState.restrictToVault = checked;
+  saveState();
+  updateVaultUI();
+  updatePoolReadout();
+  renderGuardianCards();
+  showToast(checked ? "Randomization restricted to each Guardian's assigned vault." : "Vault restriction disabled — full weapon pool unlocked.");
+}
+
+async function fetchBungieVault() {
+  const rawName = document.getElementById('inpBungieName').value.trim();
+  const alertBox = document.getElementById('vaultAlertBox');
+  alertBox.classList.add('hidden');
+
+  if (!rawName || !rawName.includes('#')) {
+    showVaultAlert("Enter a valid Bungie Name including the 4-digit code (example: <strong class='text-[#c7a86e]'>Guardian#1234</strong>).", "warn");
+    return;
+  }
+
+  const hashIdx = rawName.lastIndexOf('#');
+  const displayName = rawName.slice(0, hashIdx).trim();
+  const displayNameCode = parseInt(rawName.slice(hashIdx + 1).trim(), 10);
+
+  if (!displayName || isNaN(displayNameCode)) {
+    showVaultAlert("Invalid Bungie Name code after <strong>#</strong>. Ensure it is numeric (e.g., <code>Name#1234</code>).", "warn");
+    return;
+  }
+
+  if (location.protocol === 'file:') {
+    // Running from disk: /proxy won't exist. Warn instead of failing silently.
+    showVaultAlert("This page is running from a local file, so no proxy is available. Use <strong>Demo Vault</strong> or <strong>JSON / DIM</strong> paste, or host the page behind the proxy (server.js or the Google Apps Script web app).", "warn");
+    return;
+  }
+
+  saveState();
+
+  const btn = document.getElementById('btnFetchVault');
+  const label = document.getElementById('vaultBtnLabel');
+  btn.disabled = true;
+  label.textContent = "Searching Bungie ID...";
+
+  try {
+    // Proxy (server.js / Apps Script) injects X-API-Key server-side; the key never reaches this page.
+    const headers = { 'Content-Type': 'application/json' };
+
+    // Step 1: SearchDestinyPlayerByBungieName
+    const searchRes = await fetch(bungieProxyUrl("/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/"), {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ displayName, displayNameCode })
+    });
+
+    const searchJson = await searchRes.json();
+    if (!searchRes.ok || searchJson.ErrorCode !== 1) {
+      throw new Error(searchJson.Message || `Bungie Search Error (${searchRes.status})`);
+    }
+
+    const memberships = searchJson.Response || [];
+    if (memberships.length === 0) {
+      throw new Error(`No Destiny 2 player found matching "${displayName}#${String(displayNameCode).padStart(4, '0')}".`);
+    }
+
+    // Prefer cross-save primary membership if available
+    const primary = memberships.find(m => m.crossSaveOverride === m.membershipType) || memberships[0];
+    const { membershipType, membershipId } = primary;
+
+    // Step 2: Ensure Manifest Hash Map is populated so itemHashes resolve to names
+    if (Object.keys(MANIFEST_HASH_MAP).length === 0) {
+      label.textContent = "Resolving Manifest Hashes...";
+      await importBungieManifest();
+    }
+
+    // Step 3: Fetch Profile Vault (102), Character Inventories (201), and Character Equipment (205)
+    label.textContent = "Reading Vault & Characters...";
+    const profRes = await fetch(bungieProxyUrl(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=102,201,205`), { headers: { 'Content-Type': 'application/json' } });
+    const profJson = await profRes.json();
+
+    if (!profRes.ok || profJson.ErrorCode !== 1) {
+      throw new Error(profJson.Message || `Profile Read Error (${profRes.status})`);
+    }
+
+    const resp = profJson.Response || {};
+    const profileItems = resp.profileInventory?.data?.items || [];
+    const charInventories = Object.values(resp.characterInventories?.data || {}).flatMap(c => c.items || []);
+    const charEquipment = Object.values(resp.characterEquipment?.data || {}).flatMap(c => c.items || []);
+
+    const allHashes = [...profileItems, ...charInventories, ...charEquipment].map(i => String(i.itemHash));
+
+    if (profileItems.length === 0 && charInventories.length === 0 && charEquipment.length > 0) {
+      showVaultAlert(
+        `<strong>Privacy Notice:</strong> Equipped gear was read, but non-equipped Vault items (<code>component 102</code>) are hidden by this player's Bungie.net Privacy Settings.<br>
+         To read the full Vault, enable <em>"Show my non-equipped Inventory"</em> at <span class="text-[#c7a86e] font-mono-tech">bungie.net/7/en/User/Account/Privacy</span>, or paste a DIM export via <strong>JSON / DIM</strong>.`,
+        "warn"
+      );
+    }
+
+    applyVaultHashes(`${displayName}#${String(displayNameCode).padStart(4, '0')}`, allHashes);
+  } catch (err) {
+    console.error("Vault fetch error:", err);
+    showVaultAlert(
+      `<strong>Bungie API Notice:</strong> ${escapeHtml(err.message)}<br>
+       You can still test Vault filtering immediately using <strong>Demo Vault</strong> or paste your DIM/Bungie JSON via <strong>JSON / DIM</strong>.`,
+      "error"
+    );
+  } finally {
+    btn.disabled = false;
+    label.textContent = "Fetch Vault & Inventory";
+  }
+}
+
+// ============================================================================
+// MULTI-VAULT STORE (UP TO 6 VAULTS, ONE ASSIGNABLE PER GUARDIAN)
+// ============================================================================
+
+function addVault(displayName, weaponNames, armorNames) {
+  if (appState.vaults.length >= 6) {
+    showToast("Vault limit reached (6 vaults). Remove one with the X button before adding another.");
+    return null;
+  }
+  appState.vaultSeq = (appState.vaultSeq || 0) + 1;
+  const vault = {
+    id: `vault-${appState.vaultSeq}-${Date.now()}`,
+    displayName,
+    weaponNames: Array.from(new Set(weaponNames || [])),
+    armorNames: Array.from(new Set(armorNames || []))
+  };
+  appState.vaults.push(vault);
+  if (appState.vaults.length === 1) {
+    appState.restrictToVault = true;
+    document.getElementById('chkVaultOnly').checked = true;
+  }
+  saveState();
+  updateVaultUI();
+  updatePoolReadout();
+  renderGuardianCards();
+  return vault;
+}
+
+function removeVault(id) {
+  appState.vaults = appState.vaults.filter(v => v.id !== id);
+  // Reset any guardian that pointed at the removed vault
+  appState.guardians.forEach(g => {
+    if (g.vaultScope && g.vaultScope !== 'ANY' && !getVaultById(g.vaultScope)) g.vaultScope = 'ANY';
+  });
+  if (appState.vaults.length === 0) {
+    appState.restrictToVault = false;
+    document.getElementById('chkVaultOnly').checked = false;
+  }
+  saveState();
+  updateVaultUI();
+  updatePoolReadout();
+  renderGuardianCards();
+  showToast("Vault removed.");
+}
+
+function clearAllVaults() {
+  appState.vaults = [];
+  appState.restrictToVault = false;
+  appState.guardians.forEach(g => { g.vaultScope = 'ANY'; });
+  document.getElementById('chkVaultOnly').checked = false;
+  document.getElementById('vaultAlertBox').classList.add('hidden');
+  saveState();
+  updateVaultUI();
+  updatePoolReadout();
+  renderGuardianCards();
+  showToast("All vault links cleared.");
+}
+
+function getVaultById(id) {
+  return appState.vaults.find(v => v.id === id) || null;
+}
+
+// Which vault applies to a guardian when vault restriction is active:
+// their assigned vault, falling back to the first loaded vault.
+function getGuardianVault(guardian) {
+  if (!appState.restrictToVault || appState.vaults.length === 0) return null;
+  if (guardian && guardian.vaultScope && guardian.vaultScope !== 'ANY') {
+    const v = getVaultById(guardian.vaultScope);
+    if (v) return v;
+  }
+  return appState.vaults[0];
+}
+
+function applyVaultHashes(ownerLabel, itemHashes) {
+  const matchedWeaponSet = new Set();
+  const matchedArmorSet = new Set();
+
+  itemHashes.forEach(h => {
+    const def = MANIFEST_HASH_MAP[String(h)];
+    if (!def) return;
+    if (def.category === "Weapon") matchedWeaponSet.add(def.name.toLowerCase());
+    if (def.category === "Armor") matchedArmorSet.add(def.name.toLowerCase());
+  });
+
+  // Match against active WEAPON_DB and EXOTIC_ARMOR_DB
+  const matchedWeapons = WEAPON_DB.filter(w => matchedWeaponSet.has(w.name.toLowerCase()));
+  const matchedArmor = EXOTIC_ARMOR_DB.filter(a => matchedArmorSet.has(a.name.toLowerCase()));
+
+  const vault = addVault(ownerLabel, matchedWeapons.map(w => w.name), matchedArmor.map(a => a.name));
+  if (vault) showToast(`Vault synced for ${ownerLabel} (${vault.weaponNames.length} weapons, ${vault.armorNames.length} exotic armors).`);
+}
+
+function loadDemoVault() {
+  const sampleWeapons = [
+    "The Call", "Mountaintop", "Succession", "Rufus's Fury", "Conditional Finality",
+    "Witherhoard", "Outbreak Perfected", "Scatter Signal", "Riptide", "Fatebringer",
+    "Midnight Coup", "Blast Furnace", "Lost Signal", "Zaouli's Bane", "Sunshot",
+    "Forbearance", "Indebted Kindness", "Aberrant Action", "Velocity Baton", "Choir of One",
+    "Still Hunt", "Graviton Lance", "Calus Mini-Tool", "Funnelweb", "The Recluse",
+    "No Hesitation", "Nullify", "Apex Predator", "Edge Transit", "Gjallarhorn",
+    "Tractor Cannon", "The Lament", "Whisper of the Worm", "Microcosm", "Dragon's Breath",
+    "Cold Comfort", "Cataphract GL3", "VS Chill Inhibitor", "Cataclysmic", "Commemoration",
+    "Song of Ir Yût", "Hammerhead", "Falling Guillotine"
+  ];
+
+  const sampleArmor = [
+    "Celestial Nighthawk", "Star-Eater Scales", "Orpheus Rig", "Gyrfalcon's Hauberk", "Lucky Pants",
+    "Cuirass of the Falling Star", "Synthoceps", "Pyrogale Gauntlets", "Precious Scars", "Hazardous Propulsion",
+    "Speaker's Sight", "Starfire Protocol", "Phoenix Protocol", "Sunbracers", "Getaway Artist", "Cenotaph Mask"
+  ];
+
+  const vault = addVault("VanguardDemo#0777 (Sample Vault)", sampleWeapons, sampleArmor);
+  document.getElementById('vaultAlertBox').classList.add('hidden');
+  if (vault) showToast(`Loaded Demo Vault (${vault.weaponNames.length} Weapons & ${vault.armorNames.length} Exotic Armors) as Vault #${appState.vaults.length}.`);
+}
+
+function parseManualVaultPaste() {
+  const raw = document.getElementById('txtVaultPaste').value.trim();
+  if (!raw) {
+    showToast("Paste Bungie Profile JSON or item names first.");
+    return;
+  }
+
+  // Check if JSON
+  if (raw.startsWith('{') || raw.startsWith('[')) {
+    try {
+      const json = JSON.parse(raw);
+      const resp = json.Response || json;
+      const pItems = resp.profileInventory?.data?.items || [];
+      const cInv = Object.values(resp.characterInventories?.data || {}).flatMap(c => c.items || []);
+      const cEq = Object.values(resp.characterEquipment?.data || {}).flatMap(c => c.items || []);
+      const hashes = [...pItems, ...cInv, ...cEq].map(i => String(i.itemHash));
+      if (hashes.length > 0 && Object.keys(MANIFEST_HASH_MAP).length > 0) {
+        applyVaultHashes(appState.bungieName || "Imported JSON Vault", hashes);
+        toggleVaultImportDrawer();
+        return;
+      }
+    } catch (e) {
+      // Fall through to text/CSV name matching
+    }
+  }
+
+  // Match comma/newline/quote-separated item names (e.g. DIM CSV export)
+  const lowerText = raw.toLowerCase();
+  const matchedWeapons = WEAPON_DB.filter(w => lowerText.includes(w.name.toLowerCase())).map(w => w.name);
+  const matchedArmor = EXOTIC_ARMOR_DB.filter(a => lowerText.includes(a.name.toLowerCase())).map(a => a.name);
+
+  if (matchedWeapons.length === 0 && matchedArmor.length === 0) {
+    showToast("No matching Destiny 2 weapons or exotic armors found in pasted text.");
+    return;
+  }
+
+  const vault = addVault(appState.bungieName || "DIM / Text Vault Import", matchedWeapons, matchedArmor);
+  toggleVaultImportDrawer();
+  if (vault) showToast(`Matched ${vault.weaponNames.length} weapons & ${vault.armorNames.length} exotic armors into Vault #${appState.vaults.length}!`);
+}
+
+function clearVaultData() {
+  clearAllVaults();
+}
+
+function showVaultAlert(html, level = "info") {
+  const box = document.getElementById('vaultAlertBox');
+  box.classList.remove('hidden');
+  box.style.borderLeftColor = level === "error" ? "#d9534f" : "#c7a86e";
+  box.innerHTML = html;
+}
+
+// ============================================================================
+// VAULT ASSIGNMENT PANEL (MAP EACH VAULT TO A PLAYER)
+// ============================================================================
+
+function renderVaultAssignments() {
+  const list = document.getElementById('vaultAssignList');
+  const caption = document.getElementById('vaultAssignCaption');
+  if (!list) return;
+
+  const vaultCount = appState.vaults ? appState.vaults.length : 0;
+  caption.textContent = vaultCount > 0
+    ? `VAULT ASSIGNMENTS — ${vaultCount} VAULT${vaultCount > 1 ? 'S' : ''} READY:`
+    : 'VAULT ASSIGNMENTS (NO VAULTS LOADED — FETCH ONE TO ASSIGN):';
+
+  if (vaultCount === 0) {
+    list.innerHTML = `<span class="text-xs text-[#60687a] italic">Fetch a Bungie Vault, load the Demo Vault, or paste DIM/JSON data to start assigning vaults to players.</span>`;
+    return;
+  }
+
+  list.innerHTML = appState.guardians.map((g, idx) => {
+    const assigned = getGuardianVault(g);
+    const assignedLabel = assigned ? assigned.displayName : 'Any (Fireteam Default)';
+    return `
+      <div class="vex-subcard p-2.5 flex items-center gap-2">
+        <span class="text-[10px] font-mono-tech px-1.5 py-0.5 bg-[#0d0f13] border border-[#252a36] text-[#c7a86e] shrink-0">G${idx + 1}</span>
+        <span class="text-xs font-semibold text-[#eceae4] flex-1 min-w-0 truncate" title="${escapeHtml(g.name)}">${escapeHtml(g.name)}</span>
+        <span class="text-[10px] font-mono-tech text-[#35e366] shrink-0" title="Currently restricted to: ${escapeHtml(assignedLabel)}">
+          ${appState.restrictToVault ? '🔒' : '🔓'}
+        </span>
+        <select onchange="assignVaultToGuardian(${idx}, this.value)" class="d2-select text-[11px] py-1 max-w-[55%]" title="Assign a vault to this guardian">
+          <option value="ANY" ${!g.vaultScope || g.vaultScope === 'ANY' ? 'selected' : ''}>Any Vault (Default)</option>
+          ${appState.vaults.map(v => `<option value="${escapeHtml(v.id)}" ${g.vaultScope === v.id ? 'selected' : ''}>${escapeHtml(v.displayName)}</option>`).join('')}
+        </select>
+      </div>`;
+  }).join('');
+}
+
+function assignVaultToGuardian(idx, vaultId) {
+  changeGuardianVault(idx, vaultId || 'ANY');
+}
+
+function updateVaultUI() {
+  const strip = document.getElementById('vaultStatusStrip');
+  const summaryPanel = document.getElementById('vaultSummaryPanel');
+
+  if (!appState.vaults || appState.vaults.length === 0) {
+    strip.innerHTML = `VAULT LINK: <span class="text-[#60687a]">OFFLINE (ALL ITEMS ENABLED)</span>`;
+    summaryPanel.classList.add('hidden');
+    return;
+  }
+
+  const vaultSummaries = (appState.vaults || []).map(v => {
+    const w = WEAPON_DB.filter(x => v.weaponNames.includes(x.name));
+    return { vault: v, weapons: w, kinCount: w.filter(x => x.slot === "Kinetic").length, engCount: w.filter(x => x.slot === "Energy").length, powCount: w.filter(x => x.slot === "Power").length };
+  });
+  const totalWeapons = vaultSummaries.reduce((a, s) => a + s.weapons.length, 0);
+  const totalArmor = appState.vaults.reduce((a, v) => a + v.armorNames.length, 0);
+
+  strip.innerHTML = appState.restrictToVault
+    ? `VAULT LINK: <span class="text-[#35e366] font-semibold">ACTIVE — ${appState.vaults.length}/6 VAULTS LOADED (${totalWeapons} WEAPONS, ${totalArmor} EXOTIC ARMORS)</span>`
+    : `VAULT LINK: <span class="text-[#c7a86e]">${appState.vaults.length}/6 VAULTS LOADED (${totalWeapons} WEAPONS, ${totalArmor} EXOTIC ARMORS) — UNRESTRICTED</span>`;
+
+  summaryPanel.classList.remove('hidden');
+  document.getElementById('vaultListCaption').textContent = `LOADED VAULTS (${appState.vaults.length}/6) — ASSIGN ONE TO EACH GUARDIAN:`;
+  document.getElementById('vaultListContainer').innerHTML = appState.vaults.map(v => {
+    const s = vaultSummaries.find(x => x.vault.id === v.id);
+    return `
+      <span class="inline-flex items-center gap-2 px-2 py-1 bg-[#0d0f13] border border-[#c7a86e]/60 text-xs font-mono-tech">
+        <span class="text-[#c7a86e] font-semibold">${escapeHtml(v.displayName)}</span>
+        <span class="text-[#9aa2b2]">${s.weapons.length}W (${s.kinCount}K/${s.engCount}E/${s.powCount}P) · ${v.armorNames.length}A</span>
+        <button type="button" onclick="removeVault('${escapeHtml(v.id)}')" title="Remove this vault" class="text-[#f39c9c] hover:text-white font-bold px-1">✕</button>
+      </span>`;
+  }).join('');
+
+  if (!document.getElementById('vaultBrowserDrawer').classList.contains('hidden')) {
+    renderVaultBrowser();
+  }
+  if (typeof renderVaultAssignments === 'function') renderVaultAssignments();
+}
+
+function renderVaultBrowser() {
+  if (!appState.vaults || appState.vaults.length === 0) return;
+  const q = document.getElementById('inpVaultBrowserSearch').value.trim().toLowerCase();
+  const cat = document.getElementById('selVaultBrowserCategory').value;
+  const list = document.getElementById('vaultBrowserList');
+
+  const combinedWeaponNames = new Set(appState.vaults.flatMap(v => v.weaponNames));
+  const combinedArmorNames = new Set(appState.vaults.flatMap(v => v.armorNames));
+
+  const items = [];
+  if (cat !== "Armor") {
+    WEAPON_DB.filter(w => combinedWeaponNames.has(w.name)).forEach(w => {
+      if (cat !== "ALL" && w.slot !== cat) return;
+      if (q && !w.name.toLowerCase().includes(q) && !w.type.toLowerCase().includes(q) && !(w.originTrait || '').toLowerCase().includes(q)) return;
+      items.push({
+        title: w.name,
+        sub: `${w.slot} · ${w.type} · ${w.damage}`,
+        badge: w.originTrait || 'Standard',
+        rarity: w.rarity
+      });
+    });
+  }
+  if (cat === "ALL" || cat === "Armor") {
+    EXOTIC_ARMOR_DB.filter(a => combinedArmorNames.has(a.name)).forEach(a => {
+      if (q && !a.name.toLowerCase().includes(q) && !a.classType.toLowerCase().includes(q)) return;
+      items.push({
+        title: a.name,
+        sub: `${a.classType} · ${a.slot}`,
+        badge: "Exotic Armor",
+        rarity: "Exotic"
+      });
+    });
+  }
+
+  if (items.length === 0) {
+    list.innerHTML = `<div class="col-span-full text-xs text-[#60687a] p-2">No Vault items match your current filter.</div>`;
+    return;
+  }
+
+  list.innerHTML = items.map(it => `
+    <div class="p-2 bg-[#12151c] border border-[#252a36] flex items-center justify-between gap-2 text-xs">
+      <div class="min-w-0">
+        <div class="font-semibold truncate ${it.rarity === 'Exotic' ? 'text-[#ceae33]' : 'text-[#eceae4]'}">${escapeHtml(it.title)}</div>
+        <div class="text-[11px] text-[#9aa2b2] truncate">${escapeHtml(it.sub)}</div>
+      </div>
+      <span class="origin-badge shrink-0">${escapeHtml(it.badge)}</span>
+    </div>
+  `).join('');
+}
+
+// ============================================================================
+// 2. ORIGIN TRAIT SEARCH & FILTERING + WEAPON EXCLUSIONS
+// ============================================================================
+
+function addOriginTraitFilter(traitName) {
+  const clean = traitName.trim();
+  if (!clean) return;
+  if (!appState.selectedOriginTraits.some(t => t.toLowerCase() === clean.toLowerCase())) {
+    appState.selectedOriginTraits.push(clean);
+    saveState();
+    renderOriginTraitChips();
+    updatePoolReadout();
+    showToast(`Added Origin Trait filter: ${clean}`);
+  }
+}
+
+function removeOriginTraitFilter(traitName) {
+  appState.selectedOriginTraits = appState.selectedOriginTraits.filter(t => t !== traitName);
+  saveState();
+  renderOriginTraitChips();
+  updatePoolReadout();
+}
+
+function renderOriginTraitChips() {
+  const container = document.getElementById('activeOriginTraitList');
+  if (!appState.selectedOriginTraits || appState.selectedOriginTraits.length === 0) {
+    container.innerHTML = `<span class="text-xs text-[#60687a] italic">No Origin Trait filter active (all traits included).</span>`;
+    return;
+  }
+  const modeLabel = appState.originFilterMode === "exclude" ? "EXCLUDE" : "REQUIRE";
+  container.innerHTML = appState.selectedOriginTraits.map(t => `
+    <span class="wchip border-[#c7a86e] text-[#eceae4]">
+      <span class="text-[10px] font-mono-tech text-[#c7a86e]">${modeLabel}:</span>
+      <span>${escapeHtml(t)}</span>
+      <button type="button" onclick="removeOriginTraitFilter('${escapeHtml(t).replace(/'/g, "\\'")}')" class="text-[#9aa2b2] hover:text-white ml-1 font-bold" title="Remove Origin Trait">&times;</button>
+    </span>
+  `).join('');
+}
+
+function excludeWeaponByName(name) {
+  if (!name) return;
+  if (!appState.excludedWeapons.includes(name)) {
+    appState.excludedWeapons.push(name);
+    saveState();
+    renderExcludedWeaponChips();
+    updatePoolReadout();
+    showToast(`Excluded "${name}" from weapon pool.`);
+  }
+}
+
+function removeExcludedWeapon(name) {
+  appState.excludedWeapons = appState.excludedWeapons.filter(w => w !== name);
+  saveState();
+  renderExcludedWeaponChips();
+  updatePoolReadout();
+}
+
+function clearExcludedWeapons() {
+  appState.excludedWeapons = [];
+  saveState();
+  renderExcludedWeaponChips();
+  updatePoolReadout();
+  showToast("Cleared all weapon exclusions.");
+}
+
+function renderExcludedWeaponChips() {
+  const container = document.getElementById('excludedWeaponList');
+  if (!appState.excludedWeapons || appState.excludedWeapons.length === 0) {
+    container.innerHTML = `<span class="text-xs text-[#60687a] italic">No specific weapons excluded.</span>`;
+    return;
+  }
+  container.innerHTML = appState.excludedWeapons.map(wName => {
+    const wObj = WEAPON_DB.find(w => w.name === wName);
+    const rarityClass = wObj?.rarity === 'Exotic' ? 'exotic' : 'legendary';
+    return `
+      <span class="wchip ${rarityClass}">
+        <span>${escapeHtml(wName)}</span>
+        <button type="button" onclick="removeExcludedWeapon('${escapeHtml(wName).replace(/'/g, "\\'")}')" class="text-[#9aa2b2] hover:text-white ml-1 font-bold">&times;</button>
+      </span>
+    `;
+  }).join('');
+}
+
+function populateQuickWeaponBrowse() {
+  const sel = document.getElementById('selQuickWeaponBrowse');
+  const sorted = [...WEAPON_DB].sort((a, b) => a.name.localeCompare(b.name));
+  sel.innerHTML = `<option value="">Select a weapon from database to exclude...</option>` +
+    sorted.map(w => `<option value="${escapeHtml(w.name)}">${escapeHtml(w.name)} [${w.slot} · ${w.type} · ${w.originTrait || 'Standard'}]</option>`).join('');
+}
+
+function setupAutocompleteListeners() {
+  // Origin Trait Autocomplete
+  const inpTrait = document.getElementById('inpOriginTraitSearch');
+  const sugTrait = document.getElementById('sugOriginTraits');
+
+  inpTrait.addEventListener('input', () => {
+    const q = inpTrait.value.trim().toLowerCase();
+    const traits = getAllOriginTraits();
+    const matches = q
+      ? traits.filter(t => t.toLowerCase().includes(q))
+      : traits;
+
+    if (matches.length === 0) {
+      sugTrait.classList.remove('open');
+      return;
+    }
+
+    sugTrait.innerHTML = matches.slice(0, 25).map(t => {
+      const count = WEAPON_DB.filter(w => (w.originTrait || '').toLowerCase() === t.toLowerCase()).length;
+      return `
+        <div class="sug-item" onclick="selectOriginTraitSug('${escapeHtml(t).replace(/'/g, "\\'")}')">
+          <span class="font-medium text-[#eceae4]">${escapeHtml(t)}</span>
+          <span class="text-[11px] font-mono-tech text-[#c7a86e]">${count} WEAPON${count === 1 ? '' : 'S'}</span>
+        </div>
+      `;
+    }).join('');
+    sugTrait.classList.add('open');
+  });
+
+  inpTrait.addEventListener('focus', () => inpTrait.dispatchEvent(new Event('input')));
+
+  // Exclude Weapon Autocomplete
+  const inpExcl = document.getElementById('inpExcludeWeapon');
+  const sugExcl = document.getElementById('sugExcludeWeapons');
+
+  inpExcl.addEventListener('input', () => {
+    const q = inpExcl.value.trim().toLowerCase();
+    if (!q) {
+      sugExcl.classList.remove('open');
+      return;
+    }
+    const matches = WEAPON_DB.filter(w =>
+      w.name.toLowerCase().includes(q) ||
+      w.type.toLowerCase().includes(q) ||
+      (w.originTrait || '').toLowerCase().includes(q)
+    ).slice(0, 25);
+
+    if (matches.length === 0) {
+      sugExcl.classList.remove('open');
+      return;
+    }
+
+    sugExcl.innerHTML = matches.map(w => `
+      <div class="sug-item" onclick="selectExcludeWeaponSug('${escapeHtml(w.name).replace(/'/g, "\\'")}')">
+        <div>
+          <span class="font-semibold ${w.rarity === 'Exotic' ? 'text-[#ceae33]' : 'text-[#eceae4]'}">${escapeHtml(w.name)}</span>
+          <span class="text-[11px] text-[#9aa2b2] ml-2">${w.slot} · ${w.type}</span>
+        </div>
+        <span class="origin-badge">${escapeHtml(w.originTrait || 'Standard')}</span>
+      </div>
+    `).join('');
+    sugExcl.classList.add('open');
+  });
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.sugwrap')) {
+      document.querySelectorAll('.sugs').forEach(el => el.classList.remove('open'));
+    }
+  });
+}
+
+function selectOriginTraitSug(trait) {
+  document.getElementById('inpOriginTraitSearch').value = '';
+  document.getElementById('sugOriginTraits').classList.remove('open');
+  addOriginTraitFilter(trait);
+}
+
+function selectExcludeWeaponSug(name) {
+  document.getElementById('inpExcludeWeapon').value = '';
+  document.getElementById('sugExcludeWeapons').classList.remove('open');
+  excludeWeaponByName(name);
+}
+
+// ============================================================================
+// ELIGIBLE WEAPON & ARMOR POOL ENGINE (RESPECTS VAULT + ORIGIN TRAITS)
+// ============================================================================
+
+function getFilteredWeapons(slot = null, guardian = null) {
+  const excludedSet = new Set(appState.excludedWeapons.map(n => n.toLowerCase()));
+  const gVault = getGuardianVault(guardian);
+  const vaultWeaponSet = gVault
+    ? new Set(gVault.weaponNames.map(n => n.toLowerCase()))
+    : null;
+  const selectedTraits = appState.selectedOriginTraits.map(t => t.toLowerCase());
+  const traitMode = appState.originFilterMode;
+
+  return WEAPON_DB.filter(w => {
+    if (slot && w.slot !== slot) return false;
+    if (excludedSet.has(w.name.toLowerCase())) return false;
+    if (vaultWeaponSet && !vaultWeaponSet.has(w.name.toLowerCase())) return false;
+    if (appState.typeFilter !== "ALL" && w.type !== appState.typeFilter) return false;
+    if (appState.damageFilter !== "ALL" && w.damage !== appState.damageFilter) return false;
+    if (appState.exoticRule === "legendaryOnly" && w.rarity === "Exotic") return false;
+
+    if (selectedTraits.length > 0) {
+      const wTrait = (w.originTrait || '').toLowerCase();
+      const matchesTrait = selectedTraits.some(st => wTrait.includes(st));
+      if (traitMode === "require" && !matchesTrait) return false;
+      if (traitMode === "exclude" && matchesTrait) return false;
+    }
+
+    return true;
+  });
+}
+
+function getFilteredExoticArmor(classType, armorSlot = "ALL", guardian = null) {
+  const gVault = getGuardianVault(guardian);
+  const vaultArmorSet = gVault
+    ? new Set(gVault.armorNames.map(n => n.toLowerCase()))
+    : null;
+
+  return EXOTIC_ARMOR_DB.filter(a => {
+    if (a.classType !== classType) return false;
+    if (armorSlot && armorSlot !== "ALL" && a.slot !== armorSlot) return false;
+    if (vaultArmorSet && !vaultArmorSet.has(a.name.toLowerCase())) return false;
+    return true;
+  });
+}
+
+function updatePoolReadout() {
+  const k = getFilteredWeapons("Kinetic").length;
+  const e = getFilteredWeapons("Energy").length;
+  const p = getFilteredWeapons("Power").length;
+  const readout = document.getElementById('eligiblePoolReadout');
+  readout.innerHTML = `ELIGIBLE POOL: <span class="text-[#eceae4]">${k}</span> KINETIC | <span class="text-[#eceae4]">${e}</span> ENERGY | <span class="text-[#eceae4]">${p}</span> POWER`;
+}
+
+// ============================================================================
+// 3. GUARDIAN LOADOUT CARDS (CLASS, SUBCLASS, EXOTIC ARMOR, ASPECTS, FRAGMENTS)
+// ============================================================================
+
+function renderGuardianCards() {
+  const grid = document.getElementById('guardianCardsGrid');
+  grid.innerHTML = appState.guardians.map((g, idx) => {
+    const classSubclasses = SUBCLASS_DATA[g.classType] || SUBCLASS_DATA.Hunter;
+    const activeSub = classSubclasses.find(s => s.name === g.subclass) || classSubclasses[0];
+    const elStripeClass = `sub-${(activeSub.element || 'solar').toLowerCase()}`;
+    const armorOptions = getFilteredExoticArmor(g.classType, g.armorSlotFilter || "ALL", g);
+
+    // Ensure exotic armor list includes currently selected even if vault filtered
+    const hasCurrentArmor = armorOptions.some(a => a.name === g.exoticArmor);
+
+    return `
+      <div class="vex-subcard ${elStripeClass} p-3.5 flex flex-col justify-between gap-3">
+        <div>
+          <!-- Card Header: Guardian Name + Class + Randomize -->
+          <div class="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-[#252a36]">
+            <div class="flex items-center gap-2 flex-1 min-w-0">
+              <span class="text-[11px] font-mono-tech px-1.5 py-0.5 bg-[#0d0f13] border border-[#252a36] text-[#c7a86e]">G${idx + 1}</span>
+              <input type="text" value="${escapeHtml(g.name)}" onchange="updateGuardianField(${idx}, 'name', this.value)" class="d2-input py-1 px-2 text-xs font-semibold flex-1 min-w-0" placeholder="Guardian Name">
+            </div>
+            <button type="button" onclick="randomizeSingleGuardian(${idx})" class="btn-ghost py-1 px-2 text-[11px]" title="Randomize this Guardian's Subclass, Exotic Armor, Aspects &amp; Fragments">
+              Randomize
+            </button>
+          </div>
+
+          <!-- Per-Guardian Vault Restriction Selector -->
+          <div class="mb-2.5">
+            <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Vault Restriction <span class="text-[#60687a]">(Personal Vault)</span></label>
+            <select onchange="changeGuardianVault(${idx}, this.value)" class="d2-select w-full text-xs py-1.5 ${appState.restrictToVault && getGuardianVault(g) ? 'border-[#c7a86e]/60' : ''}">
+              <option value="ANY" ${!g.vaultScope || g.vaultScope === 'ANY' ? 'selected' : ''}>Any Vault (Fireteam Default)</option>
+              ${appState.vaults.map(v => `<option value="${escapeHtml(v.id)}" ${g.vaultScope === v.id ? 'selected' : ''}>${escapeHtml(v.displayName)} [${v.weaponNames.length}W / ${v.armorNames.length}A]</option>`).join('')}
+              ${appState.vaults.length === 0 ? `<option value="" disabled>No vaults loaded (use Vault panel)</option>` : ''}
+            </select>
+          </div>
+
+          <!-- Class & Subclass Row -->
+          <div class="grid grid-cols-2 gap-2 mb-2.5">
+            <div>
+              <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Class</label>
+              <select onchange="changeGuardianClass(${idx}, this.value)" class="d2-select w-full text-xs py-1.5">
+                <option value="Hunter" ${g.classType === 'Hunter' ? 'selected' : ''}>Hunter</option>
+                <option value="Titan" ${g.classType === 'Titan' ? 'selected' : ''}>Titan</option>
+                <option value="Warlock" ${g.classType === 'Warlock' ? 'selected' : ''}>Warlock</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Subclass</label>
+              <select onchange="changeGuardianSubclass(${idx}, this.value)" class="d2-select w-full text-xs py-1.5">
+                ${classSubclasses.map(s => `<option value="${escapeHtml(s.name)}" ${s.name === activeSub.name ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+
+          <!-- Exotic Armor Selector + Slot Filter -->
+          <div class="mb-2.5">
+            <div class="flex items-center justify-between mb-1">
+              <label class="text-[10px] font-mono-tech uppercase text-[#ceae33]">Exotic Armor</label>
+              <select onchange="changeGuardianArmorSlot(${idx}, this.value)" class="bg-[#0d0f13] border border-[#252a36] text-[10px] font-mono-tech text-[#9aa2b2] px-1.5 py-0.5">
+                <option value="ALL" ${g.armorSlotFilter === 'ALL' ? 'selected' : ''}>All Slots</option>
+                <option value="Helmet" ${g.armorSlotFilter === 'Helmet' ? 'selected' : ''}>Helmet</option>
+                <option value="Arms" ${g.armorSlotFilter === 'Arms' ? 'selected' : ''}>Arms</option>
+                <option value="Chest" ${g.armorSlotFilter === 'Chest' ? 'selected' : ''}>Chest</option>
+                <option value="Legs" ${g.armorSlotFilter === 'Legs' ? 'selected' : ''}>Legs</option>
+                <option value="Class Item" ${g.armorSlotFilter === 'Class Item' ? 'selected' : ''}>Class Item</option>
+              </select>
+            </div>
+            <select onchange="updateGuardianField(${idx}, 'exoticArmor', this.value)" class="d2-select w-full text-xs py-1.5">
+              ${!hasCurrentArmor && g.exoticArmor ? `<option value="${escapeHtml(g.exoticArmor)}" selected>${escapeHtml(g.exoticArmor)}</option>` : ''}
+              ${armorOptions.length === 0 ? `<option value="None (No Vault Match)">None (No Vault Match)</option>` : ''}
+              ${armorOptions.map(a => `<option value="${escapeHtml(a.name)}" ${a.name === g.exoticArmor ? 'selected' : ''}>${escapeHtml(a.name)} [${a.slot}]</option>`).join('')}
+            </select>
+          </div>
+
+          <!-- Aspects (2 Slots) -->
+          <div class="mb-2.5">
+            <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Aspects (Select up to 2)</label>
+            <div class="grid grid-cols-2 gap-1.5">
+              ${[0, 1].map(aIdx => `
+                <select onchange="updateGuardianArray(${idx}, 'aspects', ${aIdx}, this.value)" class="d2-select w-full text-[11px] py-1">
+                  ${activeSub.aspects.map(asp => `<option value="${escapeHtml(asp)}" ${(g.aspects?.[aIdx] === asp) ? 'selected' : ''}>${escapeHtml(asp)}</option>`).join('')}
+                </select>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Fragments (4-5 Slots) -->
+          <div>
+            <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Fragments (${activeSub.element === 'Prismatic' ? '5' : '4'} Slots)</label>
+            <div class="grid grid-cols-2 gap-1.5">
+              ${Array.from({ length: activeSub.element === 'Prismatic' ? 5 : 4 }).map((_, fIdx) => `
+                <select onchange="updateGuardianArray(${idx}, 'fragments', ${fIdx}, this.value)" class="d2-select w-full text-[11px] py-1">
+                  ${activeSub.fragments.map(frag => `<option value="${escapeHtml(frag)}" ${(g.fragments?.[fIdx] === frag) ? 'selected' : ''}>${escapeHtml(frag)}</option>`).join('')}
+                </select>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function updateGuardianField(idx, field, val) {
+  appState.guardians[idx][field] = val;
+  saveState();
+  if (field === 'name' && appState.vaults && appState.vaults.length) renderVaultAssignments();
+}
+
+function changeGuardianVault(idx, vaultId) {
+  appState.guardians[idx].vaultScope = vaultId || 'ANY';
+  saveState();
+  renderGuardianCards();
+  showToast(vaultId && vaultId !== 'ANY'
+    ? `Vault restriction set for ${appState.guardians[idx].name}.`
+    : `Vault restriction cleared for ${appState.guardians[idx].name}.`);
+}
+
+function updateGuardianArray(idx, arrKey, slotIdx, val) {
+  if (!Array.isArray(appState.guardians[idx][arrKey])) appState.guardians[idx][arrKey] = [];
+  appState.guardians[idx][arrKey][slotIdx] = val;
+  saveState();
+}
+
+function changeGuardianClass(idx, newClass) {
+  const g = appState.guardians[idx];
+  g.classType = newClass;
+  const sub = SUBCLASS_DATA[newClass][0];
+  g.subclass = sub.name;
+  g.aspects = sub.aspects.slice(0, 2);
+  g.fragments = sub.fragments.slice(0, sub.element === 'Prismatic' ? 5 : 4);
+  const armors = getFilteredExoticArmor(newClass, g.armorSlotFilter || "ALL", g);
+  g.exoticArmor = armors[0]?.name || BUILTIN_EXOTIC_ARMOR.find(a => a.classType === newClass)?.name || "";
+  saveState();
+  renderGuardianCards();
+}
+
+function changeGuardianSubclass(idx, newSubName) {
+  const g = appState.guardians[idx];
+  const sub = (SUBCLASS_DATA[g.classType] || []).find(s => s.name === newSubName);
+  if (!sub) return;
+  g.subclass = sub.name;
+  g.aspects = sub.aspects.slice(0, 2);
+  g.fragments = sub.fragments.slice(0, sub.element === 'Prismatic' ? 5 : 4);
+  saveState();
+  renderGuardianCards();
+}
+
+function changeGuardianArmorSlot(idx, slotVal) {
+  const g = appState.guardians[idx];
+  g.armorSlotFilter = slotVal;
+  const armors = getFilteredExoticArmor(g.classType, slotVal);
+  if (armors.length > 0 && !armors.some(a => a.name === g.exoticArmor)) {
+    g.exoticArmor = armors[0].name;
+  }
+  saveState();
+  renderGuardianCards();
+}
+
+function pickRandom(arr) {
+  if (!arr || arr.length === 0) return null;
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function pickUniqueSubset(arr, count) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, count);
+}
+
+function randomizeSingleGuardian(idx, silent = false) {
+  const g = appState.guardians[idx];
+  const classes = ["Hunter", "Titan", "Warlock"];
+  g.classType = pickRandom(classes);
+  const sub = pickRandom(SUBCLASS_DATA[g.classType]);
+  g.subclass = sub.name;
+  g.aspects = pickUniqueSubset(sub.aspects, 2);
+  g.fragments = pickUniqueSubset(sub.fragments, sub.element === "Prismatic" ? 5 : 4);
+
+  const armorPool = getFilteredExoticArmor(g.classType, g.armorSlotFilter || "ALL", g);
+  const fallbackPool = EXOTIC_ARMOR_DB.filter(a => a.classType === g.classType);
+  const chosenArmor = pickRandom(armorPool.length > 0 ? armorPool : fallbackPool);
+  g.exoticArmor = chosenArmor ? chosenArmor.name : "None";
+
+  if (!silent) {
+    saveState();
+    renderGuardianCards();
+    showToast(`Randomized ${g.name} (${g.classType} · ${g.subclass})`);
+  }
+}
+
+function randomizeAllLoadouts(alsoRegenerateChart = false) {
+  for (let i = 0; i < appState.guardians.length; i++) {
+    randomizeSingleGuardian(i, true);
+  }
+  saveState();
+  renderGuardianCards();
+  if (alsoRegenerateChart) {
+    generateFireteamChart();
+  } else {
+    showToast("Randomized all 6 Guardian loadouts!");
+  }
+}
+
+// ============================================================================
+// 4. FIRETEAM WEAPON & LOADOUT CHART GENERATION
+// ============================================================================
+
+function generateFireteamChart() {
+  const count = parseInt(document.getElementById('selFireteamSize').value, 10) || 6;
+  const exoticRule = document.getElementById('selExoticRule').value;
+  const dupRule = document.getElementById('selDuplicateRule').value;
+
+  const usedGlobal = new Set();
+  const usedPerSlot = { Kinetic: new Set(), Energy: new Set(), Power: new Set() };
+  const rows = [];
+
+  for (let i = 0; i < count; i++) {
+    const g = appState.guardians[i];
+    const subObj = (SUBCLASS_DATA[g.classType] || []).find(s => s.name === g.subclass) || SUBCLASS_DATA[g.classType][0];
+
+    // Per-guardian weapon pools (each guardian can be locked to their own vault)
+    const kinPool = getFilteredWeapons("Kinetic", g);
+    const engPool = getFilteredWeapons("Energy", g);
+    const powPool = getFilteredWeapons("Power", g);
+    const gVault = getGuardianVault(g);
+
+    if (kinPool.length === 0 || engPool.length === 0 || powPool.length === 0) {
+      showToast(`No eligible weapons in one or more slots for ${g.name}${gVault ? ` (Vault: ${gVault.displayName})` : ''}! Relax your Origin Trait, Vault, Archetype, or Element filters, or change that Guardian's vault restriction.`);
+      return;
+    }
+
+    let hasExotic = false;
+    const exoticSlotTarget = exoticRule === "guarantee1" ? pickRandom(["Kinetic", "Energy", "Power"]) : null;
+
+    const pickSlotWeapon = (slotName, pool) => {
+      let candidates = pool.filter(w => {
+        if (dupRule === "uniqueGlobal" && usedGlobal.has(w.name)) return false;
+        if (dupRule === "uniquePerSlot" && usedPerSlot[slotName].has(w.name)) return false;
+        if (exoticRule === "enforce1" && hasExotic && w.rarity === "Exotic") return false;
+        if (exoticRule === "guarantee1") {
+          if (slotName === exoticSlotTarget && w.rarity !== "Exotic") return false;
+          if (slotName !== exoticSlotTarget && w.rarity === "Exotic") return false;
+        }
+        return true;
+      });
+
+      // Fallback if strict rule exhausted candidates
+      if (candidates.length === 0) {
+        candidates = pool.filter(w => !(exoticRule === "enforce1" && hasExotic && w.rarity === "Exotic"));
+      }
+      if (candidates.length === 0) candidates = pool;
+
+      const chosen = pickRandom(candidates);
+      if (chosen) {
+        if (chosen.rarity === "Exotic") hasExotic = true;
+        usedGlobal.add(chosen.name);
+        usedPerSlot[slotName].add(chosen.name);
+      }
+      return chosen;
+    };
+
+    const kinetic = pickSlotWeapon("Kinetic", kinPool);
+    const energy = pickSlotWeapon("Energy", engPool);
+    const power = pickSlotWeapon("Power", powPool);
+
+    rows.push({
+      guardianName: g.name,
+      classType: g.classType,
+      subclass: g.subclass,
+      element: subObj.element,
+      exoticArmor: g.exoticArmor,
+      aspects: [...(g.aspects || [])],
+      fragments: [...(g.fragments || [])],
+      vaultSource: gVault ? gVault.displayName : null,
+      kinetic,
+      energy,
+      power
+    });
+  }
+
+  const chartPayload = {
+    generatedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+    vaultSource: (appState.restrictToVault && appState.vaults.length) ? `${appState.vaults.length} VAULT(S) ENFORCED` : null,
+    originFilters: [...appState.selectedOriginTraits],
+    originMode: appState.originFilterMode,
+    rows
+  };
+
+  appState.lastGeneratedChart = chartPayload;
+  saveState();
+  renderGeneratedChart(chartPayload);
+  showToast("Fireteam Weapon & Loadout Chart generated!");
+}
+
+function rerollWeaponsOnly() {
+  generateFireteamChart();
+}
+
+function renderWeaponCell(w) {
+  if (!w) return `<span class="text-xs text-[#60687a]">None</span>`;
+  const isExotic = w.rarity === 'Exotic';
+  return `
+    <div class="p-2 bg-[#0d0f13] border ${isExotic ? 'border-[#ceae33]/60' : 'border-[#252a36]'}">
+      <div class="font-semibold text-xs ${isExotic ? 'text-[#ceae33]' : 'text-[#eceae4]'}">${escapeHtml(w.name)}</div>
+      <div class="text-[11px] text-[#9aa2b2] mt-0.5">${escapeHtml(w.type)} · ${escapeHtml(w.damage)}</div>
+      <div class="mt-1">
+        <span class="origin-badge">${escapeHtml(w.originTrait || 'Standard')}</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderGeneratedChart(chart) {
+  const container = document.getElementById('chartMatrixContainer');
+  const ts = document.getElementById('chartTimestamp');
+
+  let metaBits = [`GENERATED AT ${chart.generatedAt}`];
+  if (chart.vaultSource) metaBits.push(`VAULT: ${chart.vaultSource}`);
+  if (chart.originFilters && chart.originFilters.length > 0) {
+    metaBits.push(`ORIGIN TRAITS (${chart.originMode.toUpperCase()}): ${chart.originFilters.join(', ')}`);
+  }
+  ts.textContent = metaBits.join(' // ');
+
+  // Responsive Matrix Table + Detailed Loadout Cards
+  const tableHtml = `
+    <div class="overflow-x-auto border border-[#252a36]">
+      <table class="w-full text-left border-collapse min-w-[920px]">
+        <thead>
+          <tr class="bg-[#0d0f13] border-b border-[#c7a86e]/50 text-[11px] font-mono-tech uppercase tracking-wider text-[#c7a86e]">
+            <th class="p-3 border-r border-[#252a36]">Guardian &amp; Subclass</th>
+            <th class="p-3 border-r border-[#252a36]">Exotic Armor &amp; Build</th>
+            <th class="p-3 border-r border-[#252a36]">Kinetic Slot</th>
+            <th class="p-3 border-r border-[#252a36]">Energy Slot</th>
+            <th class="p-3">Power Slot</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-[#252a36] bg-[#12151c]">
+          ${chart.rows.map((r, i) => `
+            <tr class="hover:bg-[#161a23] transition-colors align-top">
+              <td class="p-3 border-r border-[#252a36] sub-${(r.element || 'solar').toLowerCase()}">
+                <div class="text-[11px] font-mono-tech text-[#c7a86e]">FIRETEAM 0${i + 1}</div>
+                <div class="font-bold text-sm text-[#eceae4]">${escapeHtml(r.guardianName)}</div>
+                <div class="text-xs text-[#9aa2b2] mt-0.5">${escapeHtml(r.classType)} · <span class="text-[#eceae4]">${escapeHtml(r.subclass)}</span></div>
+                ${r.vaultSource ? `<div class="text-[10px] font-mono-tech text-[#35e366] mt-1">🔒 ${escapeHtml(r.vaultSource)}</div>` : ''}
+              </td>
+              <td class="p-3 border-r border-[#252a36] max-w-[270px]">
+                <div class="text-xs font-semibold text-[#ceae33]">${escapeHtml(r.exoticArmor)}</div>
+                <div class="text-[11px] text-[#9aa2b2] mt-1">
+                  <span class="text-[#c7a86e] font-mono-tech">ASPECTS:</span> ${escapeHtml((r.aspects || []).join(', '))}
+                </div>
+                <div class="text-[11px] text-[#9aa2b2] mt-0.5 leading-relaxed">
+                  <span class="text-[#c7a86e] font-mono-tech">FRAGMENTS:</span> ${escapeHtml((r.fragments || []).join(', '))}
+                </div>
+              </td>
+              <td class="p-3 border-r border-[#252a36]">${renderWeaponCell(r.kinetic)}</td>
+              <td class="p-3 border-r border-[#252a36]">${renderWeaponCell(r.energy)}</td>
+              <td class="p-3">${renderWeaponCell(r.power)}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  container.innerHTML = tableHtml;
+}
+
+// ============================================================================
+// 5. EXPORT & CLIPBOARD UTILITIES
+// ============================================================================
+
+function copyChartSummary() {
+  if (!appState.lastGeneratedChart) {
+    showToast("Generate a Fireteam Chart first.");
+    return;
+  }
+  const lines = ["=== DESTINY 2 FIRETEAM WEAPON & LOADOUT CHART ==="];
+  appState.lastGeneratedChart.rows.forEach((r, idx) => {
+    lines.push(
+      `\n[${idx + 1}] ${r.guardianName} — ${r.classType} (${r.subclass}) | Exotic Armor: ${r.exoticArmor}`,
+      `    Aspects: ${r.aspects.join(', ')} | Fragments: ${r.fragments.join(', ')}`,
+      `    Kinetic: ${r.kinetic?.name} [${r.kinetic?.originTrait}]`,
+      `    Energy:  ${r.energy?.name} [${r.energy?.originTrait}]`,
+      `    Power:   ${r.power?.name} [${r.power?.originTrait}]`
+    );
+  });
+
+  const ta = document.createElement('textarea');
+  ta.value = lines.join('\n');
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  ta.remove();
+  showToast("Fireteam Weapon & Loadout summary copied to clipboard!");
+}
+
+function exportChartCSV() {
+  if (!appState.lastGeneratedChart) {
+    showToast("Generate a Fireteam Chart first.");
+    return;
+  }
+  const headers = [
+    "Guardian", "Class", "Subclass", "Exotic Armor", "Aspects", "Fragments",
+    "Kinetic Weapon", "Kinetic Origin Trait",
+    "Energy Weapon", "Energy Origin Trait",
+    "Power Weapon", "Power Origin Trait"
+  ];
+
+  const csvRows = [headers.join(',')];
+  appState.lastGeneratedChart.rows.forEach(r => {
+    const vals = [
+      r.guardianName,
+      r.classType,
+      r.subclass,
+      r.exoticArmor,
+      (r.aspects || []).join(' / '),
+      (r.fragments || []).join(' / '),
+      r.kinetic?.name || '',
+      r.kinetic?.originTrait || '',
+      r.energy?.name || '',
+      r.energy?.originTrait || '',
+      r.power?.name || '',
+      r.power?.originTrait || ''
+    ].map(v => `"${String(v).replace(/"/g, '""')}"`);
+    csvRows.push(vals.join(','));
+  });
+
+  const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `destiny2-fireteam-chart-${Date.now()}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showToast("Exported Fireteam Chart CSV!");
+}
+</script>
+</body>
+</html>
