@@ -690,7 +690,7 @@
 
         <div id="secBody-rules">
         <!-- Primary Rule Controls -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
           <div>
             <label for="selFireteamSize" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Fireteam Size</label>
             <select id="selFireteamSize" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
@@ -746,9 +746,27 @@
           </div>
 
           <div>
-            <label for="selDamageFilter" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Element / Damage Type</label>
-            <select id="selDamageFilter" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
-              <option value="ALL">All Elements</option>
+            <label for="selElemKinetic" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Kinetic Slot Element</label>
+            <select id="selElemKinetic" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <option value="ALL">Any Element</option>
+              <option value="Kinetic">Kinetic</option>
+              <option value="Stasis">Stasis</option>
+              <option value="Strand">Strand</option>
+            </select>
+          </div>
+          <div>
+            <label for="selElemEnergy" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Energy Slot Element</label>
+            <select id="selElemEnergy" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <option value="ALL">Any Element</option>
+              <option value="Arc">Arc</option>
+              <option value="Solar">Solar</option>
+              <option value="Void">Void</option>
+            </select>
+          </div>
+          <div>
+            <label for="selElemPower" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Heavy Slot Element</label>
+            <select id="selElemPower" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <option value="ALL">Any Element</option>
               <option value="Kinetic">Kinetic</option>
               <option value="Stasis">Stasis</option>
               <option value="Strand">Strand</option>
@@ -960,29 +978,19 @@ function confirmBungieApiKey() {
   showToast("Bungie API key confirmed for this page session.");
 }
 
+// Returns a fetch() Promise. Calls to /Platform/ always send the key the user confirmed.
+// Static manifest content (/common/...) is a public CDN path and is fetched without the key.
 async function bungieApiFetch(path, options = {}) {
-  if (!BUNGIE_API_KEY) {
-    throw new Error("Enter and confirm your Bungie API key first.");
+  const isPlatform = path.startsWith("/Platform/");
+  if (isPlatform && !BUNGIE_API_KEY) {
+    throw new Error("Enter your Bungie API key and select Confirm first.");
   }
-
-  return fetch(new URL(path, BUNGIE_API_ORIGIN), {
-    ...options,
-    headers: {
-      ...(options.headers || {}),
-      Accept: "application/json",
-      "X-API-Key": BUNGIE_API_KEY,
-    },
-  });
-}
-const STORAGE_KEY = 'd2_fireteam_chart_v3';
-
-// PROXY CONFIG
-const BUNGIE_PROXY_URL =
-  "https://script.google.com/macros/s/AKfycbwOqu-pDY-C6gzYMV6lX0NQg89MuXfV_5qleQyjTyePTk0m666DkEY37E_-1IzBtFGr/exec";
-
-function bungieApiFetch(path) {
-  // path begins with a slash, e.g. "/Platform/Destiny2/Manifest/"
-  return `${BUNGIE_PROXY_URL}?path=${encodeURIComponent(path)}`;
+  const headers = { ...(options.headers || {}) };
+  if (isPlatform) {
+    headers["X-API-Key"] = BUNGIE_API_KEY;
+    headers["Accept"] = "application/json";
+  }
+  return fetch(new URL(path, BUNGIE_API_ORIGIN), { ...options, headers });
 }
 
 // Comprehensive Built-In Weapon Database with Origin Traits
@@ -1282,7 +1290,14 @@ let MANIFEST_HASH_MAP = {}; // itemHash -> { name, category, slot, type, damage,
 const VALID_SLOT_DAMAGE = {
   Kinetic: new Set(["Kinetic", "Stasis", "Strand"]),
   Energy: new Set(["Solar", "Arc", "Void"]),
-  Power: new Set(["Solar", "Arc", "Void", "Stasis", "Strand"])
+  Power: new Set(["Kinetic", "Solar", "Arc", "Void", "Stasis", "Strand"])
+};
+
+// Elements selectable in each slot's element filter ("ALL" = any)
+const SLOT_ELEMENT_OPTIONS = {
+  Kinetic: ["ALL", "Kinetic", "Stasis", "Strand"],
+  Energy: ["ALL", "Arc", "Solar", "Void"],
+  Power: ["ALL", "Kinetic", "Stasis", "Strand", "Solar", "Arc", "Void"]
 };
 
 function sanitizeWeaponDb() {
@@ -1304,7 +1319,7 @@ let appState = {
   exoticRule: "enforce1",
   duplicateRule: "allow",
   typeFilter: "ALL",
-  damageFilter: "ALL",
+  slotElements: { Kinetic: "ALL", Energy: "ALL", Power: "ALL" },
   originFilterMode: "require",
   selectedOriginTraits: [],
   excludedWeapons: [],
@@ -1409,7 +1424,11 @@ function saveState() {
     appState.exoticRule = document.getElementById('selExoticRule').value;
     appState.duplicateRule = document.getElementById('selDuplicateRule').value;
     appState.typeFilter = document.getElementById('selTypeFilter').value;
-    appState.damageFilter = document.getElementById('selDamageFilter').value;
+    appState.slotElements = {
+      Kinetic: document.getElementById('selElemKinetic').value,
+      Energy: document.getElementById('selElemEnergy').value,
+      Power: document.getElementById('selElemPower').value
+    };
     appState.originFilterMode = document.getElementById('selOriginFilterMode').value;
     appState.bungieName = document.getElementById('inpBungieName').value.trim();
     
@@ -1426,10 +1445,13 @@ function syncControlsFromState() {
   document.getElementById('selExoticRule').value = appState.exoticRule || "enforce1";
   document.getElementById('selDuplicateRule').value = appState.duplicateRule || "allow";
   document.getElementById('selTypeFilter').value = appState.typeFilter || "ALL";
-  document.getElementById('selDamageFilter').value = appState.damageFilter || "ALL";
+  const se = appState.slotElements || {};
+  document.getElementById('selElemKinetic').value = (SLOT_ELEMENT_OPTIONS.Kinetic.includes(se.Kinetic) ? se.Kinetic : "ALL");
+  document.getElementById('selElemEnergy').value = (SLOT_ELEMENT_OPTIONS.Energy.includes(se.Energy) ? se.Energy : "ALL");
+  document.getElementById('selElemPower').value = (SLOT_ELEMENT_OPTIONS.Power.includes(se.Power) ? se.Power : "ALL");
   document.getElementById('selOriginFilterMode').value = appState.originFilterMode || "require";
   document.getElementById('inpBungieName').value = appState.bungieName || "";
-  // API key field removed in proxy mode; legacy saved keys are ignored.
+  // API key is never persisted; it is held in memory only.
   document.getElementById('chkVaultOnly').checked = Boolean(appState.restrictToVault);
 }
 
@@ -1465,20 +1487,24 @@ function escapeHtml(str) {
 // ============================================================================
 
 async function importBungieManifest() {
+  if (!BUNGIE_API_KEY) {
+    showToast("Enter and confirm your Bungie API key first — using built-in dataset for now.");
+    return;
+  }
   const btn = document.getElementById('btnImportManifest');
   const label = document.getElementById('manifestBtnLabel');
   btn.disabled = true;
   label.textContent = "Querying Bungie Manifest...";
 
   try {
-    const manifestRes = await fetch(bungieApiFetch("/Platform/Destiny2/Manifest/"));
+    const manifestRes = await bungieApiFetch("/Platform/Destiny2/Manifest/");
     if (!manifestRes.ok) throw new Error(`Manifest HTTP ${manifestRes.status}`);
     const manifestJson = await manifestRes.json();
     const invPath = manifestJson?.Response?.jsonWorldComponentContentPaths?.en?.DestinyInventoryItemDefinition;
     if (!invPath) throw new Error("DestinyInventoryItemDefinition path missing");
 
     label.textContent = "Downloading Item Definitions...";
-    const itemsRes = await fetch(bungieApiFetch(invPath));
+    const itemsRes = await bungieApiFetch(invPath);
     if (!itemsRes.ok) throw new Error(`Items HTTP ${itemsRes.status}`);
     const items = await itemsRes.json();
 
@@ -1640,7 +1666,7 @@ function updateDatabaseStatus(isLive = false) {
 // ============================================================================
 
 function toggleApiKeyVisibility() {
-  // No-op in proxy mode (API key input was removed).
+  // Unused: the key field is a password input that is only cleared on Confirm.
 }
 
 function toggleVaultImportDrawer() {
@@ -1689,9 +1715,8 @@ async function fetchBungieVault() {
     return;
   }
 
-  if (location.protocol === 'file:') {
-    // Running from disk: /proxy won't exist. Warn instead of failing silently.
-    showVaultAlert("This page is running from a local file, so no proxy is available. Use <strong>Demo Vault</strong> or <strong>JSON / DIM</strong> paste, or host the page behind the proxy (server.js or the Google Apps Script web app).", "warn");
+  if (!BUNGIE_API_KEY) {
+    showVaultAlert("Enter your <strong>Bungie API Key</strong> and select <strong>Confirm</strong> before fetching a vault.", "warn");
     return;
   }
 
@@ -1703,11 +1728,10 @@ async function fetchBungieVault() {
   label.textContent = "Searching Bungie ID...";
 
   try {
-    // Proxy (server.js / Apps Script) injects X-API-Key server-side; the key never reaches this page.
-    const headers: { 'Content-Type': 'text/plain;charset=UTF-8' };
+    const headers = { 'Content-Type': 'application/json' };
 
     // Step 1: SearchDestinyPlayerByBungieName
-    const searchRes = await fetch(bungieApiFetch("/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/"), {
+    const searchRes = await bungieApiFetch("/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/", {
       method: "POST",
       headers,
       body: JSON.stringify({ displayName, displayNameCode })
@@ -1735,7 +1759,7 @@ async function fetchBungieVault() {
 
     // Step 3: Fetch Profile Vault (102), Character Inventories (201), and Character Equipment (205)
     label.textContent = "Reading Vault & Characters...";
-    const profRes = await fetch(bungieApiFetch(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=102,201,205`), { headers: { 'Content-Type': 'application/json' } });
+    const profRes = await bungieApiFetch(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=102,201,205`);
     const profJson = await profRes.json();
 
     if (!profRes.ok || profJson.ErrorCode !== 1) {
@@ -2261,7 +2285,8 @@ function getFilteredWeapons(slot = null, guardian = null) {
     if (excludedSet.has(w.name.toLowerCase())) return false;
     if (vaultWeaponSet && !vaultWeaponSet.has(w.name.toLowerCase())) return false;
     if (appState.typeFilter !== "ALL" && w.type !== appState.typeFilter) return false;
-    if (appState.damageFilter !== "ALL" && w.damage !== appState.damageFilter) return false;
+    const slotElem = appState.slotElements && appState.slotElements[w.slot];
+    if (slotElem && slotElem !== "ALL" && w.damage !== slotElem) return false;
     if (appState.exoticRule === "legendaryOnly" && w.rarity === "Exotic") return false;
 
     if (selectedTraits.length > 0) {
@@ -2530,8 +2555,12 @@ function generateFireteamChart() {
     const powPool = getFilteredWeapons("Power", g);
     const gVault = getGuardianVault(g);
 
-    if (kinPool.length === 0 || engPool.length === 0 || powPool.length === 0) {
-      showToast(`No eligible weapons in one or more slots for ${g.name}${gVault ? ` (Vault: ${gVault.displayName})` : ''}! Relax your Origin Trait, Vault, Archetype, or Element filters, or change that Guardian's vault restriction.`);
+    const emptySlots = [];
+    if (kinPool.length === 0) emptySlots.push("Kinetic");
+    if (engPool.length === 0) emptySlots.push("Energy");
+    if (powPool.length === 0) emptySlots.push("Heavy");
+    if (emptySlots.length > 0) {
+      showToast(`No eligible weapons in the ${emptySlots.join(" / ")} slot${emptySlots.length > 1 ? "s" : ""} for ${g.name}${gVault ? ` (Vault: ${gVault.displayName})` : ''}. Change that slot's Element filter, or relax your Archetype, Origin Trait or Vault filters.`);
       return;
     }
 
