@@ -975,7 +975,7 @@ const STORAGE_KEY = 'd2_fireteam_chart_v3';
 const BUNGIE_PROXY_URL =
   "https://script.google.com/macros/s/AKfycbwOqu-pDY-C6gzYMV6lX0NQg89MuXfV_5qleQyjTyePTk0m666DkEY37E_-1IzBtFGr/exec";
 
-function bungieProxyUrl(path) {
+function bungieApiFetch(path) {
   // path begins with a slash, e.g. "/Platform/Destiny2/Manifest/"
   return `${BUNGIE_PROXY_URL}?path=${encodeURIComponent(path)}`;
 }
@@ -1465,14 +1465,14 @@ async function importBungieManifest() {
   label.textContent = "Querying Bungie Manifest...";
 
   try {
-    const manifestRes = await fetch(bungieProxyUrl("/Platform/Destiny2/Manifest/"));
+    const manifestRes = await fetch(bungieApiFetch("/Platform/Destiny2/Manifest/"));
     if (!manifestRes.ok) throw new Error(`Manifest HTTP ${manifestRes.status}`);
     const manifestJson = await manifestRes.json();
     const invPath = manifestJson?.Response?.jsonWorldComponentContentPaths?.en?.DestinyInventoryItemDefinition;
     if (!invPath) throw new Error("DestinyInventoryItemDefinition path missing");
 
     label.textContent = "Downloading Item Definitions...";
-    const itemsRes = await fetch(bungieProxyUrl(invPath));
+    const itemsRes = await fetch(bungieApiFetch(invPath));
     if (!itemsRes.ok) throw new Error(`Items HTTP ${itemsRes.status}`);
     const items = await itemsRes.json();
 
@@ -1701,7 +1701,7 @@ async function fetchBungieVault() {
     const headers: { 'Content-Type': 'text/plain;charset=UTF-8' };
 
     // Step 1: SearchDestinyPlayerByBungieName
-    const searchRes = await fetch(bungieProxyUrl("/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/"), {
+    const searchRes = await fetch(bungieApiFetch("/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/"), {
       method: "POST",
       headers,
       body: JSON.stringify({ displayName, displayNameCode })
@@ -1729,7 +1729,7 @@ async function fetchBungieVault() {
 
     // Step 3: Fetch Profile Vault (102), Character Inventories (201), and Character Equipment (205)
     label.textContent = "Reading Vault & Characters...";
-    const profRes = await fetch(bungieProxyUrl(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=102,201,205`), { headers: { 'Content-Type': 'application/json' } });
+    const profRes = await fetch(bungieApiFetch(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=102,201,205`), { headers: { 'Content-Type': 'application/json' } });
     const profJson = await profRes.json();
 
     if (!profRes.ok || profJson.ErrorCode !== 1) {
