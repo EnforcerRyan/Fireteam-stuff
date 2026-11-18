@@ -945,13 +945,13 @@ const BUNGIE_PROXY_URL = ("<?= webAppUrl ?>".startsWith("http")) ? "<?= webAppUr
 
 function bungieProxyUrl(path) {
   // path begins with a slash, e.g. "/Platform/Destiny2/Manifest/"
+const BUNGIE_PROXY_URL = "https://script.google.com/macros/s/AKfycbwOqu-pDY-C6gzYMV6lX0NQg89MuXfV_5qleQyjTyePTk0m666DkEY37E_-1IzBtFGr/exec";
+
+function bungieProxyUrl(path) {
+  // path begins with a slash, e.g. "/Platform/Destiny2/Manifest/"
   return BUNGIE_PROXY_URL
     ? `${BUNGIE_PROXY_URL}?path=${encodeURIComponent(path)}`
     : `/proxy${path}`;
-}
-
-function bungieProxyModeIsAppsScript() {
-  return Boolean(BUNGIE_PROXY_URL);
 }
 
 // Comprehensive Built-In Weapon Database with Origin Traits
