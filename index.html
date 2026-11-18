@@ -939,17 +939,12 @@
 const STORAGE_KEY = 'd2_fireteam_chart_v3';
 
 // PROXY CONFIG
-// - Google Apps Script mode: HtmlService injects the web app URL (<?= webAppUrl ?>).
-// - Node server.js mode: left empty, fetches fall back to the /proxy/... path prefix.
-// PROXY CONFIG
 const BUNGIE_PROXY_URL =
   "https://script.google.com/macros/s/AKfycbwOqu-pDY-C6gzYMV6lX0NQg89MuXfV_5qleQyjTyePTk0m666DkEY37E_-1IzBtFGr/exec";
 
 function bungieProxyUrl(path) {
   // path begins with a slash, e.g. "/Platform/Destiny2/Manifest/"
-  return BUNGIE_PROXY_URL
-    ? `${BUNGIE_PROXY_URL}?path=${encodeURIComponent(path)}`
-    : `/proxy${path}`;
+  return `${BUNGIE_PROXY_URL}?path=${encodeURIComponent(path)}`;
 }
 
 // Comprehensive Built-In Weapon Database with Origin Traits
