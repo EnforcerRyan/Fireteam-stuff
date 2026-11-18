@@ -571,16 +571,27 @@
             <input type="text" id="inpBungieName" placeholder="e.g. IkoraRey#4821" class="d2-input w-full font-mono-tech" autocomplete="off">
           </div>
 
-          <!-- API Key handled server-side by proxy -->
-          <div class="lg:col-span-4">
-            <label class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">
-              Bungie API Access
-            </label>
-            <div class="px-3 py-2 bg-[#0d0f13] border border-[#252a36] text-xs text-[#9aa2b2] font-mono-tech">
-              <span class="text-[#35e366]">PROXY MODE:</span> No API key needed — server.js injects it securely. Visitors just type their Bungie Name.<br>
-              <span class="text-[#60687a]">Host offline? Demo Vault / JSON / DIM paste still work.</span>
-            </div>
-          </div>
+<div class="lg:col-span-4">
+  <label for="inpBungieApiKey" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">
+    Bungie API Key
+  </label>
+  <div class="flex gap-2">
+    <input
+      type="password"
+      id="inpBungieApiKey"
+      class="d2-input min-w-0 flex-1 font-mono-tech"
+      autocomplete="off"
+      placeholder="Enter your Bungie API key"
+      aria-describedby="apiKeyStatus"
+    >
+    <button type="button" onclick="confirmBungieApiKey()" class="btn-ghost">
+      Confirm
+    </button>
+  </div>
+  <p id="apiKeyStatus" class="mt-1 text-[10px] text-[#60687a]" aria-live="polite">
+    Key is only kept in memory until you reload this page.
+  </p>
+</div>
 
           <!-- Vault Action Buttons -->
           <div class="lg:col-span-4 flex flex-wrap items-center gap-2">
