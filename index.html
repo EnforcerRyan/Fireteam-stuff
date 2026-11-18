@@ -936,17 +936,39 @@
   </div>
 
   <!-- Toast Container -->
-  <div id="toastBox"></div>
+ let BUNGIE_API_KEY = "";
+const BUNGIE_API_ORIGIN = "https://www.bungie.net";
 
-<script>
-/**
- * ============================================================================
- * DESTINY 2 FIRETEAM WEAPON & LOADOUT CHART GENERATOR
- * Complete Built-In Dataset (Weapons w/ Origin Traits, Exotic Armor, Subclasses,
- * Aspects, Fragments) + Bungie Manifest API + Bungie Vault/Profile Reader
- * ============================================================================
- */
+function confirmBungieApiKey() {
+  const input = document.getElementById("inpBungieApiKey");
+  const key = input.value.trim();
 
+  if (!key) {
+    showVaultAlert("Enter your Bungie API key, then select Confirm.", "warn");
+    return;
+  }
+
+  BUNGIE_API_KEY = key;
+  input.value = "";
+  document.getElementById("apiKeyStatus").textContent =
+    "API key confirmed for this page session.";
+  showToast("Bungie API key confirmed for this page session.");
+}
+
+async function bungieApiFetch(path, options = {}) {
+  if (!BUNGIE_API_KEY) {
+    throw new Error("Enter and confirm your Bungie API key first.");
+  }
+
+  return fetch(new URL(path, BUNGIE_API_ORIGIN), {
+    ...options,
+    headers: {
+      ...(options.headers || {}),
+      Accept: "application/json",
+      "X-API-Key": BUNGIE_API_KEY,
+    },
+  });
+}
 const STORAGE_KEY = 'd2_fireteam_chart_v3';
 
 // PROXY CONFIG
