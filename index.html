@@ -470,7 +470,7 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-2.5">
-          <button id="btnImportManifest" onclick="importBungieManifest()" class="btn-brass" title="Fetch live weapons, origin traits, exotic armors, subclasses, aspects &amp; fragments from Bungie.net Manifest">
+          <button id="btnImportManifest" type="button" class="btn-brass" title="Fetch live weapons, origin traits, exotic armors, subclasses, aspects &amp; fragments from Bungie.net Manifest">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
               <polyline points="7 10 12 15 17 10"/>
@@ -478,7 +478,7 @@
             </svg>
             <span id="manifestBtnLabel">Import Destiny 2 API Data</span>
           </button>
-          <button onclick="resetAllData()" class="btn-danger" title="Reset saved state to defaults">
+          <button id="btnResetAll" type="button" class="btn-danger" title="Reset saved state to defaults">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
               <path d="M3 3v5h5"/>
@@ -507,7 +507,7 @@
     <section class="vex-panel p-4 sm:p-5" aria-label="Bungie Vault and Inventory Lookup">
       <div class="vex-corners-alt">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 pb-3 mb-4 border-b border-[#252a36]">
-          <div class="flex items-center gap-2.5 sec-header-click" onclick="toggleSection('vault')" title="Click to expand / collapse">
+          <div class="flex items-center gap-2.5 sec-header-click" data-toggle-section="vault" title="Click to expand / collapse">
             <span class="w-2 h-2 bg-[#c7a86e]"></span>
             <h2 class="font-destiny text-sm sm:text-base font-bold text-[#eceae4]">Bungie Vault &amp; Inventory Lookup</h2>
             <span class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] text-[#c7a86e]">API v2 // PROFILE 102·201·205</span>
@@ -517,7 +517,7 @@
           </div>
           <div class="flex items-center gap-3">
             <label class="vex-toggle gap-2.5" title="When active, weapons and exotic armor randomize only from each Guardian's assigned vault (per-card Vault Restriction selector). Supports up to 6 vaults, one per player.">
-              <input type="checkbox" id="chkVaultOnly" onchange="saveState(); updatePoolReadout(); renderGuardianCards();">
+              <input type="checkbox" id="chkVaultOnly">
               <span class="vex-toggle-track"><span class="vex-toggle-thumb"></span></span>
               <span class="text-xs font-semibold uppercase tracking-wider text-[#eceae4]">Restrict Randomization to Assigned Vault Per Guardian</span>
             </label>
@@ -546,7 +546,7 @@
                 placeholder="Enter your Bungie API key"
                 aria-describedby="apiKeyStatus"
               >
-              <button type="button" onclick="confirmBungieApiKey()" class="btn-ghost h-[38px]">
+              <button id="btnConfirmApiKey" type="button" class="btn-ghost h-[38px]">
                 Confirm
               </button>
             </div>
@@ -560,7 +560,7 @@
               Actions
             </span>
             <div class="flex flex-wrap items-center gap-2">
-              <button id="btnFetchVault" onclick="fetchBungieVault()" class="btn-brass flex-1 min-w-[165px] h-[38px]">
+              <button id="btnFetchVault" type="button" class="btn-brass flex-1 min-w-[165px] h-[38px]">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="3" y="4" width="18" height="16" rx="1"/>
                   <circle cx="12" cy="12" r="3"/>
@@ -568,7 +568,7 @@
                 </svg>
                 <span id="vaultBtnLabel">Fetch Vault &amp; Inventory</span>
               </button>
-              <button onclick="toggleVaultImportDrawer()" class="btn-ghost h-[38px]" title="Paste DIM CSV or Bungie Profile JSON">
+              <button id="btnToggleVaultImport" type="button" class="btn-ghost h-[38px]" title="Paste DIM CSV or Bungie Profile JSON">
                 JSON / DIM
               </button>
             </div>
@@ -578,11 +578,11 @@
         <div id="vaultImportDrawer" class="hidden mt-3 p-3 bg-[#0d0f13] border border-[#252a36]">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
             <span class="text-xs font-mono-tech text-[#c7a86e]">OFFLINE / DIM FALLBACK: Paste Bungie Profile JSON (components 102/201/205) or DIM Weapon/Armor List</span>
-            <button onclick="toggleVaultImportDrawer()" class="text-xs text-[#9aa2b2] hover:text-white self-end sm:self-auto">Close [X]</button>
+            <button id="btnCloseVaultImport" type="button" class="text-xs text-[#9aa2b2] hover:text-white self-end sm:self-auto">Close [X]</button>
           </div>
           <textarea id="txtVaultPaste" rows="3" placeholder='Paste JSON response from Bungie GetProfile OR paste item names separated by commas/newlines (e.g. "Apex Predator, Zaouli&apos;s Bane, Celestial Nighthawk...")' class="d2-input w-full font-mono-tech text-xs"></textarea>
           <div class="mt-2 flex justify-end gap-2">
-            <button onclick="parseManualVaultPaste()" class="btn-brass text-xs py-1.5 px-3">Import Pasted Vault Data</button>
+            <button id="btnParseManualVault" type="button" class="btn-brass text-xs py-1.5 px-3">Import Pasted Vault Data</button>
           </div>
         </div>
 
@@ -595,10 +595,10 @@
               <div id="vaultListContainer" class="flex flex-wrap gap-1.5"></div>
             </div>
             <div class="flex items-center gap-2">
-              <button onclick="toggleVaultBrowser()" class="btn-ghost text-xs py-1 px-2.5" id="btnToggleVaultBrowser">
+              <button id="btnToggleVaultBrowser" type="button" class="btn-ghost text-xs py-1 px-2.5">
                 Browse Vault Items
               </button>
-              <button onclick="clearAllVaults()" class="btn-danger text-xs py-1 px-2.5">
+              <button id="btnClearAllVaults" type="button" class="btn-danger text-xs py-1 px-2.5">
                 Clear All Vaults
               </button>
             </div>
@@ -614,8 +614,8 @@
 
           <div id="vaultBrowserDrawer" class="hidden mt-3 p-3 bg-[#0d0f13] border border-[#252a36]">
             <div class="flex flex-col sm:flex-row gap-2 mb-3">
-              <input type="text" id="inpVaultBrowserSearch" oninput="renderVaultBrowser()" placeholder="Search fetched Vault weapons, armor, or origin traits..." class="d2-input flex-1 text-xs">
-              <select id="selVaultBrowserCategory" onchange="renderVaultBrowser()" class="d2-select text-xs sm:w-48">
+              <input type="text" id="inpVaultBrowserSearch" placeholder="Search fetched Vault weapons, armor, or origin traits..." class="d2-input flex-1 text-xs">
+              <select id="selVaultBrowserCategory" class="d2-select text-xs sm:w-48">
                 <option value="ALL">All Vault Categories</option>
                 <option value="Kinetic">Kinetic Slot Weapons</option>
                 <option value="Energy">Energy Slot Weapons</option>
@@ -634,7 +634,7 @@
     <section class="vex-panel p-4 sm:p-5" aria-label="Weapon Rules and Origin Trait Filtering">
       <div class="vex-corners-alt">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-4 border-b border-[#252a36]">
-          <div class="flex items-center gap-2.5 sec-header-click" onclick="toggleSection('rules')" title="Click to expand / collapse">
+          <div class="flex items-center gap-2.5 sec-header-click" data-toggle-section="rules" title="Click to expand / collapse">
             <span class="w-2 h-2 bg-[#c7a86e]"></span>
             <h2 class="font-destiny text-sm sm:text-base font-bold text-[#eceae4]">Arsenal Rules, Origin Traits &amp; Exclusions</h2>
             <span class="sec-chevron" data-chevron="rules" title="Collapse / Expand">
@@ -650,7 +650,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
           <div>
             <label for="selFireteamSize" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Fireteam Size</label>
-            <select id="selFireteamSize" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+            <select id="selFireteamSize" class="d2-select w-full">
               <option value="6">6 Guardians (Raid)</option>
               <option value="3">3 Guardians (Dungeon / GM)</option>
               <option value="4">4 Guardians (Gambit / Comp)</option>
@@ -661,7 +661,7 @@
 
           <div>
             <label for="selExoticRule" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Exotic Weapon Limit</label>
-            <select id="selExoticRule" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+            <select id="selExoticRule" class="d2-select w-full">
               <option value="enforce1">Enforce Max 1 Exotic (D2 Legal)</option>
               <option value="guarantee1">Guarantee 1 Exotic Per Guardian</option>
               <option value="legendaryOnly">Legendary Weapons Only</option>
@@ -671,7 +671,7 @@
 
           <div>
             <label for="selDuplicateRule" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Fireteam Duplicates</label>
-            <select id="selDuplicateRule" onchange="saveState();" class="d2-select w-full">
+            <select id="selDuplicateRule" class="d2-select w-full">
               <option value="allow">Allow Duplicate Weapons</option>
               <option value="uniquePerSlot">Unique Weapon Per Slot</option>
               <option value="uniqueGlobal">Strictly Unique Across Team</option>
@@ -687,10 +687,10 @@
               <span class="text-[10px] font-mono-tech text-[#60687a]">(Applies across all Guardians)</span>
             </div>
             <div class="flex flex-wrap items-center gap-1.5">
-              <button type="button" onclick="randomizeGlobalSlotElements()" class="btn-brass py-1 px-2.5 text-[11px]" title="Randomly select a valid element from each slot's dropdown options across the entire team">
+              <button id="btnRandomizeSlotElements" type="button" class="btn-brass py-1 px-2.5 text-[11px]" title="Randomly select a valid element from each slot's dropdown options across the entire team">
                 🎲 Randomize Slot Elements
               </button>
-              <button type="button" onclick="resetGlobalSlotElements()" class="btn-ghost py-1 px-2 text-[11px]" title="Reset Kinetic, Energy, and Heavy slot element restrictions back to Any Element">
+              <button id="btnResetSlotElements" type="button" class="btn-ghost py-1 px-2 text-[11px]" title="Reset Kinetic, Energy, and Heavy slot element restrictions back to Any Element">
                 Reset Elements
               </button>
             </div>
@@ -698,7 +698,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label for="selElemKinetic" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Kinetic Slot Element</label>
-              <select id="selElemKinetic" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <select id="selElemKinetic" class="d2-select w-full">
                 <option value="ALL">Any Element</option>
                 <option value="Kinetic">Kinetic</option>
                 <option value="Stasis">Stasis</option>
@@ -708,7 +708,7 @@
 
             <div>
               <label for="selElemEnergy" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Energy Slot Element</label>
-              <select id="selElemEnergy" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <select id="selElemEnergy" class="d2-select w-full">
                 <option value="ALL">Any Element</option>
                 <option value="Arc">Arc</option>
                 <option value="Solar">Solar</option>
@@ -718,7 +718,7 @@
 
             <div>
               <label for="selElemPower" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Heavy Slot Element</label>
-              <select id="selElemPower" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <select id="selElemPower" class="d2-select w-full">
                 <option value="ALL">Any Element</option>
                 <option value="Kinetic">Kinetic</option>
                 <option value="Stasis">Stasis</option>
@@ -739,10 +739,10 @@
               <span class="text-[10px] font-mono-tech text-[#60687a]">(Applies across all Guardians)</span>
             </div>
             <div class="flex flex-wrap items-center gap-1.5">
-              <button type="button" onclick="randomizeGlobalSlotWeaponTypes()" class="btn-brass py-1 px-2.5 text-[11px]" title="Randomly select a valid weapon archetype for Kinetic, Energy, and Heavy slots across the entire team">
+              <button id="btnRandomizeSlotTypes" type="button" class="btn-brass py-1 px-2.5 text-[11px]" title="Randomly select a valid weapon archetype for Kinetic, Energy, and Heavy slots across the entire team">
                 🎲 Randomize Slot Weapon Types
               </button>
-              <button type="button" onclick="resetGlobalSlotWeaponTypes()" class="btn-ghost py-1 px-2 text-[11px]" title="Reset Kinetic, Energy, and Heavy slot weapon type restrictions back to All">
+              <button id="btnResetSlotTypes" type="button" class="btn-ghost py-1 px-2 text-[11px]" title="Reset Kinetic, Energy, and Heavy slot weapon type restrictions back to All">
                 Reset Slot Types
               </button>
             </div>
@@ -750,7 +750,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label for="selTypeKinetic" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Kinetic Slot Weapon Type</label>
-              <select id="selTypeKinetic" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <select id="selTypeKinetic" class="d2-select w-full">
                 <option value="ALL">All Kinetic Slot Types</option>
                 <option value="Auto Rifle">Auto Rifle</option>
                 <option value="Hand Cannon">Hand Cannon</option>
@@ -771,7 +771,7 @@
 
             <div>
               <label for="selTypeEnergy" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Energy Slot Weapon Type</label>
-              <select id="selTypeEnergy" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <select id="selTypeEnergy" class="d2-select w-full">
                 <option value="ALL">All Energy Slot Types</option>
                 <option value="Auto Rifle">Auto Rifle</option>
                 <option value="Hand Cannon">Hand Cannon</option>
@@ -791,7 +791,7 @@
 
             <div>
               <label for="selTypePower" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Heavy Slot Weapon Type</label>
-              <select id="selTypePower" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <select id="selTypePower" class="d2-select w-full">
                 <option value="ALL">All Heavy Slot Types</option>
                 <option value="Rocket Launcher">Rocket Launcher</option>
                 <option value="Grenade Launcher">Grenade Launcher</option>
@@ -814,7 +814,7 @@
     <section class="vex-panel p-4 sm:p-5" aria-label="Team Loadouts Configurator">
       <div class="vex-corners-alt">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-3 mb-4 border-b border-[#252a36]">
-          <div class="flex flex-wrap items-center gap-2.5 sec-header-click" onclick="toggleSection('guardians')" title="Click to expand / collapse">
+          <div class="flex flex-wrap items-center gap-2.5 sec-header-click" data-toggle-section="guardians" title="Click to expand / collapse">
             <span class="w-2 h-2 bg-[#c7a86e]"></span>
             <h2 class="font-destiny text-sm sm:text-base font-bold text-[#eceae4]">Fireteam Guardian Loadouts</h2>
             <span class="text-xs font-mono-tech text-[#9aa2b2]">(Class · Subclass · Exotic Armor · Aspects · Fragments · Weapon Locks)</span>
@@ -823,17 +823,17 @@
             </span>
           </div>
           <div class="flex flex-wrap items-center gap-2">
-            <button onclick="unlockAllWeaponTypes()" class="btn-ghost" title="Unlock all locked slot weapon archetypes across all Guardians">
+            <button id="btnUnlockAllTypes" type="button" class="btn-ghost" title="Unlock all locked slot weapon archetypes across all Guardians">
               🔓 Unlock All Weapon Types
             </button>
-            <button onclick="randomizeAllWeaponTypes()" class="btn-ghost" title="Randomize and lock a valid weapon archetype per slot for each Guardian (respecting their Vault & filters)">
+            <button id="btnRandomizeAllTypes" type="button" class="btn-ghost" title="Randomize and lock a valid weapon archetype per slot for each Guardian (respecting their Vault & filters)">
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="11" width="18" height="11" rx="1"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
               Randomize All Weapon Types
             </button>
-            <button onclick="randomizeAllLoadouts(false)" class="btn-ghost">
+            <button id="btnRandomizeAllLoadouts" type="button" class="btn-ghost">
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
                 <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
@@ -841,7 +841,7 @@
               </svg>
               Randomize All Loadouts
             </button>
-            <button onclick="randomizeAllLoadouts(true)" class="btn-brass">
+            <button id="btnRandomizeAndGenerate" type="button" class="btn-brass">
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polygon points="5 3 19 12 5 21 5 3"/>
               </svg>
@@ -861,11 +861,11 @@
                 </label>
                 <div class="flex flex-wrap items-center gap-2">
                   <label class="vex-toggle gap-1.5" title="Restrict Origin Trait filtering to Legendary weapons only (Exotics excluded when Origin Trait filter is active)">
-                    <input type="checkbox" id="chkOriginLegendaryOnly" checked onchange="saveState(); renderOriginTraitChips(); updatePoolReadout();">
+                    <input type="checkbox" id="chkOriginLegendaryOnly" checked>
                     <span class="vex-toggle-track"><span class="vex-toggle-thumb"></span></span>
                     <span class="text-[11px] font-mono-tech uppercase text-[#eceae4]">Legendaries Only</span>
                   </label>
-                  <select id="selOriginFilterMode" onchange="saveState(); renderOriginTraitChips(); updatePoolReadout();" class="d2-select text-xs py-1 px-2">
+                  <select id="selOriginFilterMode" class="d2-select text-xs py-1 px-2">
                     <option value="require">Mode: Require Selected Traits</option>
                     <option value="exclude">Mode: Exclude Selected Traits</option>
                   </select>
@@ -879,12 +879,6 @@
 
               <div id="quickOriginTraitRow" class="mt-2 flex flex-wrap items-center gap-1.5">
                 <span class="text-[10px] font-mono-tech uppercase text-[#60687a]">Quick Add:</span>
-                <button type="button" onclick="addOriginTraitFilter('Veist Stinger')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Veist Stinger</button>
-                <button type="button" onclick="addOriginTraitFilter('Suros Synergy')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Suros Synergy</button>
-                <button type="button" onclick="addOriginTraitFilter('Runneth Over')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Runneth Over</button>
-                <button type="button" onclick="addOriginTraitFilter('Cursed Thrall')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Cursed Thrall</button>
-                <button type="button" onclick="addOriginTraitFilter('Souldrinker')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Souldrinker</button>
-                <button type="button" onclick="addOriginTraitFilter('Bray Inheritance')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Bray Inheritance</button>
               </div>
 
               <div id="activeOriginTraitList" class="mt-2.5 flex flex-wrap gap-1.5 min-h-[28px] items-center">
@@ -897,7 +891,7 @@
                 <label for="inpExcludeWeapon" class="text-xs font-mono-tech uppercase tracking-wider text-[#c7a86e] font-semibold">
                   Exclude Specific Weapons
                 </label>
-                <button type="button" onclick="clearExcludedWeapons()" class="text-[11px] font-mono-tech text-[#9aa2b2] hover:text-[#c7a86e] uppercase">
+                <button id="btnClearExclusions" type="button" class="text-[11px] font-mono-tech text-[#9aa2b2] hover:text-[#c7a86e] uppercase">
                   Clear Exclusions
                 </button>
               </div>
@@ -909,7 +903,7 @@
 
               <div class="mt-2 flex flex-wrap items-center gap-1.5">
                 <span class="text-[10px] font-mono-tech uppercase text-[#60687a]">Browse Pool:</span>
-                <select id="selQuickWeaponBrowse" onchange="if(this.value){ excludeWeaponByName(this.value); this.value=''; }" class="d2-select text-xs py-0.5 px-2 flex-1">
+                <select id="selQuickWeaponBrowse" class="d2-select text-xs py-0.5 px-2 flex-1">
                   <option value="">Select a weapon from database to exclude...</option>
                 </select>
               </div>
@@ -926,7 +920,7 @@
     <!-- 4. PRIMARY CHART GENERATION BAR -->
     <section class="vex-panel p-4 sm:p-5" aria-label="Chart Generation Controls">
       <div class="vex-corners-alt">
-        <div class="flex items-center gap-2.5 pb-3 mb-3 border-b border-[#252a36] sec-header-click" onclick="toggleSection('generate')" title="Click to expand / collapse">
+        <div class="flex items-center gap-2.5 pb-3 mb-3 border-b border-[#252a36] sec-header-click" data-toggle-section="generate" title="Click to expand / collapse">
           <span class="w-2 h-2 bg-[#c7a86e]"></span>
           <h2 class="font-destiny text-sm sm:text-base font-bold text-[#eceae4]">Chart Generation</h2>
           <span class="sec-chevron" data-chevron="generate" title="Collapse / Expand">
@@ -934,14 +928,14 @@
           </span>
         </div>
         <div id="secBody-generate" class="flex flex-wrap items-center gap-2.5">
-          <button onclick="generateFireteamChart()" class="btn-brass text-sm py-2.5 px-5">
+          <button id="btnGenerateChart" type="button" class="btn-brass text-sm py-2.5 px-5">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
               <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
             </svg>
             Generate Fireteam Weapon &amp; Loadout Chart
           </button>
-          <button onclick="rerollWeaponsOnly()" class="btn-ghost py-2.5 px-4">
+          <button id="btnRerollWeapons" type="button" class="btn-ghost py-2.5 px-4">
             Re-Roll Weapons Only
           </button>
         </div>
@@ -952,7 +946,7 @@
     <section id="chartOutputSection" class="vex-panel p-4 sm:p-6" aria-label="Generated Fireteam Chart">
       <div class="vex-corners-alt">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-4 border-b border-[#252a36]">
-          <div class="flex flex-wrap items-center gap-2.5 sec-header-click" onclick="toggleSection('chart')" title="Click to expand / collapse">
+          <div class="flex flex-wrap items-center gap-2.5 sec-header-click" data-toggle-section="chart" title="Click to expand / collapse">
             <span class="text-[11px] font-mono-tech uppercase tracking-[0.18em] text-[#c7a86e]">Tactical Assignment Output</span>
             <h2 class="font-destiny text-lg sm:text-xl font-bold text-[#eceae4]">Fireteam Loadout &amp; Arsenal Matrix</h2>
             <span class="sec-chevron" data-chevron="chart" title="Collapse / Expand">
@@ -987,7 +981,7 @@ const BUNGIE_API_ORIGIN = "https://www.bungie.net";
 
 function confirmBungieApiKey() {
   const input = document.getElementById("inpBungieApiKey");
-  const key = input.value.trim();
+  const key = input ? input.value.trim() : "";
 
   if (!key) {
     showVaultAlert("Enter your Bungie API key, then select Confirm.", "warn");
@@ -1599,6 +1593,17 @@ function sanitizeWeaponDb() {
     });
 }
 
+function createDefaultGuardians() {
+  return [
+    { name: "Guardian 1", classType: "Warlock", subclass: "Dawnblade (Solar)", exoticArmor: "Speaker's Sight", armorSlotFilter: "ALL", vaultScope: "ANY", slotTypes: { Kinetic: "ANY", Energy: "ANY", Power: "ANY" }, aspects: ["Touch of Flame", "Hellion"], fragments: ["Ember of Benevolence", "Ember of Empyrean", "Ember of Torches", "Ember of Ashes"] },
+    { name: "Guardian 2", classType: "Hunter", subclass: "Gunslinger (Solar)", exoticArmor: "Celestial Nighthawk", armorSlotFilter: "ALL", vaultScope: "ANY", slotTypes: { Kinetic: "ANY", Energy: "ANY", Power: "ANY" }, aspects: ["Knock 'Em Down", "On Your Mark"], fragments: ["Ember of Torches", "Ember of Empyrean", "Ember of Solace", "Ember of Ashes"] },
+    { name: "Guardian 3", classType: "Titan", subclass: "Prismatic Titan", exoticArmor: "Cuirass of the Falling Star", armorSlotFilter: "ALL", vaultScope: "ANY", slotTypes: { Kinetic: "ANY", Energy: "ANY", Power: "ANY" }, aspects: ["Consecration", "Knockout"], fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Balance", "Facet of Dawn", "Facet of Courage"] },
+    { name: "Guardian 4", classType: "Warlock", subclass: "Prismatic Warlock", exoticArmor: "Getaway Artist", armorSlotFilter: "ALL", vaultScope: "ANY", slotTypes: { Kinetic: "ANY", Energy: "ANY", Power: "ANY" }, aspects: ["Feed the Void", "Bleak Watcher"], fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Dominance", "Facet of Balance", "Facet of Courage"] },
+    { name: "Guardian 5", classType: "Hunter", subclass: "Nightstalker (Void)", exoticArmor: "Orpheus Rig", armorSlotFilter: "ALL", vaultScope: "ANY", slotTypes: { Kinetic: "ANY", Energy: "ANY", Power: "ANY" }, aspects: ["Vanishing Step", "Stylish Executioner"], fragments: ["Echo of Persistence", "Echo of Undermining", "Echo of Starvation", "Echo of Obscurity"] },
+    { name: "Guardian 6", classType: "Titan", subclass: "Berserker (Strand)", exoticArmor: "Synthoceps", armorSlotFilter: "ALL", vaultScope: "ANY", slotTypes: { Kinetic: "ANY", Energy: "ANY", Power: "ANY" }, aspects: ["Banner of War", "Into the Fray"], fragments: ["Thread of Warding", "Thread of Generation", "Thread of Fury", "Thread of Continuity"] }
+  ];
+}
+
 let appState = {
   fireteamSize: 6,
   exoticRule: "enforce1",
@@ -1610,23 +1615,15 @@ let appState = {
   selectedOriginTraits: [],
   excludedWeapons: [],
   bungieName: "",
-  bungieApiKey: "",
   restrictToVault: false,
   vaults: [],
   vaultSeq: 0,
   collapsedSections: {},
-  guardians: [
-    { name: "Guardian 1", classType: "Warlock", subclass: "Dawnblade (Solar)", exoticArmor: "Speaker's Sight", armorSlotFilter: "ALL", vaultScope: "ANY", slotTypes: { Kinetic: "ANY", Energy: "ANY", Power: "ANY" }, aspects: ["Touch of Flame", "Hellion"], fragments: ["Ember of Benevolence", "Ember of Empyrean", "Ember of Torches", "Ember of Ashes"] },
-    { name: "Guardian 2", classType: "Hunter", subclass: "Gunslinger (Solar)", exoticArmor: "Celestial Nighthawk", armorSlotFilter: "ALL", vaultScope: "ANY", slotTypes: { Kinetic: "ANY", Energy: "ANY", Power: "ANY" }, aspects: ["Knock 'Em Down", "On Your Mark"], fragments: ["Ember of Torches", "Ember of Empyrean", "Ember of Solace", "Ember of Ashes"] },
-    { name: "Guardian 3", classType: "Titan", subclass: "Prismatic Titan", exoticArmor: "Cuirass of the Falling Star", armorSlotFilter: "ALL", vaultScope: "ANY", slotTypes: { Kinetic: "ANY", Energy: "ANY", Power: "ANY" }, aspects: ["Consecration", "Knockout"], fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Balance", "Facet of Dawn", "Facet of Courage"] },
-    { name: "Guardian 4", classType: "Warlock", subclass: "Prismatic Warlock", exoticArmor: "Getaway Artist", armorSlotFilter: "ALL", vaultScope: "ANY", slotTypes: { Kinetic: "ANY", Energy: "ANY", Power: "ANY" }, aspects: ["Feed the Void", "Bleak Watcher"], fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Dominance", "Facet of Balance", "Facet of Courage"] },
-    { name: "Guardian 5", classType: "Hunter", subclass: "Nightstalker (Void)", exoticArmor: "Orpheus Rig", armorSlotFilter: "ALL", vaultScope: "ANY", slotTypes: { Kinetic: "ANY", Energy: "ANY", Power: "ANY" }, aspects: ["Vanishing Step", "Stylish Executioner"], fragments: ["Echo of Persistence", "Echo of Undermining", "Echo of Starvation", "Echo of Obscurity"] },
-    { name: "Guardian 6", classType: "Titan", subclass: "Berserker (Strand)", exoticArmor: "Synthoceps", armorSlotFilter: "ALL", vaultScope: "ANY", slotTypes: { Kinetic: "ANY", Energy: "ANY", Power: "ANY" }, aspects: ["Banner of War", "Into the Fray"], fragments: ["Thread of Warding", "Thread of Generation", "Thread of Fury", "Thread of Continuity"] }
-  ],
+  guardians: createDefaultGuardians(),
   lastGeneratedChart: null
 };
 
-window.onload = function () {
+window.addEventListener("DOMContentLoaded", function () {
   loadState();
   sanitizeWeaponDb();
   syncControlsFromState();
@@ -1638,12 +1635,13 @@ window.onload = function () {
   updateDatabaseStatus();
   updateVaultUI();
   updatePoolReadout();
+  bindStaticEvents();
   setupAutocompleteListeners();
   applyCollapsedSections();
   if (appState.lastGeneratedChart) {
     renderGeneratedChart(appState.lastGeneratedChart);
   }
-};
+});
 
 function toggleSection(sectionKey) {
   appState.collapsedSections = appState.collapsedSections || {};
@@ -1679,6 +1677,7 @@ function loadState() {
     if (!raw) return;
     const parsed = JSON.parse(raw);
     if (parsed && typeof parsed === 'object') {
+      const defaults = createDefaultGuardians();
       appState = {
         ...appState,
         ...parsed,
@@ -1688,7 +1687,7 @@ function loadState() {
           Energy: sanitizeSlotTypeForSlot("Energy", parsed.slotTypes?.Energy || parsed.typeFilter, "ALL"),
           Power: sanitizeSlotTypeForSlot("Power", parsed.slotTypes?.Power || parsed.typeFilter, "ALL")
         },
-        guardians: Array.isArray(parsed.guardians) && parsed.guardians.length === 6 ? parsed.guardians : appState.guardians
+        guardians: Array.isArray(parsed.guardians) && parsed.guardians.length === 6 ? parsed.guardians : defaults
       };
       if ((!Array.isArray(appState.vaults) || appState.vaults.length === 0) && parsed.vaultData) {
         const legacy = parsed.vaultData;
@@ -1704,16 +1703,19 @@ function loadState() {
       }
       appState.vaults = (Array.isArray(appState.vaults) ? appState.vaults : []).slice(0, 6);
       appState.collapsedSections = appState.collapsedSections || {};
-      appState.guardians = appState.guardians.map(g => ({
-        vaultScope: 'ANY',
-        slotTypes: { Kinetic: 'ANY', Energy: 'ANY', Power: 'ANY' },
-        ...g,
-        slotTypes: {
-          Kinetic: sanitizeSlotTypeForSlot('Kinetic', g.slotTypes?.Kinetic, 'ANY'),
-          Energy: sanitizeSlotTypeForSlot('Energy', g.slotTypes?.Energy, 'ANY'),
-          Power: sanitizeSlotTypeForSlot('Power', g.slotTypes?.Power, 'ANY')
-        }
-      }));
+      appState.guardians = appState.guardians.map((g, idx) => {
+        const fallback = defaults[idx] || defaults[0];
+        return {
+          ...fallback,
+          ...g,
+          vaultScope: g?.vaultScope || 'ANY',
+          slotTypes: {
+            Kinetic: sanitizeSlotTypeForSlot('Kinetic', g?.slotTypes?.Kinetic, 'ANY'),
+            Energy: sanitizeSlotTypeForSlot('Energy', g?.slotTypes?.Energy, 'ANY'),
+            Power: sanitizeSlotTypeForSlot('Power', g?.slotTypes?.Power, 'ANY')
+          }
+        };
+      });
     }
   } catch (err) {
     console.warn("Could not restore saved state:", err);
@@ -1747,8 +1749,10 @@ function saveState() {
     appState.originLegendaryOnly = getChecked('chkOriginLegendaryOnly', appState.originLegendaryOnly !== false);
     appState.bungieName = getVal('inpBungieName', appState.bungieName || "").trim();
     appState.restrictToVault = getChecked('chkVaultOnly', Boolean(appState.restrictToVault));
-    delete appState.bungieApiKey;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+
+    const toStore = { ...appState };
+    delete toStore.bungieApiKey;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(toStore));
   } catch (err) {
     console.warn("Save state error:", err);
   }
@@ -1828,6 +1832,7 @@ function resetAllData() {
 
 function showToast(msg) {
   const box = document.getElementById('toastBox');
+  if (!box) return;
   const el = document.createElement('div');
   el.className = 'toast-msg';
   el.innerHTML = `<span class="text-[#c7a86e] font-mono-tech mr-2">◆</span>${escapeHtml(msg)}`;
@@ -1845,6 +1850,193 @@ function escapeHtml(str) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+function bindStaticEvents() {
+  document.querySelectorAll('[data-toggle-section]').forEach(el => {
+    el.addEventListener('click', () => {
+      const key = el.getAttribute('data-toggle-section');
+      if (key) toggleSection(key);
+    });
+  });
+
+  document.getElementById('btnImportManifest')?.addEventListener('click', importBungieManifest);
+  document.getElementById('btnResetAll')?.addEventListener('click', resetAllData);
+  document.getElementById('btnConfirmApiKey')?.addEventListener('click', confirmBungieApiKey);
+  document.getElementById('btnFetchVault')?.addEventListener('click', fetchBungieVault);
+  document.getElementById('btnToggleVaultImport')?.addEventListener('click', toggleVaultImportDrawer);
+  document.getElementById('btnCloseVaultImport')?.addEventListener('click', toggleVaultImportDrawer);
+  document.getElementById('btnParseManualVault')?.addEventListener('click', parseManualVaultPaste);
+  document.getElementById('btnToggleVaultBrowser')?.addEventListener('click', toggleVaultBrowser);
+  document.getElementById('btnClearAllVaults')?.addEventListener('click', clearAllVaults);
+
+  document.getElementById('inpVaultBrowserSearch')?.addEventListener('input', renderVaultBrowser);
+  document.getElementById('selVaultBrowserCategory')?.addEventListener('change', renderVaultBrowser);
+
+  document.getElementById('chkVaultOnly')?.addEventListener('change', () => {
+    saveState();
+    updatePoolReadout();
+    renderGuardianCards();
+  });
+
+  ['selFireteamSize', 'selExoticRule', 'selDuplicateRule'].forEach(id => {
+    document.getElementById(id)?.addEventListener('change', () => {
+      saveState();
+      updatePoolReadout();
+    });
+  });
+
+  ['selElemKinetic', 'selElemEnergy', 'selElemPower', 'selTypeKinetic', 'selTypeEnergy', 'selTypePower'].forEach(id => {
+    document.getElementById(id)?.addEventListener('change', () => {
+      saveState();
+      updatePoolReadout();
+    });
+  });
+
+  document.getElementById('btnRandomizeSlotElements')?.addEventListener('click', randomizeGlobalSlotElements);
+  document.getElementById('btnResetSlotElements')?.addEventListener('click', resetGlobalSlotElements);
+  document.getElementById('btnRandomizeSlotTypes')?.addEventListener('click', randomizeGlobalSlotWeaponTypes);
+  document.getElementById('btnResetSlotTypes')?.addEventListener('click', resetGlobalSlotWeaponTypes);
+
+  document.getElementById('btnUnlockAllTypes')?.addEventListener('click', unlockAllWeaponTypes);
+  document.getElementById('btnRandomizeAllTypes')?.addEventListener('click', randomizeAllWeaponTypes);
+  document.getElementById('btnRandomizeAllLoadouts')?.addEventListener('click', () => randomizeAllLoadouts(false));
+  document.getElementById('btnRandomizeAndGenerate')?.addEventListener('click', () => randomizeAllLoadouts(true));
+
+  ['chkOriginLegendaryOnly', 'selOriginFilterMode'].forEach(id => {
+    document.getElementById(id)?.addEventListener('change', () => {
+      saveState();
+      renderOriginTraitChips();
+      updatePoolReadout();
+    });
+  });
+
+  document.getElementById('quickOriginTraitRow')?.addEventListener('click', e => {
+    const btn = e.target.closest('[data-origin-trait]');
+    if (btn) {
+      addOriginTraitFilter(btn.getAttribute('data-origin-trait'));
+    }
+  });
+
+  document.getElementById('activeOriginTraitList')?.addEventListener('click', e => {
+    const btn = e.target.closest('[data-remove-trait]');
+    if (btn) {
+      removeOriginTraitFilter(btn.getAttribute('data-remove-trait'));
+    }
+  });
+
+  document.getElementById('btnClearExclusions')?.addEventListener('click', clearExcludedWeapons);
+  document.getElementById('selQuickWeaponBrowse')?.addEventListener('change', e => {
+    if (e.target.value) {
+      excludeWeaponByName(e.target.value);
+      e.target.value = '';
+    }
+  });
+
+  document.getElementById('excludedWeaponList')?.addEventListener('click', e => {
+    const btn = e.target.closest('[data-remove-excluded]');
+    if (btn) {
+      removeExcludedWeapon(btn.getAttribute('data-remove-excluded'));
+    }
+  });
+
+  document.getElementById('vaultListContainer')?.addEventListener('click', e => {
+    const btn = e.target.closest('[data-remove-vault]');
+    if (btn) {
+      removeVault(btn.getAttribute('data-remove-vault'));
+    }
+  });
+
+  document.getElementById('vaultAssignList')?.addEventListener('input', e => {
+    const inp = e.target.closest('[data-vault-rename-idx]');
+    if (inp) {
+      const idx = parseInt(inp.getAttribute('data-vault-rename-idx'), 10);
+      renameGuardianFromVaultSection(idx, inp.value, false);
+    }
+  });
+
+  document.getElementById('vaultAssignList')?.addEventListener('change', e => {
+    const inp = e.target.closest('[data-vault-rename-idx]');
+    if (inp) {
+      const idx = parseInt(inp.getAttribute('data-vault-rename-idx'), 10);
+      const clean = inp.value.trim() || `Guardian ${idx + 1}`;
+      renameGuardianFromVaultSection(idx, clean, true);
+      return;
+    }
+    const sel = e.target.closest('[data-vault-assign-idx]');
+    if (sel) {
+      const idx = parseInt(sel.getAttribute('data-vault-assign-idx'), 10);
+      assignVaultToGuardian(idx, sel.value);
+    }
+  });
+
+  bindGuardianCardEvents();
+
+  document.getElementById('btnGenerateChart')?.addEventListener('click', generateFireteamChart);
+  document.getElementById('btnRerollWeapons')?.addEventListener('click', rerollWeaponsOnly);
+}
+
+function bindGuardianCardEvents() {
+  const grid = document.getElementById('guardianCardsGrid');
+  if (!grid || grid.dataset.bound === "1") return;
+  grid.dataset.bound = "1";
+
+  grid.addEventListener('click', e => {
+    const randBtn = e.target.closest('[data-randomize-guardian]');
+    if (randBtn) {
+      randomizeSingleGuardian(parseInt(randBtn.getAttribute('data-randomize-guardian'), 10));
+      return;
+    }
+
+    const unlockAllBtn = e.target.closest('[data-unlock-guardian-all]');
+    if (unlockAllBtn) {
+      unlockGuardianWeaponTypes(parseInt(unlockAllBtn.getAttribute('data-unlock-guardian-all'), 10));
+      return;
+    }
+
+    const lockRandBtn = e.target.closest('[data-lock-random-guardian]');
+    if (lockRandBtn) {
+      const idx = parseInt(lockRandBtn.getAttribute('data-lock-random-guardian'), 10);
+      randomizeGuardianWeaponTypes(idx);
+      return;
+    }
+
+    const unlockSlotBtn = e.target.closest('[data-unlock-slot]');
+    if (unlockSlotBtn) {
+      const idx = parseInt(unlockSlotBtn.getAttribute('data-guardian-idx'), 10);
+      const slotKey = unlockSlotBtn.getAttribute('data-unlock-slot');
+      unlockGuardianSlotType(idx, slotKey);
+    }
+  });
+
+  grid.addEventListener('change', e => {
+    const target = e.target;
+    const idxAttr = target.getAttribute('data-guardian-idx');
+    if (idxAttr === null) return;
+    const idx = parseInt(idxAttr, 10);
+    if (!appState.guardians[idx]) return;
+
+    const action = target.getAttribute('data-g-action');
+    if (action === 'name') {
+      updateGuardianField(idx, 'name', target.value);
+    } else if (action === 'vault') {
+      changeGuardianVault(idx, target.value);
+    } else if (action === 'slot-type') {
+      changeGuardianSlotType(idx, target.getAttribute('data-slot-key'), target.value);
+    } else if (action === 'class') {
+      changeGuardianClass(idx, target.value);
+    } else if (action === 'subclass') {
+      changeGuardianSubclass(idx, target.value);
+    } else if (action === 'armor-slot') {
+      changeGuardianArmorSlot(idx, target.value);
+    } else if (action === 'exotic-armor') {
+      updateGuardianField(idx, 'exoticArmor', target.value);
+    } else if (action === 'aspect') {
+      updateGuardianArray(idx, 'aspects', parseInt(target.getAttribute('data-arr-idx'), 10), target.value);
+    } else if (action === 'fragment') {
+      updateGuardianArray(idx, 'fragments', parseInt(target.getAttribute('data-arr-idx'), 10), target.value);
+    }
+  });
 }
 
 // ============================================================================
@@ -2140,7 +2332,7 @@ async function importBungieManifest() {
   } catch (err) {
     console.warn("Manifest fetch fallback:", err);
     updateDatabaseStatus(false);
-    showToast("Bungie Manifest blocked by browser/CORS — using complete built-in Destiny 2 dataset.");
+    showToast("Bungie Manifest request failed or was blocked — using built-in Destiny 2 dataset.");
   } finally {
     btn.disabled = false;
     label.textContent = "Import Destiny 2 API Data";
@@ -2181,7 +2373,7 @@ function renderQuickOriginTraitPills() {
   }
   container.innerHTML = `<span class="text-[10px] font-mono-tech uppercase text-[#60687a]">Quick Add:</span>` +
     picks.map(t => `
-      <button type="button" onclick="addOriginTraitFilter('${escapeHtml(t).replace(/'/g, "\\'")}')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ ${escapeHtml(t)}</button>
+      <button type="button" data-origin-trait="${escapeHtml(t)}" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ ${escapeHtml(t)}</button>
     `).join('');
 }
 
@@ -2200,11 +2392,12 @@ function updateDatabaseStatus(isLive = false) {
 // ============================================================================
 
 function toggleVaultImportDrawer() {
-  document.getElementById('vaultImportDrawer').classList.toggle('hidden');
+  document.getElementById('vaultImportDrawer')?.classList.toggle('hidden');
 }
 
 function toggleVaultBrowser() {
   const drawer = document.getElementById('vaultBrowserDrawer');
+  if (!drawer) return;
   drawer.classList.toggle('hidden');
   if (!drawer.classList.contains('hidden')) {
     renderVaultBrowser();
@@ -2431,6 +2624,7 @@ function parseManualVaultPaste() {
 
 function showVaultAlert(html, level = "info") {
   const box = document.getElementById('vaultAlertBox');
+  if (!box) return;
   box.classList.remove('hidden');
   box.style.borderLeftColor = level === "error" ? "#d9534f" : "#c7a86e";
   box.innerHTML = html;
@@ -2443,6 +2637,7 @@ function renameGuardianFromVaultSection(idx, newName, syncCard = false) {
   saveState();
   if (syncCard) {
     renderGuardianCards();
+    renderVaultAssignments();
   }
 }
 
@@ -2464,9 +2659,8 @@ function renderVaultAssignments() {
         <span class="text-[10px] font-mono-tech px-1.5 py-0.5 bg-[#0d0f13] border border-[#252a36] text-[#c7a86e] shrink-0">G${idx + 1}</span>
         <input
           type="text"
+          data-vault-rename-idx="${idx}"
           value="${escapeHtml(g.name)}"
-          oninput="renameGuardianFromVaultSection(${idx}, this.value, false)"
-          onchange="renameGuardianFromVaultSection(${idx}, this.value.trim() || 'Guardian ${idx + 1}', true); this.value = appState.guardians[${idx}].name;"
           class="d2-input py-1 px-2 text-xs font-semibold flex-1 min-w-0"
           aria-label="Guardian ${idx + 1} Name"
           placeholder="Guardian ${idx + 1}"
@@ -2474,7 +2668,7 @@ function renderVaultAssignments() {
         <span class="text-[10px] font-mono-tech text-[#35e366] shrink-0" title="Currently restricted to: ${escapeHtml(assignedLabel)}">
           ${appState.restrictToVault ? '🔒' : '🔓'}
         </span>
-        <select onchange="assignVaultToGuardian(${idx}, this.value)" class="d2-select text-[11px] py-1 max-w-[44%]" title="Assign a vault to this guardian">
+        <select data-vault-assign-idx="${idx}" class="d2-select text-[11px] py-1 max-w-[44%]" title="Assign a vault to this guardian">
           <option value="ANY" ${!g.vaultScope || g.vaultScope === 'ANY' ? 'selected' : ''}>Any Vault (Default)</option>
           ${appState.vaults.map(v => `<option value="${escapeHtml(v.id)}" ${g.vaultScope === v.id ? 'selected' : ''}>${escapeHtml(v.displayName)}</option>`).join('')}
         </select>
@@ -2496,9 +2690,15 @@ function updateVaultUI() {
     return;
   }
 
-  const vaultSummaries = (appState.vaults || []).map(v => {
+  const vaultSummaries = appState.vaults.map(v => {
     const w = WEAPON_DB.filter(x => v.weaponNames.includes(x.name));
-    return { vault: v, weapons: w, kinCount: w.filter(x => x.slot === "Kinetic").length, engCount: w.filter(x => x.slot === "Energy").length, powCount: w.filter(x => x.slot === "Power").length };
+    return {
+      vault: v,
+      weapons: w,
+      kinCount: w.filter(x => x.slot === "Kinetic").length,
+      engCount: w.filter(x => x.slot === "Energy").length,
+      powCount: w.filter(x => x.slot === "Power").length
+    };
   });
   const totalWeapons = vaultSummaries.reduce((a, s) => a + s.weapons.length, 0);
   const totalArmor = appState.vaults.reduce((a, v) => a + v.armorNames.length, 0);
@@ -2515,14 +2715,14 @@ function updateVaultUI() {
       <span class="inline-flex items-center gap-2 px-2 py-1 bg-[#0d0f13] border border-[#c7a86e]/60 text-xs font-mono-tech">
         <span class="text-[#c7a86e] font-semibold">${escapeHtml(v.displayName)}</span>
         <span class="text-[#9aa2b2]">${s.weapons.length}W (${s.kinCount}K/${s.engCount}E/${s.powCount}P) · ${v.armorNames.length}A</span>
-        <button type="button" onclick="removeVault('${escapeHtml(v.id)}')" title="Remove this vault" class="text-[#f39c9c] hover:text-white font-bold px-1">✕</button>
+        <button type="button" data-remove-vault="${escapeHtml(v.id)}" title="Remove this vault" class="text-[#f39c9c] hover:text-white font-bold px-1">✕</button>
       </span>`;
   }).join('');
 
   if (!document.getElementById('vaultBrowserDrawer').classList.contains('hidden')) {
     renderVaultBrowser();
   }
-  if (typeof renderVaultAssignments === 'function') renderVaultAssignments();
+  renderVaultAssignments();
 }
 
 function renderVaultBrowser() {
@@ -2602,6 +2802,7 @@ function removeOriginTraitFilter(traitName) {
 
 function renderOriginTraitChips() {
   const container = document.getElementById('activeOriginTraitList');
+  if (!container) return;
   if (!appState.selectedOriginTraits || appState.selectedOriginTraits.length === 0) {
     container.innerHTML = `<span class="text-xs text-[#60687a] italic">No Origin Trait filter active (all traits included).</span>`;
     return;
@@ -2612,7 +2813,7 @@ function renderOriginTraitChips() {
     <span class="wchip border-[#c7a86e] text-[#eceae4]">
       <span class="text-[10px] font-mono-tech text-[#c7a86e]">${modeLabel}${tierLabel}:</span>
       <span>${escapeHtml(t)}</span>
-      <button type="button" onclick="removeOriginTraitFilter('${escapeHtml(t).replace(/'/g, "\\'")}')" class="text-[#9aa2b2] hover:text-white ml-1 font-bold" title="Remove Origin Trait">&times;</button>
+      <button type="button" data-remove-trait="${escapeHtml(t)}" class="text-[#9aa2b2] hover:text-white ml-1 font-bold" title="Remove Origin Trait">&times;</button>
     </span>
   `).join('');
 }
@@ -2645,6 +2846,7 @@ function clearExcludedWeapons() {
 
 function renderExcludedWeaponChips() {
   const container = document.getElementById('excludedWeaponList');
+  if (!container) return;
   if (!appState.excludedWeapons || appState.excludedWeapons.length === 0) {
     container.innerHTML = `<span class="text-xs text-[#60687a] italic">No specific weapons excluded.</span>`;
     return;
@@ -2655,7 +2857,7 @@ function renderExcludedWeaponChips() {
     return `
       <span class="wchip ${rarityClass}">
         <span>${escapeHtml(wName)}</span>
-        <button type="button" onclick="removeExcludedWeapon('${escapeHtml(wName).replace(/'/g, "\\'")}')" class="text-[#9aa2b2] hover:text-white ml-1 font-bold">&times;</button>
+        <button type="button" data-remove-excluded="${escapeHtml(wName)}" class="text-[#9aa2b2] hover:text-white ml-1 font-bold">&times;</button>
       </span>
     `;
   }).join('');
@@ -2663,6 +2865,7 @@ function renderExcludedWeaponChips() {
 
 function populateQuickWeaponBrowse() {
   const sel = document.getElementById('selQuickWeaponBrowse');
+  if (!sel) return;
   const sorted = [...WEAPON_DB].sort((a, b) => a.name.localeCompare(b.name));
   sel.innerHTML = `<option value="">Select a weapon from database to exclude...</option>` +
     sorted.map(w => `<option value="${escapeHtml(w.name)}">${escapeHtml(w.name)} [${w.slot} · ${formatWeaponTypeLabel(w.type)} · ${w.rarity} · ${w.originTrait || 'Standard'}]</option>`).join('');
@@ -2694,7 +2897,7 @@ function renderOriginTraitSuggestions(queryText) {
     ).length;
     const isSelected = appState.selectedOriginTraits.some(st => st.toLowerCase() === t.toLowerCase());
     return `
-      <div class="sug-item ${isSelected ? 'active' : ''}" onmousedown="event.preventDefault(); selectOriginTraitSug('${escapeHtml(t).replace(/'/g, "\\'")}')">
+      <div class="sug-item ${isSelected ? 'active' : ''}" data-select-origin="${escapeHtml(t)}">
         <span class="font-medium text-[#eceae4]">${escapeHtml(t)}</span>
         <span class="text-[11px] font-mono-tech text-[#c7a86e]">${isSelected ? 'ACTIVE · ' : ''}${count} LEGENDARY</span>
       </div>
@@ -2709,17 +2912,17 @@ function setupAutocompleteListeners() {
 
   const updateOriginSuggestions = () => renderOriginTraitSuggestions(inpTrait.value);
 
-  inpTrait.addEventListener('input', updateOriginSuggestions);
-  inpTrait.addEventListener('keyup', (e) => {
+  inpTrait?.addEventListener('input', updateOriginSuggestions);
+  inpTrait?.addEventListener('keyup', (e) => {
     if (e.key === 'Escape') {
       sugTrait.classList.remove('open');
       return;
     }
     updateOriginSuggestions();
   });
-  inpTrait.addEventListener('focus', updateOriginSuggestions);
-  inpTrait.addEventListener('click', updateOriginSuggestions);
-  inpTrait.addEventListener('keydown', (e) => {
+  inpTrait?.addEventListener('focus', updateOriginSuggestions);
+  inpTrait?.addEventListener('click', updateOriginSuggestions);
+  inpTrait?.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       const q = inpTrait.value.trim();
@@ -2731,10 +2934,18 @@ function setupAutocompleteListeners() {
     }
   });
 
+  sugTrait?.addEventListener('mousedown', (e) => {
+    const item = e.target.closest('[data-select-origin]');
+    if (item) {
+      e.preventDefault();
+      selectOriginTraitSug(item.getAttribute('data-select-origin'));
+    }
+  });
+
   const inpExcl = document.getElementById('inpExcludeWeapon');
   const sugExcl = document.getElementById('sugExcludeWeapons');
 
-  inpExcl.addEventListener('input', () => {
+  inpExcl?.addEventListener('input', () => {
     const q = inpExcl.value.trim().toLowerCase();
     if (!q) {
       sugExcl.classList.remove('open');
@@ -2753,7 +2964,7 @@ function setupAutocompleteListeners() {
     }
 
     sugExcl.innerHTML = matches.map(w => `
-      <div class="sug-item" onmousedown="event.preventDefault(); selectExcludeWeaponSug('${escapeHtml(w.name).replace(/'/g, "\\'")}')">
+      <div class="sug-item" data-select-exclude="${escapeHtml(w.name)}">
         <div>
           <span class="font-semibold ${w.rarity === 'Exotic' ? 'text-[#ceae33]' : 'text-[#eceae4]'}">${escapeHtml(w.name)}</span>
           <span class="text-[11px] text-[#9aa2b2] ml-2">${w.slot} · ${formatWeaponTypeLabel(w.type)}</span>
@@ -2762,6 +2973,14 @@ function setupAutocompleteListeners() {
       </div>
     `).join('');
     sugExcl.classList.add('open');
+  });
+
+  sugExcl?.addEventListener('mousedown', (e) => {
+    const item = e.target.closest('[data-select-exclude]');
+    if (item) {
+      e.preventDefault();
+      selectExcludeWeaponSug(item.getAttribute('data-select-exclude'));
+    }
   });
 
   document.addEventListener('click', (e) => {
@@ -2784,7 +3003,7 @@ function selectExcludeWeaponSug(name) {
 }
 
 // ============================================================================
-// ELIGIBLE WEAPON & ARMOR POOL ENGINE (NO SILENT LOCK DROPPING)
+// ELIGIBLE WEAPON & ARMOR POOL ENGINE
 // ============================================================================
 
 function getFilteredWeapons(slot = null, guardian = null, overrideSlotType = null) {
@@ -2955,6 +3174,7 @@ function updatePoolReadout() {
   const e = getFilteredWeapons("Energy").length;
   const p = getFilteredWeapons("Power").length;
   const readout = document.getElementById('eligiblePoolReadout');
+  if (!readout) return;
   const traitActive = (appState.selectedOriginTraits || []).length > 0;
   const se = appState.slotElements || {};
   const activeElems = ["Kinetic", "Energy", "Power"]
@@ -3004,33 +3224,32 @@ function renderGuardianCards() {
           <div class="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-[#252a36]">
             <div class="flex items-center gap-2 flex-1 min-w-0">
               <span class="text-[11px] font-mono-tech px-1.5 py-0.5 bg-[#0d0f13] border border-[#252a36] text-[#c7a86e]">G${idx + 1}</span>
-              <input type="text" value="${escapeHtml(g.name)}" onchange="updateGuardianField(${idx}, 'name', this.value)" class="d2-input py-1 px-2 text-xs font-semibold flex-1 min-w-0" placeholder="Guardian Name">
+              <input type="text" data-guardian-idx="${idx}" data-g-action="name" value="${escapeHtml(g.name)}" class="d2-input py-1 px-2 text-xs font-semibold flex-1 min-w-0" placeholder="Guardian Name">
             </div>
-            <button type="button" onclick="randomizeSingleGuardian(${idx})" class="btn-ghost py-1 px-2 text-[11px]" title="Randomize this Guardian's Subclass, Exotic Armor, Aspects, Fragments, Slot Weapon Types &amp; Weapons">
+            <button type="button" data-randomize-guardian="${idx}" class="btn-ghost py-1 px-2 text-[11px]" title="Randomize this Guardian's Subclass, Exotic Armor, Aspects, Fragments, Slot Weapon Types &amp; Weapons">
               Randomize
             </button>
           </div>
 
           <div class="mb-2.5">
             <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Vault Restriction <span class="text-[#60687a]">(Personal Vault)</span></label>
-            <select onchange="changeGuardianVault(${idx}, this.value)" class="d2-select w-full text-xs py-1.5 ${appState.restrictToVault && getGuardianVault(g) ? 'border-[#c7a86e]/60' : ''}">
+            <select data-guardian-idx="${idx}" data-g-action="vault" class="d2-select w-full text-xs py-1.5 ${appState.restrictToVault && getGuardianVault(g) ? 'border-[#c7a86e]/60' : ''}">
               <option value="ANY" ${!g.vaultScope || g.vaultScope === 'ANY' ? 'selected' : ''}>Any Vault (Fireteam Default)</option>
               ${appState.vaults.map(v => `<option value="${escapeHtml(v.id)}" ${g.vaultScope === v.id ? 'selected' : ''}>${escapeHtml(v.displayName)} [${v.weaponNames.length}W / ${v.armorNames.length}A]</option>`).join('')}
               ${appState.vaults.length === 0 ? `<option value="" disabled>No vaults loaded (use Vault panel)</option>` : ''}
             </select>
           </div>
 
-          <!-- Per-Guardian Slot Weapon Type Locks + Unlock Controls -->
           <div class="mb-2.5 p-2 bg-[#0d0f13] border border-[#252a36]">
             <div class="flex items-center justify-between gap-1 mb-1.5">
               <span class="text-[10px] font-mono-tech uppercase text-[#c7a86e] font-semibold">Slot Weapon Type Locks</span>
               <div class="flex items-center gap-1">
                 ${anyLocked ? `
-                  <button type="button" onclick="unlockGuardianWeaponTypes(${idx})" class="text-[10px] font-mono-tech uppercase px-1.5 py-0.5 bg-[#161a23] border border-[#2b3140] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition" title="Unlock all locked slot weapon types for this Guardian">
+                  <button type="button" data-unlock-guardian-all="${idx}" class="text-[10px] font-mono-tech uppercase px-1.5 py-0.5 bg-[#161a23] border border-[#2b3140] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition" title="Unlock all locked slot weapon types for this Guardian">
                     🔓 Unlock All
                   </button>
                 ` : ''}
-                <button type="button" onclick="randomizeGuardianWeaponTypes(${idx})" class="text-[10px] font-mono-tech uppercase px-1.5 py-0.5 bg-[#161a23] border border-[#2b3140] hover:border-[#c7a86e] text-[#c7a86e] transition" title="Randomize &amp; lock valid weapon archetypes for Kinetic, Energy &amp; Heavy slots from this Guardian's eligible pool/vault">
+                <button type="button" data-lock-random-guardian="${idx}" class="text-[10px] font-mono-tech uppercase px-1.5 py-0.5 bg-[#161a23] border border-[#2b3140] hover:border-[#c7a86e] text-[#c7a86e] transition" title="Randomize and lock valid weapon archetypes for Kinetic, Energy and Heavy slots">
                   🎲 Lock Random Types
                 </button>
               </div>
@@ -3045,12 +3264,12 @@ function renderGuardianCards() {
                     <div class="flex items-center justify-between mb-0.5">
                       <label class="block text-[9px] font-mono-tech uppercase text-[#9aa2b2]">${slotLabel}</label>
                       ${isLocked ? `
-                        <button type="button" onclick="unlockGuardianSlotType(${idx}, '${slotKey}')" class="text-[9px] font-mono-tech text-[#c7a86e] hover:text-white leading-none px-0.5" title="Unlock ${slotLabel} weapon type lock">
+                        <button type="button" data-guardian-idx="${idx}" data-unlock-slot="${slotKey}" class="text-[9px] font-mono-tech text-[#c7a86e] hover:text-white leading-none px-0.5" title="Unlock ${slotLabel} weapon type lock">
                           🔓 Unlock
                         </button>
                       ` : ''}
                     </div>
-                    <select onchange="changeGuardianSlotType(${idx}, '${slotKey}', this.value)" class="d2-select w-full text-[10px] py-1 px-1.5 pr-5 ${isLocked ? 'border-[#c7a86e] text-[#eceae4]' : ''}" title="${slotLabel} slot weapon archetype lock">
+                    <select data-guardian-idx="${idx}" data-g-action="slot-type" data-slot-key="${slotKey}" class="d2-select w-full text-[10px] py-1 px-1.5 pr-5 ${isLocked ? 'border-[#c7a86e] text-[#eceae4]' : ''}" title="${slotLabel} slot weapon archetype lock">
                       <option value="ANY" ${curVal === 'ANY' ? 'selected' : ''}>Any (Unlocked)</option>
                       <option value="RANDOM" ${curVal === 'RANDOM' ? 'selected' : ''}>🎲 Randomize &amp; Lock</option>
                       ${SLOT_WEAPON_TYPES[slotKey].map(t => `<option value="${escapeHtml(t)}" ${curVal === t ? 'selected' : ''}>${escapeHtml(formatWeaponTypeLabel(t))}</option>`).join('')}
@@ -3064,7 +3283,7 @@ function renderGuardianCards() {
           <div class="grid grid-cols-2 gap-2 mb-2.5">
             <div>
               <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Class</label>
-              <select onchange="changeGuardianClass(${idx}, this.value)" class="d2-select w-full text-xs py-1.5">
+              <select data-guardian-idx="${idx}" data-g-action="class" class="d2-select w-full text-xs py-1.5">
                 <option value="Hunter" ${g.classType === 'Hunter' ? 'selected' : ''}>Hunter</option>
                 <option value="Titan" ${g.classType === 'Titan' ? 'selected' : ''}>Titan</option>
                 <option value="Warlock" ${g.classType === 'Warlock' ? 'selected' : ''}>Warlock</option>
@@ -3072,7 +3291,7 @@ function renderGuardianCards() {
             </div>
             <div>
               <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Subclass</label>
-              <select onchange="changeGuardianSubclass(${idx}, this.value)" class="d2-select w-full text-xs py-1.5">
+              <select data-guardian-idx="${idx}" data-g-action="subclass" class="d2-select w-full text-xs py-1.5">
                 ${classSubclasses.map(s => `<option value="${escapeHtml(s.name)}" ${s.name === activeSub.name ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}
               </select>
             </div>
@@ -3081,7 +3300,7 @@ function renderGuardianCards() {
           <div class="mb-2.5">
             <div class="flex items-center justify-between mb-1">
               <label class="text-[10px] font-mono-tech uppercase text-[#ceae33]">Exotic Armor</label>
-              <select onchange="changeGuardianArmorSlot(${idx}, this.value)" class="bg-[#0d0f13] border border-[#252a36] text-[10px] font-mono-tech text-[#9aa2b2] px-1.5 py-0.5">
+              <select data-guardian-idx="${idx}" data-g-action="armor-slot" class="bg-[#0d0f13] border border-[#252a36] text-[10px] font-mono-tech text-[#9aa2b2] px-1.5 py-0.5">
                 <option value="ALL" ${g.armorSlotFilter === 'ALL' ? 'selected' : ''}>All Slots</option>
                 <option value="Helmet" ${g.armorSlotFilter === 'Helmet' ? 'selected' : ''}>Helmet</option>
                 <option value="Arms" ${g.armorSlotFilter === 'Arms' ? 'selected' : ''}>Arms</option>
@@ -3090,7 +3309,7 @@ function renderGuardianCards() {
                 <option value="Class Item" ${g.armorSlotFilter === 'Class Item' ? 'selected' : ''}>Class Item</option>
               </select>
             </div>
-            <select onchange="updateGuardianField(${idx}, 'exoticArmor', this.value)" class="d2-select w-full text-xs py-1.5">
+            <select data-guardian-idx="${idx}" data-g-action="exotic-armor" class="d2-select w-full text-xs py-1.5">
               ${!hasCurrentArmor && g.exoticArmor ? `<option value="${escapeHtml(g.exoticArmor)}" selected>${escapeHtml(g.exoticArmor)}</option>` : ''}
               ${armorOptions.length === 0 ? `<option value="None (No Vault Match)">None (No Vault Match)</option>` : ''}
               ${armorOptions.map(a => `<option value="${escapeHtml(a.name)}" ${a.name === g.exoticArmor ? 'selected' : ''}>${escapeHtml(a.name)} [${a.slot}]</option>`).join('')}
@@ -3101,7 +3320,7 @@ function renderGuardianCards() {
             <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Aspects (Select up to 2)</label>
             <div class="grid grid-cols-2 gap-1.5">
               ${[0, 1].map(aIdx => `
-                <select onchange="updateGuardianArray(${idx}, 'aspects', ${aIdx}, this.value)" class="d2-select w-full text-[11px] py-1">
+                <select data-guardian-idx="${idx}" data-g-action="aspect" data-arr-idx="${aIdx}" class="d2-select w-full text-[11px] py-1">
                   ${activeSub.aspects.map(asp => `<option value="${escapeHtml(asp)}" ${(g.aspects?.[aIdx] === asp) ? 'selected' : ''}>${escapeHtml(asp)}</option>`).join('')}
                 </select>
               `).join('')}
@@ -3112,7 +3331,7 @@ function renderGuardianCards() {
             <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Fragments (${activeSub.element === 'Prismatic' ? '5' : '4'} Slots)</label>
             <div class="grid grid-cols-2 gap-1.5">
               ${Array.from({ length: activeSub.element === 'Prismatic' ? 5 : 4 }).map((_, fIdx) => `
-                <select onchange="updateGuardianArray(${idx}, 'fragments', ${fIdx}, this.value)" class="d2-select w-full text-[11px] py-1">
+                <select data-guardian-idx="${idx}" data-g-action="fragment" data-arr-idx="${fIdx}" class="d2-select w-full text-[11px] py-1">
                   ${activeSub.fragments.map(frag => `<option value="${escapeHtml(frag)}" ${(g.fragments?.[fIdx] === frag) ? 'selected' : ''}>${escapeHtml(frag)}</option>`).join('')}
                 </select>
               `).join('')}
@@ -3168,15 +3387,18 @@ function unlockAllWeaponTypes() {
 }
 
 function updateGuardianField(idx, field, val) {
+  if (!appState.guardians[idx]) return;
   appState.guardians[idx][field] = val;
   saveState();
   if (field === 'name' && appState.vaults && appState.vaults.length) renderVaultAssignments();
 }
 
 function changeGuardianVault(idx, vaultId) {
+  if (!appState.guardians[idx]) return;
   appState.guardians[idx].vaultScope = vaultId || 'ANY';
   saveState();
   renderGuardianCards();
+  updatePoolReadout();
   showToast(vaultId && vaultId !== 'ANY'
     ? `Vault restriction set for ${appState.guardians[idx].name}.`
     : `Vault restriction cleared for ${appState.guardians[idx].name}.`);
@@ -3184,12 +3406,14 @@ function changeGuardianVault(idx, vaultId) {
 
 function changeGuardianSlotType(idx, slotKey, typeVal) {
   const g = appState.guardians[idx];
+  if (!g) return;
   if (!g.slotTypes) g.slotTypes = { Kinetic: "ANY", Energy: "ANY", Power: "ANY" };
   if (typeVal === "RANDOM") {
     const picked = pickRandomSlotArchetypeForGuardian(g, slotKey);
     g.slotTypes[slotKey] = sanitizeSlotTypeForSlot(slotKey, picked, "ANY");
     saveState();
     renderGuardianCards();
+    updatePoolReadout();
     if (g.slotTypes[slotKey] !== "ANY") {
       showToast(`Locked ${g.name}'s ${slotKey === "Power" ? "Heavy" : slotKey} slot to ${formatWeaponTypeLabel(g.slotTypes[slotKey])}!`);
     } else {
@@ -3200,13 +3424,13 @@ function changeGuardianSlotType(idx, slotKey, typeVal) {
   g.slotTypes[slotKey] = sanitizeSlotTypeForSlot(slotKey, typeVal, "ANY");
   saveState();
   renderGuardianCards();
+  updatePoolReadout();
 }
 
 function pickRandomSlotArchetypeForGuardian(g, slotKey) {
   const allowedSlotTypes = SLOT_WEAPON_TYPES[slotKey] || [];
   const pool = getFilteredWeapons(slotKey, g, "IGNORE");
   if (pool.length > 0) {
-    // Equal odds per eligible weapon in the pool rather than skewing toward sparse types
     const chosenWeapon = pickRandom(pool);
     const normalized = normalizeWeaponType(chosenWeapon.type);
     if (allowedSlotTypes.includes(normalized)) return normalized;
@@ -3218,6 +3442,7 @@ function pickRandomSlotArchetypeForGuardian(g, slotKey) {
 
 function randomizeGuardianWeaponTypes(idx, silent = false) {
   const g = appState.guardians[idx];
+  if (!g) return;
   if (!g.slotTypes) g.slotTypes = { Kinetic: "ANY", Energy: "ANY", Power: "ANY" };
   for (const slotKey of ["Kinetic", "Energy", "Power"]) {
     const picked = pickRandomSlotArchetypeForGuardian(g, slotKey);
@@ -3226,6 +3451,7 @@ function randomizeGuardianWeaponTypes(idx, silent = false) {
   if (!silent) {
     saveState();
     renderGuardianCards();
+    updatePoolReadout();
     const summary = ["Kinetic", "Energy", "Power"]
       .map(s => `${s === "Power" ? "Heavy" : s}: ${formatWeaponTypeLabel(g.slotTypes[s])}`)
       .join(" · ");
@@ -3239,11 +3465,13 @@ function randomizeAllWeaponTypes() {
   }
   saveState();
   renderGuardianCards();
+  updatePoolReadout();
   generateFireteamChart();
   showToast("Randomized & locked weapon archetypes per slot for all Guardians and assigned vault weapons!");
 }
 
 function updateGuardianArray(idx, arrKey, slotIdx, val) {
+  if (!appState.guardians[idx]) return;
   if (!Array.isArray(appState.guardians[idx][arrKey])) appState.guardians[idx][arrKey] = [];
   appState.guardians[idx][arrKey][slotIdx] = val;
   saveState();
@@ -3251,6 +3479,7 @@ function updateGuardianArray(idx, arrKey, slotIdx, val) {
 
 function changeGuardianClass(idx, newClass) {
   const g = appState.guardians[idx];
+  if (!g) return;
   g.classType = newClass;
   const sub = SUBCLASS_DATA[newClass][0];
   g.subclass = sub.name;
@@ -3264,6 +3493,7 @@ function changeGuardianClass(idx, newClass) {
 
 function changeGuardianSubclass(idx, newSubName) {
   const g = appState.guardians[idx];
+  if (!g) return;
   const sub = (SUBCLASS_DATA[g.classType] || []).find(s => s.name === newSubName);
   if (!sub) return;
   g.subclass = sub.name;
@@ -3275,6 +3505,7 @@ function changeGuardianSubclass(idx, newSubName) {
 
 function changeGuardianArmorSlot(idx, slotVal) {
   const g = appState.guardians[idx];
+  if (!g) return;
   g.armorSlotFilter = slotVal;
   const armors = getFilteredExoticArmor(g.classType, slotVal, g);
   if (armors.length > 0 && !armors.some(a => a.name === g.exoticArmor)) {
@@ -3298,13 +3529,18 @@ function pickUniqueSubset(arr, count) {
   return copy.slice(0, count);
 }
 
+// Evaluates Exotic eligibility in strict check order: Heavy ("Power") -> Energy -> Kinetic.
+// Once an Exotic is rolled in an earlier slot in that sequence, later slots are locked out from rolling Exotics
+// whenever the limit is enforced ("enforce1" or "guarantee1").
 function buildGuardianWeapons(g, usedGlobal, usedPerSlot) {
-  const exoticRule = document.getElementById('selExoticRule').value;
-  const dupRule = document.getElementById('selDuplicateRule').value;
+  const exoticRule = document.getElementById('selExoticRule')?.value || appState.exoticRule || "enforce1";
+  const dupRule = document.getElementById('selDuplicateRule')?.value || appState.duplicateRule || "allow";
 
   if (!g.slotTypes) g.slotTypes = { Kinetic: "ANY", Energy: "ANY", Power: "ANY" };
   let resolvedAnyRandom = false;
-  for (const slotKey of ["Kinetic", "Energy", "Power"]) {
+  const checkOrder = ["Power", "Energy", "Kinetic"];
+
+  for (const slotKey of checkOrder) {
     if (g.slotTypes[slotKey] === "RANDOM") {
       const picked = pickRandomSlotArchetypeForGuardian(g, slotKey);
       g.slotTypes[slotKey] = sanitizeSlotTypeForSlot(slotKey, picked, "ANY");
@@ -3317,52 +3553,48 @@ function buildGuardianWeapons(g, usedGlobal, usedPerSlot) {
   }
 
   const slotPools = {
-    Kinetic: getFilteredWeapons("Kinetic", g),
+    Power: getFilteredWeapons("Power", g),
     Energy: getFilteredWeapons("Energy", g),
-    Power: getFilteredWeapons("Power", g)
+    Kinetic: getFilteredWeapons("Kinetic", g)
   };
   const gVault = getGuardianVault(g);
 
   const emptySlots = [];
-  if (slotPools.Kinetic.length === 0) emptySlots.push(`Kinetic${g.slotTypes.Kinetic !== "ANY" ? ` (${formatWeaponTypeLabel(g.slotTypes.Kinetic)})` : ""}`);
-  if (slotPools.Energy.length === 0) emptySlots.push(`Energy${g.slotTypes.Energy !== "ANY" ? ` (${formatWeaponTypeLabel(g.slotTypes.Energy)})` : ""}`);
   if (slotPools.Power.length === 0) emptySlots.push(`Heavy${g.slotTypes.Power !== "ANY" ? ` (${formatWeaponTypeLabel(g.slotTypes.Power)})` : ""}`);
+  if (slotPools.Energy.length === 0) emptySlots.push(`Energy${g.slotTypes.Energy !== "ANY" ? ` (${formatWeaponTypeLabel(g.slotTypes.Energy)})` : ""}`);
+  if (slotPools.Kinetic.length === 0) emptySlots.push(`Kinetic${g.slotTypes.Kinetic !== "ANY" ? ` (${formatWeaponTypeLabel(g.slotTypes.Kinetic)})` : ""}`);
   if (emptySlots.length > 0) {
     return {
       error: `No eligible weapons in the ${emptySlots.join(" / ")} slot${emptySlots.length > 1 ? "s" : ""} for ${g.name}${gVault ? ` (Vault: ${gVault.displayName})` : ''}. Adjust your Element, Weapon Type lock, Origin Trait, or Vault filters.`
     };
   }
 
-  let hasExotic = false;
-  const enforceSingleExotic = exoticRule !== "unrestricted";
-  const slotsWithExotics = ["Kinetic", "Energy", "Power"].filter(s => slotPools[s].some(w => w.rarity === "Exotic"));
-  const exoticSlotTarget = exoticRule === "guarantee1" && slotsWithExotics.length > 0
-    ? pickRandom(slotsWithExotics)
-    : null;
+  const enforceSingleExotic = exoticRule === "enforce1" || exoticRule === "guarantee1";
+  let exoticLockedOut = false;
+  let guaranteedExoticAssigned = false;
 
   const pickSlotWeapon = (slotName, pool) => {
-    const disallowExotic = enforceSingleExotic && hasExotic;
+    const disallowExotic = enforceSingleExotic && exoticLockedOut;
+    const mustBeExotic = exoticRule === "guarantee1" && !guaranteedExoticAssigned && !disallowExotic;
 
-    let candidates = pool.filter(w => {
-      if (dupRule === "uniqueGlobal" && usedGlobal.has(w.name)) return false;
-      if (dupRule === "uniquePerSlot" && usedPerSlot[slotName].has(w.name)) return false;
-      if (disallowExotic && w.rarity === "Exotic") return false;
-      if (exoticRule === "guarantee1" && exoticSlotTarget) {
-        if (slotName === exoticSlotTarget && w.rarity !== "Exotic") return false;
-        if (slotName !== exoticSlotTarget && w.rarity === "Exotic") return false;
-      }
-      return true;
-    });
-
-    if (candidates.length === 0 && disallowExotic) {
-      candidates = pool.filter(w => w.rarity !== "Exotic");
-    }
-    if (candidates.length === 0) {
-      candidates = pool.filter(w => {
+    const filterPool = ({ ignoreDup = false, ignoreExoticRequirement = false } = {}) => {
+      return pool.filter(w => {
+        if (!ignoreDup) {
+          if (dupRule === "uniqueGlobal" && usedGlobal.has(w.name)) return false;
+          if (dupRule === "uniquePerSlot" && usedPerSlot[slotName].has(w.name)) return false;
+        }
         if (disallowExotic && w.rarity === "Exotic") return false;
-        if (dupRule === "uniqueGlobal" && usedGlobal.has(w.name)) return false;
+        if (!ignoreExoticRequirement && mustBeExotic && w.rarity !== "Exotic") return false;
         return true;
       });
+    };
+
+    let candidates = filterPool();
+    if (candidates.length === 0 && mustBeExotic) {
+      candidates = filterPool({ ignoreExoticRequirement: true });
+    }
+    if (candidates.length === 0) {
+      candidates = filterPool({ ignoreDup: true, ignoreExoticRequirement: true });
     }
     if (candidates.length === 0) {
       candidates = disallowExotic ? pool.filter(w => w.rarity !== "Exotic") : pool;
@@ -3373,20 +3605,20 @@ function buildGuardianWeapons(g, usedGlobal, usedPerSlot) {
 
     const chosen = pickRandom(candidates);
     if (chosen) {
-      if (chosen.rarity === "Exotic") hasExotic = true;
+      if (chosen.rarity === "Exotic") {
+        guaranteedExoticAssigned = true;
+        if (enforceSingleExotic) {
+          exoticLockedOut = true;
+        }
+      }
       usedGlobal.add(chosen.name);
       usedPerSlot[slotName].add(chosen.name);
     }
     return chosen;
   };
 
-  // Shuffle roll order when enforcing max 1 Exotic so no slot gets sequential priority
-  const rollOrder = enforceSingleExotic
-    ? pickUniqueSubset(["Kinetic", "Energy", "Power"], 3)
-    : ["Kinetic", "Energy", "Power"];
-
   const pickedBySlot = {};
-  for (const slotName of rollOrder) {
+  for (const slotName of checkOrder) {
     pickedBySlot[slotName] = pickSlotWeapon(slotName, slotPools[slotName]);
   }
 
@@ -3401,6 +3633,7 @@ function buildGuardianWeapons(g, usedGlobal, usedPerSlot) {
 
 function randomizeSingleGuardian(idx, silent = false) {
   const g = appState.guardians[idx];
+  if (!g) return;
   const classes = ["Hunter", "Titan", "Warlock"];
   g.classType = pickRandom(classes);
   const sub = pickRandom(SUBCLASS_DATA[g.classType]);
@@ -3418,7 +3651,14 @@ function randomizeSingleGuardian(idx, silent = false) {
   if (!silent) {
     saveState();
     renderGuardianCards();
-    if (appState.lastGeneratedChart && Array.isArray(appState.lastGeneratedChart.rows) && appState.lastGeneratedChart.rows[idx]) {
+    updatePoolReadout();
+    const activeCount = parseInt(document.getElementById('selFireteamSize')?.value || appState.fireteamSize || 6, 10);
+    if (
+      appState.lastGeneratedChart &&
+      Array.isArray(appState.lastGeneratedChart.rows) &&
+      idx < activeCount &&
+      appState.lastGeneratedChart.rows[idx]
+    ) {
       const usedGlobal = new Set();
       const usedPerSlot = { Kinetic: new Set(), Energy: new Set(), Power: new Set() };
       appState.lastGeneratedChart.rows.forEach((row, rIdx) => {
@@ -3454,7 +3694,7 @@ function randomizeSingleGuardian(idx, silent = false) {
       appState.lastGeneratedChart.originLegendaryOnly = appState.originLegendaryOnly !== false;
       saveState();
       renderGeneratedChart(appState.lastGeneratedChart);
-    } else {
+    } else if (appState.lastGeneratedChart) {
       generateFireteamChart();
     }
     showToast(`Randomized ${g.name} (${g.classType} · ${g.subclass}) & locked slot weapon types!`);
@@ -3467,7 +3707,12 @@ function randomizeAllLoadouts(alsoRegenerateChart = true) {
   }
   saveState();
   renderGuardianCards();
-  generateFireteamChart();
+  updatePoolReadout();
+  if (alsoRegenerateChart || appState.lastGeneratedChart) {
+    generateFireteamChart();
+  } else {
+    showToast("All Guardian loadouts randomized!");
+  }
 }
 
 // ============================================================================
@@ -3655,7 +3900,8 @@ function renderGuardianDimControls(row, rowIndex) {
 }
 
 function generateFireteamChart() {
-  const count = parseInt(document.getElementById('selFireteamSize').value, 10) || 6;
+  saveState();
+  const count = Math.min(6, Math.max(1, parseInt(document.getElementById('selFireteamSize')?.value || appState.fireteamSize || 6, 10) || 6));
 
   const usedGlobal = new Set();
   const usedPerSlot = { Kinetic: new Set(), Energy: new Set(), Power: new Set() };
@@ -3663,7 +3909,9 @@ function generateFireteamChart() {
 
   for (let i = 0; i < count; i++) {
     const g = appState.guardians[i];
-    const subObj = (SUBCLASS_DATA[g.classType] || []).find(s => s.name === g.subclass) || SUBCLASS_DATA[g.classType][0];
+    if (!g) continue;
+    const subList = SUBCLASS_DATA[g.classType] || SUBCLASS_DATA.Hunter;
+    const subObj = subList.find(s => s.name === g.subclass) || subList[0];
 
     const weaponsRes = buildGuardianWeapons(g, usedGlobal, usedPerSlot);
     if (weaponsRes.error) {
@@ -3727,14 +3975,15 @@ function renderWeaponCell(w, lockedType = null) {
 function renderGeneratedChart(chart) {
   const container = document.getElementById('chartMatrixContainer');
   const ts = document.getElementById('chartTimestamp');
+  if (!container || !chart || !Array.isArray(chart.rows)) return;
 
-  let metaBits = [`GENERATED AT ${chart.generatedAt}`];
+  const metaBits = [`GENERATED AT ${chart.generatedAt || ''}`];
   if (chart.vaultSource) metaBits.push(`VAULT: ${chart.vaultSource}`);
   if (chart.originFilters && chart.originFilters.length > 0) {
     const tierSuffix = chart.originLegendaryOnly ? ' [LEGENDARIES ONLY]' : '';
     metaBits.push(`ORIGIN TRAITS (${chart.originMode.toUpperCase()}${tierSuffix}): ${chart.originFilters.join(', ')}`);
   }
-  ts.textContent = metaBits.join(' // ');
+  if (ts) ts.textContent = metaBits.join(' // ');
 
   const tableHtml = `
     <div class="overflow-x-auto border border-[#252a36]">
