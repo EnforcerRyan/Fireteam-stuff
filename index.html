@@ -196,6 +196,7 @@
     justify-content: center;
     gap: 0.4rem;
     box-shadow: 0 2px 10px rgba(199, 168, 110, 0.2);
+    text-decoration: none;
   }
 
   .btn-brass:hover:not(:disabled) {
@@ -224,6 +225,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.35rem;
+    text-decoration: none;
   }
 
   .btn-ghost:hover:not(:disabled) {
@@ -457,32 +459,6 @@
     border-radius: 1px;
     letter-spacing: 0.02em;
   }
-
-  @media print {
-    body {
-      background: #ffffff !important;
-      color: #111827 !important;
-    }
-    .no-print {
-      display: none !important;
-    }
-    .vex-panel, .vex-subcard {
-      background: #ffffff !important;
-      border: 1px solid #cbd5e1 !important;
-      box-shadow: none !important;
-      color: #111827 !important;
-    }
-    .vex-panel::before, .vex-panel::after,
-    .vex-corners-alt::before, .vex-corners-alt::after,
-    .vex-subcard::before, .vex-subcard::after {
-      display: none !important;
-    }
-    .origin-badge {
-      border-color: #94a3b8 !important;
-      color: #334155 !important;
-      background: #f8fafc !important;
-    }
-  }
 </style>
 </head>
 <body class="antialiased selection:bg-[#c7a86e] selection:text-[#0a0b0e]">
@@ -502,11 +478,11 @@
             Destiny 2 Fireteam Weapon &amp; Loadout Chart
           </h1>
           <p class="text-xs sm:text-sm text-[#9aa2b2] mt-1 max-w-3xl">
-            Configure Guardian subclasses, exotic armor, aspects, fragments, per-player Bungie Vault restrictions (up to 6 vaults, one assignable per Guardian), and Origin Trait filters to generate randomized fireteam loadouts.
+            Configure Guardian subclasses, exotic armor, aspects, fragments, per-player Bungie Vault restrictions (up to 6 vaults, one assignable per Guardian), and Legendary Origin Trait filters to generate randomized fireteam loadouts.
           </p>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2.5 no-print">
+        <div class="flex flex-wrap items-center gap-2.5">
           <button id="btnImportManifest" onclick="importBungieManifest()" class="btn-brass" title="Fetch live weapons, origin traits, exotic armors, subclasses, aspects &amp; fragments from Bungie.net Manifest">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -541,7 +517,7 @@
     </header>
 
     <!-- 1. BUNGIE VAULT & INVENTORY LOOKUP PANEL -->
-    <section class="vex-panel p-4 sm:p-5 no-print" aria-label="Bungie Vault and Inventory Lookup">
+    <section class="vex-panel p-4 sm:p-5" aria-label="Bungie Vault and Inventory Lookup">
       <div class="vex-corners-alt">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 pb-3 mb-4 border-b border-[#252a36]">
           <div class="flex items-center gap-2.5 sec-header-click" onclick="toggleSection('vault')" title="Click to expand / collapse">
@@ -562,53 +538,56 @@
         </div>
 
         <div id="secBody-vault">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-end">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
           <!-- Bungie Name Input -->
           <div class="lg:col-span-4">
-            <label for="inpBungieName" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">
+            <label for="inpBungieName" class="block h-4 text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">
               Bungie Name (Name#1234)
             </label>
-            <input type="text" id="inpBungieName" placeholder="e.g. IkoraRey#4821" class="d2-input w-full font-mono-tech" autocomplete="off">
+            <input type="text" id="inpBungieName" placeholder="e.g. IkoraRey#4821" class="d2-input w-full h-[38px] font-mono-tech" autocomplete="off">
           </div>
 
-         <div class="lg:col-span-4">
-  <label for="inpBungieApiKey" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">
-    Bungie API Key
-  </label>
-  <div class="flex gap-2">
-    <input
-      type="password"
-      id="inpBungieApiKey"
-      class="d2-input min-w-0 flex-1 font-mono-tech"
-      autocomplete="off"
-      placeholder="Enter your Bungie API key"
-      aria-describedby="apiKeyStatus"
-    >
-    <button type="button" onclick="confirmBungieApiKey()" class="btn-ghost">
-      Confirm
-    </button>
-  </div>
-  <p id="apiKeyStatus" class="mt-1 text-[10px] text-[#60687a]" aria-live="polite">
-    Key is only kept in memory until you reload this page.
-  </p>
-</div>
+          <!-- Bungie API Key Input -->
+          <div class="lg:col-span-4">
+            <label for="inpBungieApiKey" class="block h-4 text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">
+              Bungie API Key
+            </label>
+            <div class="flex gap-2">
+              <input
+                type="password"
+                id="inpBungieApiKey"
+                class="d2-input min-w-0 flex-1 h-[38px] font-mono-tech"
+                autocomplete="off"
+                placeholder="Enter your Bungie API key"
+                aria-describedby="apiKeyStatus"
+              >
+              <button type="button" onclick="confirmBungieApiKey()" class="btn-ghost h-[38px]">
+                Confirm
+              </button>
+            </div>
+            <p id="apiKeyStatus" class="mt-1 text-[10px] text-[#60687a]" aria-live="polite">
+              Key is only kept in memory until you reload this page.
+            </p>
+          </div>
 
           <!-- Vault Action Buttons -->
-          <div class="lg:col-span-4 flex flex-wrap items-center gap-2">
-            <button id="btnFetchVault" onclick="fetchBungieVault()" class="btn-brass flex-1 min-w-[165px]">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="16" rx="1"/>
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M12 4v3M12 17v3M4 12h3M17 12h3"/>
-              </svg>
-              <span id="vaultBtnLabel">Fetch Vault &amp; Inventory</span>
-            </button>
-            <button onclick="loadDemoVault()" class="btn-ghost" title="Load a realistic sample Vault &amp; Character inventory to test Vault filtering immediately">
-              Demo Vault
-            </button>
-            <button onclick="toggleVaultImportDrawer()" class="btn-ghost" title="Paste DIM CSV or Bungie Profile JSON">
-              JSON / DIM
-            </button>
+          <div class="lg:col-span-4">
+            <span class="hidden lg:block h-4 text-[11px] font-mono-tech uppercase tracking-wider text-transparent mb-1 select-none" aria-hidden="true">
+              Actions
+            </span>
+            <div class="flex flex-wrap items-center gap-2">
+              <button id="btnFetchVault" onclick="fetchBungieVault()" class="btn-brass flex-1 min-w-[165px] h-[38px]">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="16" rx="1"/>
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M12 4v3M12 17v3M4 12h3M17 12h3"/>
+                </svg>
+                <span id="vaultBtnLabel">Fetch Vault &amp; Inventory</span>
+              </button>
+              <button onclick="toggleVaultImportDrawer()" class="btn-ghost h-[38px]" title="Paste DIM CSV or Bungie Profile JSON">
+                JSON / DIM
+              </button>
+            </div>
           </div>
         </div>
 
@@ -673,7 +652,7 @@
     </section>
 
     <!-- 2. WEAPON RULES, ORIGIN TRAIT SEARCH & EXCLUSIONS -->
-    <section class="vex-panel p-4 sm:p-5 no-print" aria-label="Weapon Rules and Origin Trait Filtering">
+    <section class="vex-panel p-4 sm:p-5" aria-label="Weapon Rules and Origin Trait Filtering">
       <div class="vex-corners-alt">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-4 border-b border-[#252a36]">
           <div class="flex items-center gap-2.5 sec-header-click" onclick="toggleSection('rules')" title="Click to expand / collapse">
@@ -690,7 +669,7 @@
 
         <div id="secBody-rules">
         <!-- Primary Rule Controls -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
           <div>
             <label for="selFireteamSize" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Fireteam Size</label>
             <select id="selFireteamSize" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
@@ -746,9 +725,27 @@
           </div>
 
           <div>
-            <label for="selDamageFilter" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Element / Damage Type</label>
-            <select id="selDamageFilter" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
-              <option value="ALL">All Elements</option>
+            <label for="selElemKinetic" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Kinetic Slot Element</label>
+            <select id="selElemKinetic" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <option value="ALL">Any Element</option>
+              <option value="Kinetic">Kinetic</option>
+              <option value="Stasis">Stasis</option>
+              <option value="Strand">Strand</option>
+            </select>
+          </div>
+          <div>
+            <label for="selElemEnergy" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Energy Slot Element</label>
+            <select id="selElemEnergy" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <option value="ALL">Any Element</option>
+              <option value="Arc">Arc</option>
+              <option value="Solar">Solar</option>
+              <option value="Void">Void</option>
+            </select>
+          </div>
+          <div>
+            <label for="selElemPower" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Heavy Slot Element</label>
+            <select id="selElemPower" onchange="saveState(); updatePoolReadout();" class="d2-select w-full">
+              <option value="ALL">Any Element</option>
               <option value="Kinetic">Kinetic</option>
               <option value="Stasis">Stasis</option>
               <option value="Strand">Strand</option>
@@ -764,23 +761,30 @@
 
           <!-- Origin Trait Search & Filter Panel -->
           <div class="bg-[#0d0f13] border border-[#252a36] p-3">
-            <div class="flex items-center justify-between gap-2 mb-2">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
               <label for="inpOriginTraitSearch" class="text-xs font-mono-tech uppercase tracking-wider text-[#c7a86e] font-semibold">
                 Origin Trait Search &amp; Filter
               </label>
-              <select id="selOriginFilterMode" onchange="saveState(); updatePoolReadout();" class="d2-select text-xs py-1 px-2">
-                <option value="require">Mode: Require Selected Traits</option>
-                <option value="exclude">Mode: Exclude Selected Traits</option>
-              </select>
+              <div class="flex flex-wrap items-center gap-2">
+                <label class="vex-toggle gap-1.5" title="Restrict Origin Trait filtering to Legendary weapons only (Exotics excluded when Origin Trait filter is active)">
+                  <input type="checkbox" id="chkOriginLegendaryOnly" checked onchange="saveState(); renderOriginTraitChips(); updatePoolReadout();">
+                  <span class="vex-toggle-track"><span class="vex-toggle-thumb"></span></span>
+                  <span class="text-[11px] font-mono-tech uppercase text-[#eceae4]">Legendaries Only</span>
+                </label>
+                <select id="selOriginFilterMode" onchange="saveState(); renderOriginTraitChips(); updatePoolReadout();" class="d2-select text-xs py-1 px-2">
+                  <option value="require">Mode: Require Selected Traits</option>
+                  <option value="exclude">Mode: Exclude Selected Traits</option>
+                </select>
+              </div>
             </div>
 
             <div class="sugwrap">
-              <input type="text" id="inpOriginTraitSearch" placeholder="Search Origin Traits (e.g. Veist Stinger, Suros Synergy, Runneth Over, Cursed Thrall)..." class="d2-input w-full text-xs" autocomplete="off">
+              <input type="text" id="inpOriginTraitSearch" placeholder="Type to search Legendary Origin Traits (e.g. Veist, Suros, Runneth, Cursed)..." class="d2-input w-full text-xs" autocomplete="off">
               <div id="sugOriginTraits" class="sugs"></div>
             </div>
 
             <!-- Quick-Select Popular Origin Trait Pills -->
-            <div class="mt-2 flex flex-wrap items-center gap-1.5">
+            <div id="quickOriginTraitRow" class="mt-2 flex flex-wrap items-center gap-1.5">
               <span class="text-[10px] font-mono-tech uppercase text-[#60687a]">Quick Add:</span>
               <button type="button" onclick="addOriginTraitFilter('Veist Stinger')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Veist Stinger</button>
               <button type="button" onclick="addOriginTraitFilter('Suros Synergy')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Suros Synergy</button>
@@ -830,7 +834,7 @@
     </section>
 
     <!-- 3. TEAM LOADOUTS & GUARDIAN CONFIGURATOR -->
-    <section class="vex-panel p-4 sm:p-5 no-print" aria-label="Team Loadouts Configurator">
+    <section class="vex-panel p-4 sm:p-5" aria-label="Team Loadouts Configurator">
       <div class="vex-corners-alt">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-3 mb-4 border-b border-[#252a36]">
           <div class="flex flex-wrap items-center gap-2.5 sec-header-click" onclick="toggleSection('guardians')" title="Click to expand / collapse">
@@ -866,18 +870,17 @@
       </div>
     </section>
 
-    <!-- 4. PRIMARY CHART GENERATION & EXPORT BAR -->
-    <section class="vex-panel p-4 sm:p-5 no-print" aria-label="Chart Generation Controls">
+    <!-- 4. PRIMARY CHART GENERATION BAR -->
+    <section class="vex-panel p-4 sm:p-5" aria-label="Chart Generation Controls">
       <div class="vex-corners-alt">
         <div class="flex items-center gap-2.5 pb-3 mb-3 border-b border-[#252a36] sec-header-click" onclick="toggleSection('generate')" title="Click to expand / collapse">
           <span class="w-2 h-2 bg-[#c7a86e]"></span>
-          <h2 class="font-destiny text-sm sm:text-base font-bold text-[#eceae4]">Chart Generation &amp; Export</h2>
+          <h2 class="font-destiny text-sm sm:text-base font-bold text-[#eceae4]">Chart Generation</h2>
           <span class="sec-chevron" data-chevron="generate" title="Collapse / Expand">
             <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
           </span>
         </div>
-        <div id="secBody-generate" class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-        <div class="flex flex-wrap items-center gap-2.5">
+        <div id="secBody-generate" class="flex flex-wrap items-center gap-2.5">
           <button onclick="generateFireteamChart()" class="btn-brass text-sm py-2.5 px-5">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
@@ -888,19 +891,6 @@
           <button onclick="rerollWeaponsOnly()" class="btn-ghost py-2.5 px-4">
             Re-Roll Weapons Only
           </button>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-2">
-          <button onclick="copyChartSummary()" class="btn-ghost">
-            Copy Text Summary
-          </button>
-          <button onclick="exportChartCSV()" class="btn-ghost">
-            Export CSV
-          </button>
-          <button onclick="window.print()" class="btn-ghost">
-            Print Chart
-          </button>
-        </div>
         </div>
       </div>
     </section>
@@ -960,29 +950,19 @@ function confirmBungieApiKey() {
   showToast("Bungie API key confirmed for this page session.");
 }
 
+// Returns a fetch() Promise. Calls to /Platform/ always send the key the user confirmed.
+// Static manifest content (/common/...) is a public CDN path and is fetched without the key.
 async function bungieApiFetch(path, options = {}) {
-  if (!BUNGIE_API_KEY) {
-    throw new Error("Enter and confirm your Bungie API key first.");
+  const isPlatform = path.startsWith("/Platform/");
+  if (isPlatform && !BUNGIE_API_KEY) {
+    throw new Error("Enter your Bungie API key and select Confirm first.");
   }
-
-  return fetch(new URL(path, BUNGIE_API_ORIGIN), {
-    ...options,
-    headers: {
-      ...(options.headers || {}),
-      Accept: "application/json",
-      "X-API-Key": BUNGIE_API_KEY,
-    },
-  });
-}
-const STORAGE_KEY = 'd2_fireteam_chart_v3';
-
-// PROXY CONFIG
-const BUNGIE_PROXY_URL =
-  "https://script.google.com/macros/s/AKfycbwOqu-pDY-C6gzYMV6lX0NQg89MuXfV_5qleQyjTyePTk0m666DkEY37E_-1IzBtFGr/exec";
-
-function bungieApiFetch(path) {
-  // path begins with a slash, e.g. "/Platform/Destiny2/Manifest/"
-  return `${BUNGIE_PROXY_URL}?path=${encodeURIComponent(path)}`;
+  const headers = { ...(options.headers || {}) };
+  if (isPlatform) {
+    headers["X-API-Key"] = BUNGIE_API_KEY;
+    headers["Accept"] = "application/json";
+  }
+  return fetch(new URL(path, BUNGIE_API_ORIGIN), { ...options, headers });
 }
 
 // Comprehensive Built-In Weapon Database with Origin Traits
@@ -1154,6 +1134,198 @@ const BUILTIN_EXOTIC_ARMOR = [
   { name: "Solipsism (Exotic Class Item)", classType: "Warlock", slot: "Class Item" }
 ];
 
+// Built-in DestinyInventoryItemDefinition Hashes for Direct DIM Loadout URLs (?loadout=...)
+const BUILTIN_ITEM_HASHES = {
+  // Subclasses (18)
+  "Gunslinger (Solar)": 2240888816,
+  "Arcstrider (Arc)": 2328211300,
+  "Nightstalker (Void)": 2453351420,
+  "Revenant (Stasis)": 873720784,
+  "Threadrunner (Strand)": 3785442599,
+  "Prismatic Hunter": 4282591831,
+  "Sunbreaker (Solar)": 2550323932,
+  "Striker (Arc)": 2932390016,
+  "Sentinel (Void)": 2842471112,
+  "Behemoth (Stasis)": 613647804,
+  "Berserker (Strand)": 242419885,
+  "Prismatic Titan": 1616346845,
+  "Dawnblade (Solar)": 3941205951,
+  "Stormcaller (Arc)": 3168997075,
+  "Voidwalker (Void)": 2849050827,
+  "Shadebinder (Stasis)": 3291545503,
+  "Broodweaver (Strand)": 4204413574,
+  "Prismatic Warlock": 3893112950,
+
+  // Kinetic Slot Weapons
+  "The Call": 1245655644,
+  "Mountaintop": 3691881271,
+  "Succession": 2990047042,
+  "Heritage": 4248569242,
+  "Rufus's Fury": 484515708,
+  "Conditional Finality": 3371017761,
+  "Witherhoard": 2357297366,
+  "Izanagi's Burden": 3211806999,
+  "Outbreak Perfected": 400096939,
+  "Khvostov 7G-0X": 325519402,
+  "Supremacy": 686951703,
+  "Scatter Signal": 3005144933,
+  "Riptide": 2715240478,
+  "Deliverance": 768621510,
+  "Submission": 3886426828,
+  "Fatebringer": 1216319404,
+  "Midnight Coup": 1128225405,
+  "Hung Jury SR4": 4281371574,
+  "Blast Furnace": 3843477312,
+  "Smite of Merain": 2221264583,
+  "Imminence": 2847959581,
+  "Breachlight": 1289997971,
+  "Lost Signal": 2324401908,
+  "Liturgy": 3918824056,
+  "Tinasha's Mastery": 480368036,
+  "Rake Angle": 2376481550,
+  "Osteo Striga": 46524085,
+  "Quicksilver Storm": 3837702841,
+  "Wish-Ender": 814876685,
+  "Ace of Spades": 347366834,
+  "Euphony": 3074058273,
+  "Lingering Dread": 3393130645,
+  "New Pacific Epitaph": 2663075077,
+  "Appetence": 2747177064,
+
+  // Energy Slot Weapons
+  "Zaouli's Bane": 431721920,
+  "Sunshot": 2907129557,
+  "Forbearance": 613334176,
+  "Indebted Kindness": 3305265315,
+  "Aberrant Action": 2198166292,
+  "Velocity Baton": 3825285413,
+  "Choir of One": 2349257849,
+  "Still Hunt": 1763241975,
+  "Graviton Lance": 3628991658,
+  "Trinity Ghoul": 814876684,
+  "Divinity": 4103414242,
+  "Cloudstrike": 2603483885,
+  "Buried Bloodline": 1298815317,
+  "Calus Mini-Tool": 2490988246,
+  "Funnelweb": 3341893443,
+  "IKELOS_SMG_v1.0.3": 2149697300,
+  "The Recluse": 3354242550,
+  "Luna's Howl": 153979396,
+  "Word of Crota": 2450535595,
+  "Abyss Defiant": 1463420737,
+  "Oversoul Edict": 1219498542,
+  "Nullify": 4206818389,
+  "Non-Denouement": 3616301173,
+  "No Hesitation": 3826273432,
+  "The Eremite": 3180268535,
+  "Cartesian Coordinate": 2481881293,
+  "Techeun Force": 3591141932,
+  "Nation of Beasts": 654370424,
+  "Tyranny of Heaven": 2721249463,
+  "Summoner": 1907698332,
+  "Igneous Hammer": 2351183275,
+  "Acasia's Dejection": 4057920729,
+  "Heliocentric QSc": 3998080529,
+  "Ros Arago IV": 3583275737,
+  "VS Pyroelectric Propellant": 2184323254,
+  "Chroma Rush": 1119734784,
+  "Trustee": 1392919471,
+  "Posterity": 3281285075,
+
+  // Power Slot Weapons
+  "Apex Predator": 1851777734,
+  "Edge Transit": 218335759,
+  "Gjallarhorn": 1363886209,
+  "Tractor Cannon": 3580904581,
+  "The Lament": 3487253372,
+  "Whisper of the Worm": 1891561814,
+  "Leviathan's Breath": 2591746970,
+  "Thunderlord": 3325463374,
+  "Microcosm": 189171336,
+  "Dragon's Breath": 370930766,
+  "Parasite": 2812324401,
+  "Xenophage": 1395261499,
+  "Anarchy": 2220014607,
+  "Cold Comfort": 3748613770,
+  "Hothead": 2612247350,
+  "Crux Termination IV": 2171429505,
+  "Faith-Keeper": 4195138678,
+  "Cataphract GL3": 2036397983,
+  "VS Chill Inhibitor": 1762785662,
+  "Wicked Sister": 1375639377,
+  "Bitter/Sweet": 1618022274,
+  "Cataclysmic": 999767358,
+  "Briar's Contempt": 2656304290,
+  "Doomed Petitioner": 3672364044,
+  "Scintillation": 1689525461,
+  "Taipan-4fr": 1911060537,
+  "Stormchaser": 3652506829,
+  "Commemoration": 4230965989,
+  "Song of Ir Yût": 2669964015,
+  "Hammerhead": 603242241,
+  "Pro Memoria": 333708949,
+  "Fixed Odds": 1642384931,
+  "Falling Guillotine": 614426548,
+  "Bequest": 3387602456,
+  "Summum Bonum": 2409611889,
+  "The Other Half": 2466919363,
+
+  // Exotic Armor — Hunter
+  "Celestial Nighthawk": 1321354572,
+  "Star-Eater Scales": 1001356380,
+  "Orpheus Rig": 193869523,
+  "Gyrfalcon's Hauberk": 2843928135,
+  "Omnioculus": 1935198785,
+  "Liar's Handshake": 4165919945,
+  "Assassin's Cowl": 2203146422,
+  "Lucky Pants": 193869520,
+  "Renewal Grasps": 1467044898,
+  "Cyrtarachne's Facade": 3926392527,
+  "Shards of Galanor": 691578978,
+  "Mothkeeper's Wraps": 3322346251,
+  "Relativism (Exotic Class Item)": 2809120022,
+  "Relativism": 2809120022,
+  "Mask of Fealty": 1383148758,
+  "Gifted Conviction": 3437107268,
+
+  // Exotic Armor — Titan
+  "Cuirass of the Falling Star": 2321120637,
+  "Synthoceps": 241462142,
+  "Pyrogale Gauntlets": 2354840072,
+  "Loreley Splendor Helm": 3316517958,
+  "Heart of Inmost Light": 1341951177,
+  "Precious Scars": 3974038291,
+  "Abeyant Leap": 2463947681,
+  "Banner of War / Wormgod Caress": 1703551922,
+  "Wormgod Caress": 1703551922,
+  "Helm of Saint-14": 106575079,
+  "Ursa Furiosa": 1848640623,
+  "Stronghold": 2240152949,
+  "Hazardous Propulsion": 1807343361,
+  "Wishful Ignorance": 1906093346,
+  "Stoicism (Exotic Class Item)": 266021826,
+  "Stoicism": 266021826,
+
+  // Exotic Armor — Warlock
+  "Speaker's Sight": 2124234385,
+  "Starfire Protocol": 2082483156,
+  "Phoenix Protocol": 4057299719,
+  "Sunbracers": 3787517196,
+  "Lunafaction Boots": 4136768282,
+  "Cenotaph Mask": 3087439249,
+  "Getaway Artist": 3084282676,
+  "Osmiomancy Gloves": 3259193988,
+  "Contraverse Hold": 1906093347,
+  "Nezarec's Sin": 3381022971,
+  "Briarbinds": 2436136972,
+  "Swarmers": 3322346250,
+  "Fallen Sunstar": 376323821,
+  "Geomag Stabilizers": 121305948,
+  "Mataiodoxía": 3183898359,
+  "Solipsism (Exotic Class Item)": 2273643087,
+  "Solipsism": 2273643087
+};
+
 // Subclasses, Aspects, and Fragments Matrix
 const SUBCLASS_DATA = {
   Hunter: [
@@ -1277,20 +1449,26 @@ let WEAPON_DB = [...BUILTIN_WEAPONS];
 let EXOTIC_ARMOR_DB = [...BUILTIN_EXOTIC_ARMOR];
 let MANIFEST_HASH_MAP = {}; // itemHash -> { name, category, slot, type, damage, rarity, originTrait, classType }
 
-// Valid damage types per weapon slot (fix: prevents Kinetic/Stasis/Strand appearing in
-// Energy slot and Solar/Arc/Void appearing in Kinetic slot)
+// Valid damage types per weapon slot
 const VALID_SLOT_DAMAGE = {
   Kinetic: new Set(["Kinetic", "Stasis", "Strand"]),
   Energy: new Set(["Solar", "Arc", "Void"]),
-  Power: new Set(["Solar", "Arc", "Void", "Stasis", "Strand"])
+  Power: new Set(["Kinetic", "Solar", "Arc", "Void", "Stasis", "Strand"])
+};
+
+// Elements selectable in each slot's element filter ("ALL" = any)
+const SLOT_ELEMENT_OPTIONS = {
+  Kinetic: ["ALL", "Kinetic", "Stasis", "Strand"],
+  Energy: ["ALL", "Arc", "Solar", "Void"],
+  Power: ["ALL", "Kinetic", "Stasis", "Strand", "Solar", "Arc", "Void"]
 };
 
 function sanitizeWeaponDb() {
   WEAPON_DB = WEAPON_DB.filter(w => {
     const validSet = VALID_SLOT_DAMAGE[w.slot];
-    if (!validSet) return false; // unknown slot
+    if (!validSet) return false;
     const isExotic = w.rarity === "Exotic";
-    const valid = validSet.has(w.damage) || (isExotic && w.damage === "Kinetic"); // rare kinetic-damage exotics (e.g. Microcosm)
+    const valid = validSet.has(w.damage) || (isExotic && w.damage === "Kinetic");
     if (!valid) {
       console.warn("Excluded weapon with impossible slot/damage combination:", w.name, "|", w.slot, "slot /", w.damage, "damage");
     }
@@ -1304,8 +1482,9 @@ let appState = {
   exoticRule: "enforce1",
   duplicateRule: "allow",
   typeFilter: "ALL",
-  damageFilter: "ALL",
+  slotElements: { Kinetic: "ALL", Energy: "ALL", Power: "ALL" },
   originFilterMode: "require",
+  originLegendaryOnly: true,
   selectedOriginTraits: [],
   excludedWeapons: [],
   bungieName: "",
@@ -1334,6 +1513,7 @@ window.onload = function () {
   sanitizeWeaponDb();
   syncControlsFromState();
   populateQuickWeaponBrowse();
+  renderQuickOriginTraitPills();
   renderOriginTraitChips();
   renderExcludedWeaponChips();
   renderGuardianCards();
@@ -1379,9 +1559,9 @@ function loadState() {
       appState = {
         ...appState,
         ...parsed,
+        originLegendaryOnly: typeof parsed.originLegendaryOnly === 'boolean' ? parsed.originLegendaryOnly : true,
         guardians: Array.isArray(parsed.guardians) && parsed.guardians.length === 6 ? parsed.guardians : appState.guardians
       };
-      // Migration: single legacy vaultData -> vaults array (max 6)
       if ((!Array.isArray(appState.vaults) || appState.vaults.length === 0) && parsed.vaultData) {
         const legacy = parsed.vaultData;
         if (legacy && ((legacy.weaponNames || []).length || (legacy.armorNames || []).length)) {
@@ -1409,10 +1589,14 @@ function saveState() {
     appState.exoticRule = document.getElementById('selExoticRule').value;
     appState.duplicateRule = document.getElementById('selDuplicateRule').value;
     appState.typeFilter = document.getElementById('selTypeFilter').value;
-    appState.damageFilter = document.getElementById('selDamageFilter').value;
+    appState.slotElements = {
+      Kinetic: document.getElementById('selElemKinetic').value,
+      Energy: document.getElementById('selElemEnergy').value,
+      Power: document.getElementById('selElemPower').value
+    };
     appState.originFilterMode = document.getElementById('selOriginFilterMode').value;
+    appState.originLegendaryOnly = document.getElementById('chkOriginLegendaryOnly').checked;
     appState.bungieName = document.getElementById('inpBungieName').value.trim();
-    
     appState.restrictToVault = document.getElementById('chkVaultOnly').checked;
     delete appState.bungieApiKey;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
@@ -1426,10 +1610,13 @@ function syncControlsFromState() {
   document.getElementById('selExoticRule').value = appState.exoticRule || "enforce1";
   document.getElementById('selDuplicateRule').value = appState.duplicateRule || "allow";
   document.getElementById('selTypeFilter').value = appState.typeFilter || "ALL";
-  document.getElementById('selDamageFilter').value = appState.damageFilter || "ALL";
+  const se = appState.slotElements || {};
+  document.getElementById('selElemKinetic').value = (SLOT_ELEMENT_OPTIONS.Kinetic.includes(se.Kinetic) ? se.Kinetic : "ALL");
+  document.getElementById('selElemEnergy').value = (SLOT_ELEMENT_OPTIONS.Energy.includes(se.Energy) ? se.Energy : "ALL");
+  document.getElementById('selElemPower').value = (SLOT_ELEMENT_OPTIONS.Power.includes(se.Power) ? se.Power : "ALL");
   document.getElementById('selOriginFilterMode').value = appState.originFilterMode || "require";
+  document.getElementById('chkOriginLegendaryOnly').checked = appState.originLegendaryOnly !== false;
   document.getElementById('inpBungieName').value = appState.bungieName || "";
-  // API key field removed in proxy mode; legacy saved keys are ignored.
   document.getElementById('chkVaultOnly').checked = Boolean(appState.restrictToVault);
 }
 
@@ -1464,29 +1651,131 @@ function escapeHtml(str) {
 // BUNGIE MANIFEST API IMPORTER (WEAPONS + ORIGIN TRAITS + EXOTIC ARMOR)
 // ============================================================================
 
+const IGNORED_ORIGIN_PLUG_NAMES = new Set([
+  "empty origin trait socket",
+  "origin trait",
+  "default ornament",
+  "empty socket",
+  "standard frame"
+]);
+
+function isValidOriginTraitName(name) {
+  if (!name || typeof name !== "string") return false;
+  const clean = name.trim();
+  if (!clean) return false;
+  return !IGNORED_ORIGIN_PLUG_NAMES.has(clean.toLowerCase());
+}
+
+function resolveOriginTraitFromItem(def, plugDefMap, plugSetMap) {
+  const tier = def.inventory?.tierTypeName;
+  if (tier === "Exotic") return "Exotic Intrinsic";
+
+  const candidatePlugHashes = [];
+  const socketEntries = Array.isArray(def.sockets?.socketEntries) ? def.sockets.socketEntries : [];
+  const socketCategories = Array.isArray(def.sockets?.socketCategories) ? def.sockets.socketCategories : [];
+
+  // 1. Primary: Socket Category 3993098925 (ORIGIN TRAITS)
+  const originCat = socketCategories.find(c => Number(c.socketCategoryHash) === 3993098925);
+  const targetIndexes = new Set(Array.isArray(originCat?.socketIndexes) ? originCat.socketIndexes : []);
+
+  // 2. Fallback: Any socket whose initial or reusable plug has itemTypeDisplayName === "Origin Trait"
+  socketEntries.forEach((sockEntry, idx) => {
+    if (!sockEntry) return;
+    if (targetIndexes.has(idx)) {
+      if (sockEntry.singleInitialItemHash) candidatePlugHashes.push(String(sockEntry.singleInitialItemHash));
+      if (Array.isArray(sockEntry.reusablePlugItems)) {
+        for (const rp of sockEntry.reusablePlugItems) {
+          if (rp?.plugItemHash) candidatePlugHashes.push(String(rp.plugItemHash));
+        }
+      }
+      for (const setHash of [sockEntry.reusablePlugSetHash, sockEntry.randomizedPlugSetHash]) {
+        if (setHash && Array.isArray(plugSetMap[String(setHash)])) {
+          for (const pHash of plugSetMap[String(setHash)]) {
+            candidatePlugHashes.push(String(pHash));
+          }
+        }
+      }
+    } else {
+      const checkHashes = [];
+      if (sockEntry.singleInitialItemHash) checkHashes.push(String(sockEntry.singleInitialItemHash));
+      for (const setHash of [sockEntry.reusablePlugSetHash, sockEntry.randomizedPlugSetHash]) {
+        if (setHash && Array.isArray(plugSetMap[String(setHash)])) {
+          checkHashes.push(...plugSetMap[String(setHash)].map(String));
+        }
+      }
+      for (const pHash of checkHashes) {
+        const meta = plugDefMap[pHash];
+        if (meta && meta.isOriginTrait) {
+          candidatePlugHashes.push(pHash);
+        }
+      }
+    }
+  });
+
+  for (const pHash of candidatePlugHashes) {
+    const meta = plugDefMap[pHash];
+    if (meta && isValidOriginTraitName(meta.name)) {
+      return meta.name.trim();
+    }
+  }
+
+  return "Standard Frame";
+}
+
 async function importBungieManifest() {
+  if (!BUNGIE_API_KEY) {
+    showToast("Enter and confirm your Bungie API key first — using built-in dataset for now.");
+    return;
+  }
   const btn = document.getElementById('btnImportManifest');
   const label = document.getElementById('manifestBtnLabel');
   btn.disabled = true;
   label.textContent = "Querying Bungie Manifest...";
 
   try {
-    const manifestRes = await fetch(bungieApiFetch("/Platform/Destiny2/Manifest/"));
+    const manifestRes = await bungieApiFetch("/Platform/Destiny2/Manifest/");
     if (!manifestRes.ok) throw new Error(`Manifest HTTP ${manifestRes.status}`);
     const manifestJson = await manifestRes.json();
-    const invPath = manifestJson?.Response?.jsonWorldComponentContentPaths?.en?.DestinyInventoryItemDefinition;
+    const contentPaths = manifestJson?.Response?.jsonWorldComponentContentPaths?.en || {};
+    const invPath = contentPaths.DestinyInventoryItemDefinition;
+    const plugSetPath = contentPaths.DestinyPlugSetDefinition;
     if (!invPath) throw new Error("DestinyInventoryItemDefinition path missing");
 
-    label.textContent = "Downloading Item Definitions...";
-    const itemsRes = await fetch(bungieApiFetch(invPath));
+    label.textContent = "Downloading Item & Trait Definitions...";
+    const [itemsRes, plugSetsRes] = await Promise.all([
+      bungieApiFetch(invPath),
+      plugSetPath ? bungieApiFetch(plugSetPath).catch(() => null) : Promise.resolve(null)
+    ]);
     if (!itemsRes.ok) throw new Error(`Items HTTP ${itemsRes.status}`);
     const items = await itemsRes.json();
 
-    // First pass: collect plug/trait names (socket category 3993098925 = Origin Traits)
-    const plugNameMap = {};
+    const plugSetMap = {};
+    if (plugSetsRes && plugSetsRes.ok) {
+      const plugSetsJson = await plugSetsRes.json();
+      for (const [setHash, setDef] of Object.entries(plugSetsJson || {})) {
+        const list = [];
+        if (Array.isArray(setDef?.reusablePlugItems)) {
+          for (const item of setDef.reusablePlugItems) {
+            const pHash = item?.plugItemHash ?? item?.itemHash;
+            if (pHash) list.push(String(pHash));
+          }
+        }
+        plugSetMap[String(setHash)] = list;
+      }
+    }
+
+    // First pass: collect plug/trait metadata
+    const plugDefMap = {};
     for (const [hash, def] of Object.entries(items)) {
-      if (def?.displayProperties?.name && (def.itemType === 19 || def.plug)) {
-        plugNameMap[hash] = def.displayProperties.name;
+      const plugName = def?.displayProperties?.name?.trim();
+      if (plugName && (def.itemType === 19 || def.plug)) {
+        const typeDisp = (def.itemTypeDisplayName || "").toLowerCase();
+        const plugCatId = (def.plug?.plugCategoryIdentifier || "").toLowerCase();
+        const isOriginTrait = typeDisp.includes("origin trait") || plugCatId.includes("origins");
+        plugDefMap[String(hash)] = {
+          name: plugName,
+          isOriginTrait
+        };
       }
     }
 
@@ -1530,32 +1819,16 @@ async function importBungieManifest() {
         const slot = slotBucketMap[def.inventory?.bucketTypeHash];
         if (!slot) continue;
 
-        // Resolve damage type. Some weapons (e.g. Refurbished A499) omit
-        // defaultDamageTypeHash, so fall back to the enum; if still unknown,
-        // skip the weapon rather than mislabeling it (e.g. "Energy" + "Kinetic").
         const damageEnumMap = { 1: "Kinetic", 2: "Arc", 3: "Solar", 4: "Void", 5: "Stasis", 6: "Strand" };
-        let damage = damageMap[def.defaultDamageTypeHash] || damageEnumMap[def.defaultDamageType];
+        const damage = damageMap[def.defaultDamageTypeHash] || damageEnumMap[def.defaultDamageType];
         const type = def.itemTypeDisplayName || "Weapon";
         if (!damage) {
-          console.info("Skipped weapon without a resolvable damage type:", name, "|", slot, "slot");
           continue;
         }
 
-        // Extract Origin Trait from socketCategories (3993098925 = ORIGIN TRAITS)
-        let originTrait = tier === "Exotic" ? "Exotic Intrinsic" : "Standard Frame";
-        const originCat = def.sockets?.socketCategories?.find(c => c.socketCategoryHash === 3993098925);
-        if (originCat && Array.isArray(originCat.socketIndexes)) {
-          for (const idx of originCat.socketIndexes) {
-            const sockEntry = def.sockets?.socketEntries?.[idx];
-            const plugHash = sockEntry?.singleInitialItemHash || sockEntry?.reusablePlugItems?.[0]?.plugItemHash;
-            if (plugHash && plugNameMap[plugHash]) {
-              originTrait = plugNameMap[plugHash];
-              break;
-            }
-          }
-        }
+        const originTrait = resolveOriginTraitFromItem(def, plugDefMap, plugSetMap);
 
-        MANIFEST_HASH_MAP[hash] = {
+        MANIFEST_HASH_MAP[String(hash)] = {
           name,
           category: "Weapon",
           slot,
@@ -1578,7 +1851,7 @@ async function importBungieManifest() {
         const slot = armorSlotMap[def.inventory?.bucketTypeHash];
         if (!classType || !slot) continue;
 
-        MANIFEST_HASH_MAP[hash] = {
+        MANIFEST_HASH_MAP[String(hash)] = {
           name,
           category: "Armor",
           classType,
@@ -1591,6 +1864,14 @@ async function importBungieManifest() {
           parsedArmor.push({ name, classType, slot });
         }
       }
+
+      // ItemType 16 = Subclass
+      if (def.itemType === 16) {
+        MANIFEST_HASH_MAP[String(hash)] = {
+          name,
+          category: "Subclass"
+        };
+      }
     }
 
     if (parsedWeapons.length > 50) {
@@ -1598,10 +1879,14 @@ async function importBungieManifest() {
       sanitizeWeaponDb();
       if (parsedArmor.length > 20) EXOTIC_ARMOR_DB = parsedArmor;
       populateQuickWeaponBrowse();
+      renderQuickOriginTraitPills();
       renderGuardianCards();
       updateDatabaseStatus(true);
       updatePoolReadout();
-      showToast(`Imported ${WEAPON_DB.length} weapons & ${EXOTIC_ARMOR_DB.length} exotic armors from Bungie Manifest!`);
+      if (appState.lastGeneratedChart) {
+        renderGeneratedChart(appState.lastGeneratedChart);
+      }
+      showToast(`Imported ${WEAPON_DB.length} weapons (${getAllOriginTraits().length} Legendary origin traits) & ${EXOTIC_ARMOR_DB.length} exotic armors!`);
     } else {
       throw new Error("Insufficient items parsed from Manifest.");
     }
@@ -1618,11 +1903,39 @@ async function importBungieManifest() {
 function getAllOriginTraits() {
   const set = new Set();
   WEAPON_DB.forEach(w => {
-    if (w.originTrait && w.originTrait !== "Exotic Intrinsic" && w.originTrait !== "Standard Frame") {
-      set.add(w.originTrait);
+    if (
+      w.rarity === "Legendary" &&
+      w.originTrait &&
+      w.originTrait !== "Exotic Intrinsic" &&
+      w.originTrait !== "Standard Frame"
+    ) {
+      set.add(w.originTrait.trim());
     }
   });
   return Array.from(set).sort((a, b) => a.localeCompare(b));
+}
+
+function renderQuickOriginTraitPills() {
+  const container = document.getElementById('quickOriginTraitRow');
+  if (!container) return;
+  const preferred = [
+    "Veist Stinger",
+    "Suros Synergy",
+    "Runneth Over",
+    "Cursed Thrall",
+    "Souldrinker",
+    "Bray Inheritance"
+  ];
+  const available = getAllOriginTraits();
+  const picks = preferred.filter(p => available.includes(p));
+  for (const t of available) {
+    if (picks.length >= 6) break;
+    if (!picks.includes(t)) picks.push(t);
+  }
+  container.innerHTML = `<span class="text-[10px] font-mono-tech uppercase text-[#60687a]">Quick Add:</span>` +
+    picks.map(t => `
+      <button type="button" onclick="addOriginTraitFilter('${escapeHtml(t).replace(/'/g, "\\'")}')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ ${escapeHtml(t)}</button>
+    `).join('');
 }
 
 function updateDatabaseStatus(isLive = false) {
@@ -1632,16 +1945,12 @@ function updateDatabaseStatus(isLive = false) {
   badge.innerHTML = isLive
     ? `<span class="w-1.5 h-1.5 bg-[#35e366]"></span> DB: BUNGIE MANIFEST LIVE`
     : `<span class="w-1.5 h-1.5 bg-[#c7a86e]"></span> DB: BUILT-IN ARCHIVE READY`;
-  counts.textContent = `WEAPONS: ${WEAPON_DB.length} | EXOTIC ARMOR: ${EXOTIC_ARMOR_DB.length} | SUBCLASSES: 18 | ORIGIN TRAITS: ${traits.length}`;
+  counts.textContent = `WEAPONS: ${WEAPON_DB.length} | EXOTIC ARMOR: ${EXOTIC_ARMOR_DB.length} | SUBCLASSES: 18 | LEGENDARY ORIGIN TRAITS: ${traits.length}`;
 }
 
 // ============================================================================
-// 1. BUNGIE VAULT & INVENTORY LOOKUP (API + DEMO + DIM/JSON IMPORT)
+// 1. BUNGIE VAULT & INVENTORY LOOKUP (API + DIM/JSON IMPORT)
 // ============================================================================
-
-function toggleApiKeyVisibility() {
-  // No-op in proxy mode (API key input was removed).
-}
 
 function toggleVaultImportDrawer() {
   document.getElementById('vaultImportDrawer').classList.toggle('hidden');
@@ -1653,21 +1962,6 @@ function toggleVaultBrowser() {
   if (!drawer.classList.contains('hidden')) {
     renderVaultBrowser();
   }
-}
-
-function toggleVaultRestriction(checked) {
-  if (checked && (!appState.vaults || appState.vaults.length === 0)) {
-    showToast("Fetch a Bungie Vault or load Demo Vault first to restrict randomization.");
-    document.getElementById('chkVaultOnly').checked = false;
-    appState.restrictToVault = false;
-    return;
-  }
-  appState.restrictToVault = checked;
-  saveState();
-  updateVaultUI();
-  updatePoolReadout();
-  renderGuardianCards();
-  showToast(checked ? "Randomization restricted to each Guardian's assigned vault." : "Vault restriction disabled — full weapon pool unlocked.");
 }
 
 async function fetchBungieVault() {
@@ -1689,9 +1983,8 @@ async function fetchBungieVault() {
     return;
   }
 
-  if (location.protocol === 'file:') {
-    // Running from disk: /proxy won't exist. Warn instead of failing silently.
-    showVaultAlert("This page is running from a local file, so no proxy is available. Use <strong>Demo Vault</strong> or <strong>JSON / DIM</strong> paste, or host the page behind the proxy (server.js or the Google Apps Script web app).", "warn");
+  if (!BUNGIE_API_KEY) {
+    showVaultAlert("Enter your <strong>Bungie API Key</strong> and select <strong>Confirm</strong> before fetching a vault.", "warn");
     return;
   }
 
@@ -1703,11 +1996,9 @@ async function fetchBungieVault() {
   label.textContent = "Searching Bungie ID...";
 
   try {
-    // Proxy (server.js / Apps Script) injects X-API-Key server-side; the key never reaches this page.
-    const headers: { 'Content-Type': 'text/plain;charset=UTF-8' };
+    const headers = { 'Content-Type': 'application/json' };
 
-    // Step 1: SearchDestinyPlayerByBungieName
-    const searchRes = await fetch(bungieApiFetch("/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/"), {
+    const searchRes = await bungieApiFetch("/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/", {
       method: "POST",
       headers,
       body: JSON.stringify({ displayName, displayNameCode })
@@ -1723,19 +2014,16 @@ async function fetchBungieVault() {
       throw new Error(`No Destiny 2 player found matching "${displayName}#${String(displayNameCode).padStart(4, '0')}".`);
     }
 
-    // Prefer cross-save primary membership if available
     const primary = memberships.find(m => m.crossSaveOverride === m.membershipType) || memberships[0];
     const { membershipType, membershipId } = primary;
 
-    // Step 2: Ensure Manifest Hash Map is populated so itemHashes resolve to names
     if (Object.keys(MANIFEST_HASH_MAP).length === 0) {
       label.textContent = "Resolving Manifest Hashes...";
       await importBungieManifest();
     }
 
-    // Step 3: Fetch Profile Vault (102), Character Inventories (201), and Character Equipment (205)
     label.textContent = "Reading Vault & Characters...";
-    const profRes = await fetch(bungieApiFetch(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=102,201,205`), { headers: { 'Content-Type': 'application/json' } });
+    const profRes = await bungieApiFetch(`/Platform/Destiny2/${membershipType}/Profile/${membershipId}/?components=102,201,205`);
     const profJson = await profRes.json();
 
     if (!profRes.ok || profJson.ErrorCode !== 1) {
@@ -1762,7 +2050,7 @@ async function fetchBungieVault() {
     console.error("Vault fetch error:", err);
     showVaultAlert(
       `<strong>Bungie API Notice:</strong> ${escapeHtml(err.message)}<br>
-       You can still test Vault filtering immediately using <strong>Demo Vault</strong> or paste your DIM/Bungie JSON via <strong>JSON / DIM</strong>.`,
+       You can paste your DIM/Bungie JSON directly via <strong>JSON / DIM</strong>.`,
       "error"
     );
   } finally {
@@ -1801,7 +2089,6 @@ function addVault(displayName, weaponNames, armorNames) {
 
 function removeVault(id) {
   appState.vaults = appState.vaults.filter(v => v.id !== id);
-  // Reset any guardian that pointed at the removed vault
   appState.guardians.forEach(g => {
     if (g.vaultScope && g.vaultScope !== 'ANY' && !getVaultById(g.vaultScope)) g.vaultScope = 'ANY';
   });
@@ -1833,8 +2120,6 @@ function getVaultById(id) {
   return appState.vaults.find(v => v.id === id) || null;
 }
 
-// Which vault applies to a guardian when vault restriction is active:
-// their assigned vault, falling back to the first loaded vault.
 function getGuardianVault(guardian) {
   if (!appState.restrictToVault || appState.vaults.length === 0) return null;
   if (guardian && guardian.vaultScope && guardian.vaultScope !== 'ANY') {
@@ -1855,36 +2140,11 @@ function applyVaultHashes(ownerLabel, itemHashes) {
     if (def.category === "Armor") matchedArmorSet.add(def.name.toLowerCase());
   });
 
-  // Match against active WEAPON_DB and EXOTIC_ARMOR_DB
   const matchedWeapons = WEAPON_DB.filter(w => matchedWeaponSet.has(w.name.toLowerCase()));
   const matchedArmor = EXOTIC_ARMOR_DB.filter(a => matchedArmorSet.has(a.name.toLowerCase()));
 
   const vault = addVault(ownerLabel, matchedWeapons.map(w => w.name), matchedArmor.map(a => a.name));
   if (vault) showToast(`Vault synced for ${ownerLabel} (${vault.weaponNames.length} weapons, ${vault.armorNames.length} exotic armors).`);
-}
-
-function loadDemoVault() {
-  const sampleWeapons = [
-    "The Call", "Mountaintop", "Succession", "Rufus's Fury", "Conditional Finality",
-    "Witherhoard", "Outbreak Perfected", "Scatter Signal", "Riptide", "Fatebringer",
-    "Midnight Coup", "Blast Furnace", "Lost Signal", "Zaouli's Bane", "Sunshot",
-    "Forbearance", "Indebted Kindness", "Aberrant Action", "Velocity Baton", "Choir of One",
-    "Still Hunt", "Graviton Lance", "Calus Mini-Tool", "Funnelweb", "The Recluse",
-    "No Hesitation", "Nullify", "Apex Predator", "Edge Transit", "Gjallarhorn",
-    "Tractor Cannon", "The Lament", "Whisper of the Worm", "Microcosm", "Dragon's Breath",
-    "Cold Comfort", "Cataphract GL3", "VS Chill Inhibitor", "Cataclysmic", "Commemoration",
-    "Song of Ir Yût", "Hammerhead", "Falling Guillotine"
-  ];
-
-  const sampleArmor = [
-    "Celestial Nighthawk", "Star-Eater Scales", "Orpheus Rig", "Gyrfalcon's Hauberk", "Lucky Pants",
-    "Cuirass of the Falling Star", "Synthoceps", "Pyrogale Gauntlets", "Precious Scars", "Hazardous Propulsion",
-    "Speaker's Sight", "Starfire Protocol", "Phoenix Protocol", "Sunbracers", "Getaway Artist", "Cenotaph Mask"
-  ];
-
-  const vault = addVault("VanguardDemo#0777 (Sample Vault)", sampleWeapons, sampleArmor);
-  document.getElementById('vaultAlertBox').classList.add('hidden');
-  if (vault) showToast(`Loaded Demo Vault (${vault.weaponNames.length} Weapons & ${vault.armorNames.length} Exotic Armors) as Vault #${appState.vaults.length}.`);
 }
 
 function parseManualVaultPaste() {
@@ -1894,7 +2154,6 @@ function parseManualVaultPaste() {
     return;
   }
 
-  // Check if JSON
   if (raw.startsWith('{') || raw.startsWith('[')) {
     try {
       const json = JSON.parse(raw);
@@ -1913,7 +2172,6 @@ function parseManualVaultPaste() {
     }
   }
 
-  // Match comma/newline/quote-separated item names (e.g. DIM CSV export)
   const lowerText = raw.toLowerCase();
   const matchedWeapons = WEAPON_DB.filter(w => lowerText.includes(w.name.toLowerCase())).map(w => w.name);
   const matchedArmor = EXOTIC_ARMOR_DB.filter(a => lowerText.includes(a.name.toLowerCase())).map(a => a.name);
@@ -1926,10 +2184,6 @@ function parseManualVaultPaste() {
   const vault = addVault(appState.bungieName || "DIM / Text Vault Import", matchedWeapons, matchedArmor);
   toggleVaultImportDrawer();
   if (vault) showToast(`Matched ${vault.weaponNames.length} weapons & ${vault.armorNames.length} exotic armors into Vault #${appState.vaults.length}!`);
-}
-
-function clearVaultData() {
-  clearAllVaults();
 }
 
 function showVaultAlert(html, level = "info") {
@@ -1954,7 +2208,7 @@ function renderVaultAssignments() {
     : 'VAULT ASSIGNMENTS (NO VAULTS LOADED — FETCH ONE TO ASSIGN):';
 
   if (vaultCount === 0) {
-    list.innerHTML = `<span class="text-xs text-[#60687a] italic">Fetch a Bungie Vault, load the Demo Vault, or paste DIM/JSON data to start assigning vaults to players.</span>`;
+    list.innerHTML = `<span class="text-xs text-[#60687a] italic">Fetch a Bungie Vault or paste DIM/JSON data to start assigning vaults to players.</span>`;
     return;
   }
 
@@ -2035,7 +2289,7 @@ function renderVaultBrowser() {
       if (q && !w.name.toLowerCase().includes(q) && !w.type.toLowerCase().includes(q) && !(w.originTrait || '').toLowerCase().includes(q)) return;
       items.push({
         title: w.name,
-        sub: `${w.slot} · ${w.type} · ${w.damage}`,
+        sub: `${w.slot} · ${w.type} · ${w.damage} · ${w.rarity}`,
         badge: w.originTrait || 'Standard',
         rarity: w.rarity
       });
@@ -2074,7 +2328,7 @@ function renderVaultBrowser() {
 // ============================================================================
 
 function addOriginTraitFilter(traitName) {
-  const clean = traitName.trim();
+  const clean = String(traitName || "").trim();
   if (!clean) return;
   if (!appState.selectedOriginTraits.some(t => t.toLowerCase() === clean.toLowerCase())) {
     appState.selectedOriginTraits.push(clean);
@@ -2082,6 +2336,8 @@ function addOriginTraitFilter(traitName) {
     renderOriginTraitChips();
     updatePoolReadout();
     showToast(`Added Origin Trait filter: ${clean}`);
+  } else {
+    showToast(`Origin Trait "${clean}" is already active.`);
   }
 }
 
@@ -2099,9 +2355,10 @@ function renderOriginTraitChips() {
     return;
   }
   const modeLabel = appState.originFilterMode === "exclude" ? "EXCLUDE" : "REQUIRE";
+  const tierLabel = appState.originLegendaryOnly ? " · LEGENDARY ONLY" : "";
   container.innerHTML = appState.selectedOriginTraits.map(t => `
     <span class="wchip border-[#c7a86e] text-[#eceae4]">
-      <span class="text-[10px] font-mono-tech text-[#c7a86e]">${modeLabel}:</span>
+      <span class="text-[10px] font-mono-tech text-[#c7a86e]">${modeLabel}${tierLabel}:</span>
       <span>${escapeHtml(t)}</span>
       <button type="button" onclick="removeOriginTraitFilter('${escapeHtml(t).replace(/'/g, "\\'")}')" class="text-[#9aa2b2] hover:text-white ml-1 font-bold" title="Remove Origin Trait">&times;</button>
     </span>
@@ -2156,39 +2413,72 @@ function populateQuickWeaponBrowse() {
   const sel = document.getElementById('selQuickWeaponBrowse');
   const sorted = [...WEAPON_DB].sort((a, b) => a.name.localeCompare(b.name));
   sel.innerHTML = `<option value="">Select a weapon from database to exclude...</option>` +
-    sorted.map(w => `<option value="${escapeHtml(w.name)}">${escapeHtml(w.name)} [${w.slot} · ${w.type} · ${w.originTrait || 'Standard'}]</option>`).join('');
+    sorted.map(w => `<option value="${escapeHtml(w.name)}">${escapeHtml(w.name)} [${w.slot} · ${w.type} · ${w.rarity} · ${w.originTrait || 'Standard'}]</option>`).join('');
+}
+
+function renderOriginTraitSuggestions(queryText) {
+  const sugTrait = document.getElementById('sugOriginTraits');
+  if (!sugTrait) return;
+
+  const q = String(queryText || "").trim().toLowerCase();
+  const traits = getAllOriginTraits();
+  const matches = q
+    ? traits.filter(t => t.toLowerCase().includes(q))
+    : traits;
+
+  if (matches.length === 0) {
+    sugTrait.innerHTML = `
+      <div class="sug-item text-[#9aa2b2] italic">
+        <span>No Legendary Origin Traits matching "${escapeHtml(queryText.trim())}"</span>
+      </div>
+    `;
+    sugTrait.classList.add('open');
+    return;
+  }
+
+  sugTrait.innerHTML = matches.slice(0, 40).map(t => {
+    const count = WEAPON_DB.filter(
+      w => w.rarity === "Legendary" && (w.originTrait || '').trim().toLowerCase() === t.toLowerCase()
+    ).length;
+    const isSelected = appState.selectedOriginTraits.some(st => st.toLowerCase() === t.toLowerCase());
+    return `
+      <div class="sug-item ${isSelected ? 'active' : ''}" onmousedown="event.preventDefault(); selectOriginTraitSug('${escapeHtml(t).replace(/'/g, "\\'")}')">
+        <span class="font-medium text-[#eceae4]">${escapeHtml(t)}</span>
+        <span class="text-[11px] font-mono-tech text-[#c7a86e]">${isSelected ? 'ACTIVE · ' : ''}${count} LEGENDARY</span>
+      </div>
+    `;
+  }).join('');
+  sugTrait.classList.add('open');
 }
 
 function setupAutocompleteListeners() {
-  // Origin Trait Autocomplete
+  // Origin Trait Autocomplete (Legendary weapons)
   const inpTrait = document.getElementById('inpOriginTraitSearch');
   const sugTrait = document.getElementById('sugOriginTraits');
 
-  inpTrait.addEventListener('input', () => {
-    const q = inpTrait.value.trim().toLowerCase();
-    const traits = getAllOriginTraits();
-    const matches = q
-      ? traits.filter(t => t.toLowerCase().includes(q))
-      : traits;
+  const updateOriginSuggestions = () => renderOriginTraitSuggestions(inpTrait.value);
 
-    if (matches.length === 0) {
+  inpTrait.addEventListener('input', updateOriginSuggestions);
+  inpTrait.addEventListener('keyup', (e) => {
+    if (e.key === 'Escape') {
       sugTrait.classList.remove('open');
       return;
     }
-
-    sugTrait.innerHTML = matches.slice(0, 25).map(t => {
-      const count = WEAPON_DB.filter(w => (w.originTrait || '').toLowerCase() === t.toLowerCase()).length;
-      return `
-        <div class="sug-item" onclick="selectOriginTraitSug('${escapeHtml(t).replace(/'/g, "\\'")}')">
-          <span class="font-medium text-[#eceae4]">${escapeHtml(t)}</span>
-          <span class="text-[11px] font-mono-tech text-[#c7a86e]">${count} WEAPON${count === 1 ? '' : 'S'}</span>
-        </div>
-      `;
-    }).join('');
-    sugTrait.classList.add('open');
+    updateOriginSuggestions();
   });
-
-  inpTrait.addEventListener('focus', () => inpTrait.dispatchEvent(new Event('input')));
+  inpTrait.addEventListener('focus', updateOriginSuggestions);
+  inpTrait.addEventListener('click', updateOriginSuggestions);
+  inpTrait.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const q = inpTrait.value.trim();
+      if (!q) return;
+      const traits = getAllOriginTraits();
+      const exact = traits.find(t => t.toLowerCase() === q.toLowerCase());
+      const partial = traits.find(t => t.toLowerCase().includes(q.toLowerCase()));
+      selectOriginTraitSug(exact || partial || q);
+    }
+  });
 
   // Exclude Weapon Autocomplete
   const inpExcl = document.getElementById('inpExcludeWeapon');
@@ -2212,7 +2502,7 @@ function setupAutocompleteListeners() {
     }
 
     sugExcl.innerHTML = matches.map(w => `
-      <div class="sug-item" onclick="selectExcludeWeaponSug('${escapeHtml(w.name).replace(/'/g, "\\'")}')">
+      <div class="sug-item" onmousedown="event.preventDefault(); selectExcludeWeaponSug('${escapeHtml(w.name).replace(/'/g, "\\'")}')">
         <div>
           <span class="font-semibold ${w.rarity === 'Exotic' ? 'text-[#ceae33]' : 'text-[#eceae4]'}">${escapeHtml(w.name)}</span>
           <span class="text-[11px] text-[#9aa2b2] ml-2">${w.slot} · ${w.type}</span>
@@ -2223,7 +2513,6 @@ function setupAutocompleteListeners() {
     sugExcl.classList.add('open');
   });
 
-  // Close dropdowns on outside click
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.sugwrap')) {
       document.querySelectorAll('.sugs').forEach(el => el.classList.remove('open'));
@@ -2244,7 +2533,7 @@ function selectExcludeWeaponSug(name) {
 }
 
 // ============================================================================
-// ELIGIBLE WEAPON & ARMOR POOL ENGINE (RESPECTS VAULT + ORIGIN TRAITS)
+// ELIGIBLE WEAPON & ARMOR POOL ENGINE (RESPECTS VAULT + LEGENDARY ORIGIN TRAITS)
 // ============================================================================
 
 function getFilteredWeapons(slot = null, guardian = null) {
@@ -2253,20 +2542,23 @@ function getFilteredWeapons(slot = null, guardian = null) {
   const vaultWeaponSet = gVault
     ? new Set(gVault.weaponNames.map(n => n.toLowerCase()))
     : null;
-  const selectedTraits = appState.selectedOriginTraits.map(t => t.toLowerCase());
-  const traitMode = appState.originFilterMode;
+  const selectedTraits = (appState.selectedOriginTraits || []).map(t => t.trim().toLowerCase()).filter(Boolean);
+  const traitMode = appState.originFilterMode || "require";
+  const originLegendaryOnly = appState.originLegendaryOnly !== false;
 
   return WEAPON_DB.filter(w => {
     if (slot && w.slot !== slot) return false;
     if (excludedSet.has(w.name.toLowerCase())) return false;
     if (vaultWeaponSet && !vaultWeaponSet.has(w.name.toLowerCase())) return false;
     if (appState.typeFilter !== "ALL" && w.type !== appState.typeFilter) return false;
-    if (appState.damageFilter !== "ALL" && w.damage !== appState.damageFilter) return false;
+    const slotElem = appState.slotElements && appState.slotElements[w.slot];
+    if (slotElem && slotElem !== "ALL" && w.damage !== slotElem) return false;
     if (appState.exoticRule === "legendaryOnly" && w.rarity === "Exotic") return false;
 
     if (selectedTraits.length > 0) {
-      const wTrait = (w.originTrait || '').toLowerCase();
-      const matchesTrait = selectedTraits.some(st => wTrait.includes(st));
+      if (originLegendaryOnly && w.rarity !== "Legendary") return false;
+      const wTrait = (w.originTrait || '').trim().toLowerCase();
+      const matchesTrait = selectedTraits.some(st => wTrait === st || wTrait.includes(st));
       if (traitMode === "require" && !matchesTrait) return false;
       if (traitMode === "exclude" && matchesTrait) return false;
     }
@@ -2294,7 +2586,11 @@ function updatePoolReadout() {
   const e = getFilteredWeapons("Energy").length;
   const p = getFilteredWeapons("Power").length;
   const readout = document.getElementById('eligiblePoolReadout');
-  readout.innerHTML = `ELIGIBLE POOL: <span class="text-[#eceae4]">${k}</span> KINETIC | <span class="text-[#eceae4]">${e}</span> ENERGY | <span class="text-[#eceae4]">${p}</span> POWER`;
+  const traitActive = (appState.selectedOriginTraits || []).length > 0;
+  const traitBadge = traitActive
+    ? ` <span class="text-[#c7a86e]">[ORIGIN FILTER ACTIVE]</span>`
+    : '';
+  readout.innerHTML = `ELIGIBLE POOL: <span class="text-[#eceae4]">${k}</span> KINETIC | <span class="text-[#eceae4]">${e}</span> ENERGY | <span class="text-[#eceae4]">${p}</span> POWER${traitBadge}`;
 }
 
 // ============================================================================
@@ -2309,7 +2605,6 @@ function renderGuardianCards() {
     const elStripeClass = `sub-${(activeSub.element || 'solar').toLowerCase()}`;
     const armorOptions = getFilteredExoticArmor(g.classType, g.armorSlotFilter || "ALL", g);
 
-    // Ensure exotic armor list includes currently selected even if vault filtered
     const hasCurrentArmor = armorOptions.some(a => a.name === g.exoticArmor);
 
     return `
@@ -2321,7 +2616,7 @@ function renderGuardianCards() {
               <span class="text-[11px] font-mono-tech px-1.5 py-0.5 bg-[#0d0f13] border border-[#252a36] text-[#c7a86e]">G${idx + 1}</span>
               <input type="text" value="${escapeHtml(g.name)}" onchange="updateGuardianField(${idx}, 'name', this.value)" class="d2-input py-1 px-2 text-xs font-semibold flex-1 min-w-0" placeholder="Guardian Name">
             </div>
-            <button type="button" onclick="randomizeSingleGuardian(${idx})" class="btn-ghost py-1 px-2 text-[11px]" title="Randomize this Guardian's Subclass, Exotic Armor, Aspects &amp; Fragments">
+            <button type="button" onclick="randomizeSingleGuardian(${idx})" class="btn-ghost py-1 px-2 text-[11px]" title="Randomize this Guardian's Subclass, Exotic Armor, Aspects, Fragments &amp; Filtered Weapons">
               Randomize
             </button>
           </div>
@@ -2473,6 +2768,61 @@ function pickUniqueSubset(arr, count) {
   return copy.slice(0, count);
 }
 
+function buildGuardianWeapons(g, usedGlobal, usedPerSlot) {
+  const exoticRule = document.getElementById('selExoticRule').value;
+  const dupRule = document.getElementById('selDuplicateRule').value;
+  const kinPool = getFilteredWeapons("Kinetic", g);
+  const engPool = getFilteredWeapons("Energy", g);
+  const powPool = getFilteredWeapons("Power", g);
+  const gVault = getGuardianVault(g);
+
+  const emptySlots = [];
+  if (kinPool.length === 0) emptySlots.push("Kinetic");
+  if (engPool.length === 0) emptySlots.push("Energy");
+  if (powPool.length === 0) emptySlots.push("Heavy");
+  if (emptySlots.length > 0) {
+    return {
+      error: `No eligible weapons in the ${emptySlots.join(" / ")} slot${emptySlots.length > 1 ? "s" : ""} for ${g.name}${gVault ? ` (Vault: ${gVault.displayName})` : ''}. Adjust your Origin Trait, Legendary-only, or Vault filters.`
+    };
+  }
+
+  let hasExotic = false;
+  const exoticSlotTarget = exoticRule === "guarantee1" ? pickRandom(["Kinetic", "Energy", "Power"]) : null;
+
+  const pickSlotWeapon = (slotName, pool) => {
+    let candidates = pool.filter(w => {
+      if (dupRule === "uniqueGlobal" && usedGlobal.has(w.name)) return false;
+      if (dupRule === "uniquePerSlot" && usedPerSlot[slotName].has(w.name)) return false;
+      if (exoticRule === "enforce1" && hasExotic && w.rarity === "Exotic") return false;
+      if (exoticRule === "guarantee1") {
+        if (slotName === exoticSlotTarget && w.rarity !== "Exotic") return false;
+        if (slotName !== exoticSlotTarget && w.rarity === "Exotic") return false;
+      }
+      return true;
+    });
+
+    if (candidates.length === 0) {
+      candidates = pool.filter(w => !(exoticRule === "enforce1" && hasExotic && w.rarity === "Exotic"));
+    }
+    if (candidates.length === 0) candidates = pool;
+
+    const chosen = pickRandom(candidates);
+    if (chosen) {
+      if (chosen.rarity === "Exotic") hasExotic = true;
+      usedGlobal.add(chosen.name);
+      usedPerSlot[slotName].add(chosen.name);
+    }
+    return chosen;
+  };
+
+  return {
+    kinetic: pickSlotWeapon("Kinetic", kinPool),
+    energy: pickSlotWeapon("Energy", engPool),
+    power: pickSlotWeapon("Power", powPool),
+    vaultSource: gVault ? gVault.displayName : null
+  };
+}
+
 function randomizeSingleGuardian(idx, silent = false) {
   const g = appState.guardians[idx];
   const classes = ["Hunter", "Titan", "Warlock"];
@@ -2480,7 +2830,7 @@ function randomizeSingleGuardian(idx, silent = false) {
   const sub = pickRandom(SUBCLASS_DATA[g.classType]);
   g.subclass = sub.name;
   g.aspects = pickUniqueSubset(sub.aspects, 2);
-  g.fragments = pickUniqueSubset(sub.fragments, sub.element === "Prismatic" ? 5 : 4);
+  g.fragments = pickUniqueSubset(sub.fragments, sub.element === 'Prismatic' ? 5 : 4);
 
   const armorPool = getFilteredExoticArmor(g.classType, g.armorSlotFilter || "ALL", g);
   const fallbackPool = EXOTIC_ARMOR_DB.filter(a => a.classType === g.classType);
@@ -2490,31 +2840,178 @@ function randomizeSingleGuardian(idx, silent = false) {
   if (!silent) {
     saveState();
     renderGuardianCards();
-    showToast(`Randomized ${g.name} (${g.classType} · ${g.subclass})`);
+    if (appState.lastGeneratedChart && Array.isArray(appState.lastGeneratedChart.rows) && appState.lastGeneratedChart.rows[idx]) {
+      const usedGlobal = new Set();
+      const usedPerSlot = { Kinetic: new Set(), Energy: new Set(), Power: new Set() };
+      appState.lastGeneratedChart.rows.forEach((row, rIdx) => {
+        if (rIdx === idx) return;
+        if (row.kinetic?.name) { usedGlobal.add(row.kinetic.name); usedPerSlot.Kinetic.add(row.kinetic.name); }
+        if (row.energy?.name) { usedGlobal.add(row.energy.name); usedPerSlot.Energy.add(row.energy.name); }
+        if (row.power?.name) { usedGlobal.add(row.power.name); usedPerSlot.Power.add(row.power.name); }
+      });
+
+      const weaponsRes = buildGuardianWeapons(g, usedGlobal, usedPerSlot);
+      if (weaponsRes.error) {
+        showToast(weaponsRes.error);
+        return;
+      }
+
+      appState.lastGeneratedChart.rows[idx] = {
+        guardianName: g.name,
+        classType: g.classType,
+        subclass: g.subclass,
+        element: sub.element,
+        exoticArmor: g.exoticArmor,
+        aspects: [...(g.aspects || [])],
+        fragments: [...(g.fragments || [])],
+        vaultSource: weaponsRes.vaultSource,
+        kinetic: weaponsRes.kinetic,
+        energy: weaponsRes.energy,
+        power: weaponsRes.power
+      };
+      appState.lastGeneratedChart.generatedAt = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      appState.lastGeneratedChart.originFilters = [...appState.selectedOriginTraits];
+      appState.lastGeneratedChart.originMode = appState.originFilterMode;
+      appState.lastGeneratedChart.originLegendaryOnly = appState.originLegendaryOnly !== false;
+      saveState();
+      renderGeneratedChart(appState.lastGeneratedChart);
+    } else {
+      generateFireteamChart();
+    }
+    showToast(`Randomized ${g.name} (${g.classType} · ${g.subclass}) with active filters!`);
   }
 }
 
-function randomizeAllLoadouts(alsoRegenerateChart = false) {
+function randomizeAllLoadouts(alsoRegenerateChart = true) {
   for (let i = 0; i < appState.guardians.length; i++) {
     randomizeSingleGuardian(i, true);
   }
   saveState();
   renderGuardianCards();
-  if (alsoRegenerateChart) {
-    generateFireteamChart();
-  } else {
-    showToast("Randomized all 6 Guardian loadouts!");
-  }
+  generateFireteamChart();
 }
 
 // ============================================================================
-// 4. FIRETEAM WEAPON & LOADOUT CHART GENERATION
+// 4. FIRETEAM WEAPON & LOADOUT CHART GENERATION + DIRECT DIM LOADOUT LINKS
 // ============================================================================
+
+const CLASS_HASH_MAP = {
+  Titan: 0,
+  Hunter: 1,
+  Warlock: 2
+};
+
+function resolveItemHash(itemName, expectedCategory = null) {
+  if (!itemName) return null;
+  const raw = String(itemName).trim();
+  const target = raw.toLowerCase();
+  if (!target || target.startsWith("none")) return null;
+
+  // 1. Check live imported Bungie Manifest first
+  if (typeof MANIFEST_HASH_MAP === 'object' && MANIFEST_HASH_MAP !== null) {
+    for (const [hash, def] of Object.entries(MANIFEST_HASH_MAP)) {
+      if (!def || !def.name) continue;
+      if (expectedCategory && def.category !== expectedCategory) continue;
+      if (def.name.trim().toLowerCase() === target) {
+        const num = Number(hash);
+        if (Number.isFinite(num) && num > 0) return num;
+      }
+    }
+    if (expectedCategory) {
+      for (const [hash, def] of Object.entries(MANIFEST_HASH_MAP)) {
+        if (!def || !def.name) continue;
+        if (def.name.trim().toLowerCase() === target) {
+          const num = Number(hash);
+          if (Number.isFinite(num) && num > 0) return num;
+        }
+      }
+    }
+  }
+
+  // 2. Fallback to comprehensive built-in Destiny 2 item hash table
+  if (Object.prototype.hasOwnProperty.call(BUILTIN_ITEM_HASHES, raw)) {
+    return BUILTIN_ITEM_HASHES[raw];
+  }
+  for (const [key, hashVal] of Object.entries(BUILTIN_ITEM_HASHES)) {
+    if (key.toLowerCase() === target) return hashVal;
+  }
+
+  // Strip parenthetical labels (e.g. "Relativism (Exotic Class Item)")
+  const stripped = raw.replace(/\s*\(Exotic Class Item\)\s*/gi, "").trim();
+  if (stripped && stripped !== raw) {
+    if (Object.prototype.hasOwnProperty.call(BUILTIN_ITEM_HASHES, stripped)) {
+      return BUILTIN_ITEM_HASHES[stripped];
+    }
+    const strippedLower = stripped.toLowerCase();
+    for (const [key, hashVal] of Object.entries(BUILTIN_ITEM_HASHES)) {
+      if (key.toLowerCase() === strippedLower) return hashVal;
+    }
+  }
+
+  return null;
+}
+
+function buildGuardianDimLink(row, guardianIndex = 0) {
+  const safeRow = row || {};
+  const classType = safeRow.classType || "Hunter";
+  const numericClass = Object.prototype.hasOwnProperty.call(CLASS_HASH_MAP, classType)
+    ? CLASS_HASH_MAP[classType]
+    : 1;
+
+  const subclassHash = resolveItemHash(safeRow.subclass, "Subclass");
+  const exoticArmorHash = resolveItemHash(safeRow.exoticArmor, "Armor");
+  const kineticHash = resolveItemHash(safeRow.kinetic?.name, "Weapon");
+  const energyHash = resolveItemHash(safeRow.energy?.name, "Weapon");
+  const powerHash = resolveItemHash(safeRow.power?.name, "Weapon");
+
+  const equipped = [];
+  for (const h of [subclassHash, exoticArmorHash, kineticHash, energyHash, powerHash]) {
+    if (typeof h === "number" && Number.isFinite(h) && h > 0) {
+      equipped.push({ hash: h });
+    }
+  }
+
+  const parameters = {
+    clearArmor: false,
+    clearWeapons: false,
+    clearMods: false
+  };
+  if (typeof exoticArmorHash === "number" && Number.isFinite(exoticArmorHash) && exoticArmorHash > 0) {
+    parameters.exoticArmorHash = exoticArmorHash;
+  }
+
+  const loadoutName = `${safeRow.guardianName || `Guardian ${guardianIndex + 1}`} - ${safeRow.subclass || classType}`;
+  const dimLoadout = {
+    id: "shared",
+    name: loadoutName,
+    classType: numericClass,
+    equipped,
+    unequipped: [],
+    parameters
+  };
+
+  return `https://app.destinyitemmanager.com/loadouts?loadout=${encodeURIComponent(JSON.stringify(dimLoadout))}`;
+}
+
+function renderGuardianDimControls(row, rowIndex) {
+  const dimUrl = buildGuardianDimLink(row, rowIndex);
+  return `
+    <div class="mt-2.5 pt-2.5 border-t border-[#252a36]">
+      <a
+        href="${escapeHtml(dimUrl)}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-brass py-1 px-2.5 text-[10px]"
+        title="Open pre-populated loadout in Destiny Item Manager to save directly as a DIM Loadout"
+      >
+        DIM Link ↗
+      </a>
+    </div>
+  `;
+}
 
 function generateFireteamChart() {
   const count = parseInt(document.getElementById('selFireteamSize').value, 10) || 6;
-  const exoticRule = document.getElementById('selExoticRule').value;
-  const dupRule = document.getElementById('selDuplicateRule').value;
 
   const usedGlobal = new Set();
   const usedPerSlot = { Kinetic: new Set(), Energy: new Set(), Power: new Set() };
@@ -2524,50 +3021,11 @@ function generateFireteamChart() {
     const g = appState.guardians[i];
     const subObj = (SUBCLASS_DATA[g.classType] || []).find(s => s.name === g.subclass) || SUBCLASS_DATA[g.classType][0];
 
-    // Per-guardian weapon pools (each guardian can be locked to their own vault)
-    const kinPool = getFilteredWeapons("Kinetic", g);
-    const engPool = getFilteredWeapons("Energy", g);
-    const powPool = getFilteredWeapons("Power", g);
-    const gVault = getGuardianVault(g);
-
-    if (kinPool.length === 0 || engPool.length === 0 || powPool.length === 0) {
-      showToast(`No eligible weapons in one or more slots for ${g.name}${gVault ? ` (Vault: ${gVault.displayName})` : ''}! Relax your Origin Trait, Vault, Archetype, or Element filters, or change that Guardian's vault restriction.`);
+    const weaponsRes = buildGuardianWeapons(g, usedGlobal, usedPerSlot);
+    if (weaponsRes.error) {
+      showToast(weaponsRes.error);
       return;
     }
-
-    let hasExotic = false;
-    const exoticSlotTarget = exoticRule === "guarantee1" ? pickRandom(["Kinetic", "Energy", "Power"]) : null;
-
-    const pickSlotWeapon = (slotName, pool) => {
-      let candidates = pool.filter(w => {
-        if (dupRule === "uniqueGlobal" && usedGlobal.has(w.name)) return false;
-        if (dupRule === "uniquePerSlot" && usedPerSlot[slotName].has(w.name)) return false;
-        if (exoticRule === "enforce1" && hasExotic && w.rarity === "Exotic") return false;
-        if (exoticRule === "guarantee1") {
-          if (slotName === exoticSlotTarget && w.rarity !== "Exotic") return false;
-          if (slotName !== exoticSlotTarget && w.rarity === "Exotic") return false;
-        }
-        return true;
-      });
-
-      // Fallback if strict rule exhausted candidates
-      if (candidates.length === 0) {
-        candidates = pool.filter(w => !(exoticRule === "enforce1" && hasExotic && w.rarity === "Exotic"));
-      }
-      if (candidates.length === 0) candidates = pool;
-
-      const chosen = pickRandom(candidates);
-      if (chosen) {
-        if (chosen.rarity === "Exotic") hasExotic = true;
-        usedGlobal.add(chosen.name);
-        usedPerSlot[slotName].add(chosen.name);
-      }
-      return chosen;
-    };
-
-    const kinetic = pickSlotWeapon("Kinetic", kinPool);
-    const energy = pickSlotWeapon("Energy", engPool);
-    const power = pickSlotWeapon("Power", powPool);
 
     rows.push({
       guardianName: g.name,
@@ -2577,10 +3035,10 @@ function generateFireteamChart() {
       exoticArmor: g.exoticArmor,
       aspects: [...(g.aspects || [])],
       fragments: [...(g.fragments || [])],
-      vaultSource: gVault ? gVault.displayName : null,
-      kinetic,
-      energy,
-      power
+      vaultSource: weaponsRes.vaultSource,
+      kinetic: weaponsRes.kinetic,
+      energy: weaponsRes.energy,
+      power: weaponsRes.power
     });
   }
 
@@ -2589,6 +3047,7 @@ function generateFireteamChart() {
     vaultSource: (appState.restrictToVault && appState.vaults.length) ? `${appState.vaults.length} VAULT(S) ENFORCED` : null,
     originFilters: [...appState.selectedOriginTraits],
     originMode: appState.originFilterMode,
+    originLegendaryOnly: appState.originLegendaryOnly !== false,
     rows
   };
 
@@ -2608,7 +3067,7 @@ function renderWeaponCell(w) {
   return `
     <div class="p-2 bg-[#0d0f13] border ${isExotic ? 'border-[#ceae33]/60' : 'border-[#252a36]'}">
       <div class="font-semibold text-xs ${isExotic ? 'text-[#ceae33]' : 'text-[#eceae4]'}">${escapeHtml(w.name)}</div>
-      <div class="text-[11px] text-[#9aa2b2] mt-0.5">${escapeHtml(w.type)} · ${escapeHtml(w.damage)}</div>
+      <div class="text-[11px] text-[#9aa2b2] mt-0.5">${escapeHtml(w.type)} · ${escapeHtml(w.damage)} · ${escapeHtml(w.rarity)}</div>
       <div class="mt-1">
         <span class="origin-badge">${escapeHtml(w.originTrait || 'Standard')}</span>
       </div>
@@ -2623,11 +3082,11 @@ function renderGeneratedChart(chart) {
   let metaBits = [`GENERATED AT ${chart.generatedAt}`];
   if (chart.vaultSource) metaBits.push(`VAULT: ${chart.vaultSource}`);
   if (chart.originFilters && chart.originFilters.length > 0) {
-    metaBits.push(`ORIGIN TRAITS (${chart.originMode.toUpperCase()}): ${chart.originFilters.join(', ')}`);
+    const tierSuffix = chart.originLegendaryOnly ? ' [LEGENDARIES ONLY]' : '';
+    metaBits.push(`ORIGIN TRAITS (${chart.originMode.toUpperCase()}${tierSuffix}): ${chart.originFilters.join(', ')}`);
   }
   ts.textContent = metaBits.join(' // ');
 
-  // Responsive Matrix Table + Detailed Loadout Cards
   const tableHtml = `
     <div class="overflow-x-auto border border-[#252a36]">
       <table class="w-full text-left border-collapse min-w-[920px]">
@@ -2648,6 +3107,7 @@ function renderGeneratedChart(chart) {
                 <div class="font-bold text-sm text-[#eceae4]">${escapeHtml(r.guardianName)}</div>
                 <div class="text-xs text-[#9aa2b2] mt-0.5">${escapeHtml(r.classType)} · <span class="text-[#eceae4]">${escapeHtml(r.subclass)}</span></div>
                 ${r.vaultSource ? `<div class="text-[10px] font-mono-tech text-[#35e366] mt-1">🔒 ${escapeHtml(r.vaultSource)}</div>` : ''}
+                ${renderGuardianDimControls(r, i)}
               </td>
               <td class="p-3 border-r border-[#252a36] max-w-[270px]">
                 <div class="text-xs font-semibold text-[#ceae33]">${escapeHtml(r.exoticArmor)}</div>
@@ -2669,78 +3129,6 @@ function renderGeneratedChart(chart) {
   `;
 
   container.innerHTML = tableHtml;
-}
-
-// ============================================================================
-// 5. EXPORT & CLIPBOARD UTILITIES
-// ============================================================================
-
-function copyChartSummary() {
-  if (!appState.lastGeneratedChart) {
-    showToast("Generate a Fireteam Chart first.");
-    return;
-  }
-  const lines = ["=== DESTINY 2 FIRETEAM WEAPON & LOADOUT CHART ==="];
-  appState.lastGeneratedChart.rows.forEach((r, idx) => {
-    lines.push(
-      `\n[${idx + 1}] ${r.guardianName} — ${r.classType} (${r.subclass}) | Exotic Armor: ${r.exoticArmor}`,
-      `    Aspects: ${r.aspects.join(', ')} | Fragments: ${r.fragments.join(', ')}`,
-      `    Kinetic: ${r.kinetic?.name} [${r.kinetic?.originTrait}]`,
-      `    Energy:  ${r.energy?.name} [${r.energy?.originTrait}]`,
-      `    Power:   ${r.power?.name} [${r.power?.originTrait}]`
-    );
-  });
-
-  const ta = document.createElement('textarea');
-  ta.value = lines.join('\n');
-  document.body.appendChild(ta);
-  ta.select();
-  document.execCommand('copy');
-  ta.remove();
-  showToast("Fireteam Weapon & Loadout summary copied to clipboard!");
-}
-
-function exportChartCSV() {
-  if (!appState.lastGeneratedChart) {
-    showToast("Generate a Fireteam Chart first.");
-    return;
-  }
-  const headers = [
-    "Guardian", "Class", "Subclass", "Exotic Armor", "Aspects", "Fragments",
-    "Kinetic Weapon", "Kinetic Origin Trait",
-    "Energy Weapon", "Energy Origin Trait",
-    "Power Weapon", "Power Origin Trait"
-  ];
-
-  const csvRows = [headers.join(',')];
-  appState.lastGeneratedChart.rows.forEach(r => {
-    const vals = [
-      r.guardianName,
-      r.classType,
-      r.subclass,
-      r.exoticArmor,
-      (r.aspects || []).join(' / '),
-      (r.fragments || []).join(' / '),
-      r.kinetic?.name || '',
-      r.kinetic?.originTrait || '',
-      r.energy?.name || '',
-      r.energy?.originTrait || '',
-      r.power?.name || '',
-      r.power?.originTrait || ''
-    ].map(v => `"${String(v).replace(/"/g, '""')}"`);
-    csvRows.push(vals.join(','));
-  });
-
-  const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `destiny2-fireteam-chart-${Date.now()}.csv`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
-  showToast("Exported Fireteam Chart CSV!");
 }
 </script>
 </body>
