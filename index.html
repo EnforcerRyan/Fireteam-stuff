@@ -64,7 +64,6 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* Vex Corner-Bracket Panel Aesthetic (Sharp 1px Architectural Corners) */
   .vex-panel {
     position: relative;
     background: linear-gradient(180deg, rgba(18, 21, 28, 0.96) 0%, rgba(13, 15, 19, 0.98) 100%);
@@ -122,7 +121,6 @@
     border-left: 2px solid var(--border-brass);
   }
 
-  /* Inner Vex Card (Guardian Loadout Cards) */
   .vex-subcard {
     position: relative;
     background-color: #12151c;
@@ -151,7 +149,6 @@
     border-right: 1.5px solid var(--border-brass);
   }
 
-  /* Inputs & Selects */
   .d2-input,
   .d2-select {
     background-color: var(--bg-input);
@@ -178,7 +175,6 @@
     padding-right: 1.9rem;
   }
 
-  /* Buttons (Sharp Architectural Edges) */
   .btn-brass {
     background: linear-gradient(180deg, #c7a86e 0%, #9b7e48 100%);
     color: #0a0b0e;
@@ -258,7 +254,6 @@
     color: #ffffff;
   }
 
-  /* Autocomplete Dropdown (sugwrap + sugs) */
   .sugwrap {
     position: relative;
     width: 100%;
@@ -305,7 +300,6 @@
     color: #fff;
   }
 
-  /* Active Weapon Chips (wlist) */
   .wchip {
     display: inline-flex;
     align-items: center;
@@ -329,7 +323,6 @@
     background: linear-gradient(90deg, rgba(82, 47, 101, 0.28) 0%, rgba(22, 26, 35, 0.98) 100%);
   }
 
-  /* Subclass Element Indicator Stripe */
   .sub-solar { border-left: 2px solid var(--solar-orange); }
   .sub-arc { border-left: 2px solid var(--arc-cyan); }
   .sub-void { border-left: 2px solid var(--void-purple); }
@@ -337,7 +330,6 @@
   .sub-strand { border-left: 2px solid var(--strand-green); }
   .sub-prismatic { border-left: 2px solid var(--prismatic-pink); }
 
-  /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -353,7 +345,6 @@
     background: var(--border-brass);
   }
 
-  /* Toast Notification Box */
   #toastBox {
     position: fixed;
     bottom: 20px;
@@ -381,7 +372,6 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Toggle Switch (Sharp Architectural Vex Styling) */
   .vex-toggle {
     position: relative;
     display: inline-flex;
@@ -423,7 +413,6 @@
     background: var(--border-brass);
   }
 
-  /* Collapsible Section Chevron */
   .sec-chevron {
     display: inline-flex;
     align-items: center;
@@ -445,7 +434,6 @@
     user-select: none;
   }
 
-  /* Origin Trait Pill Badge */
   .origin-badge {
     display: inline-flex;
     align-items: center;
@@ -463,7 +451,6 @@
 </head>
 <body class="antialiased selection:bg-[#c7a86e] selection:text-[#0a0b0e]">
 
-  <!-- Main Container -->
   <div class="max-w-[1440px] mx-auto px-3 sm:px-6 py-6 space-y-6">
 
     <!-- Header Banner -->
@@ -539,7 +526,6 @@
 
         <div id="secBody-vault">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-start">
-          <!-- Bungie Name Input -->
           <div class="lg:col-span-4">
             <label for="inpBungieName" class="block h-4 text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">
               Bungie Name (Name#1234)
@@ -547,7 +533,6 @@
             <input type="text" id="inpBungieName" placeholder="e.g. IkoraRey#4821" class="d2-input w-full h-[38px] font-mono-tech" autocomplete="off">
           </div>
 
-          <!-- Bungie API Key Input -->
           <div class="lg:col-span-4">
             <label for="inpBungieApiKey" class="block h-4 text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">
               Bungie API Key
@@ -570,7 +555,6 @@
             </p>
           </div>
 
-          <!-- Vault Action Buttons -->
           <div class="lg:col-span-4">
             <span class="hidden lg:block h-4 text-[11px] font-mono-tech uppercase tracking-wider text-transparent mb-1 select-none" aria-hidden="true">
               Actions
@@ -591,7 +575,6 @@
           </div>
         </div>
 
-        <!-- Optional JSON / DIM Paste Drawer -->
         <div id="vaultImportDrawer" class="hidden mt-3 p-3 bg-[#0d0f13] border border-[#252a36]">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
             <span class="text-xs font-mono-tech text-[#c7a86e]">OFFLINE / DIM FALLBACK: Paste Bungie Profile JSON (components 102/201/205) or DIM Weapon/Armor List</span>
@@ -603,10 +586,8 @@
           </div>
         </div>
 
-        <!-- Vault Diagnostic / Privacy Notice Box -->
         <div id="vaultAlertBox" class="hidden mt-3 p-3 bg-[#161a23] border-l-2 border-[#c7a86e] text-xs text-[#eceae4]"></div>
 
-        <!-- Vault Summary: Loaded Vaults (up to 6) & Interactive Browser -->
         <div id="vaultSummaryPanel" class="hidden mt-4 pt-3 border-t border-[#252a36]">
           <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
             <div class="flex flex-col gap-1.5">
@@ -623,7 +604,6 @@
             </div>
           </div>
 
-          <!-- Vault -> Player Assignment -->
           <div class="mt-3 pt-3 border-t border-[#252a36]">
             <div class="flex items-center justify-between gap-2 mb-2">
               <span class="text-[10px] font-mono-tech uppercase text-[#60687a]" id="vaultAssignCaption">VAULT ASSIGNMENTS (0 VAULTS READY):</span>
@@ -632,7 +612,6 @@
             <div id="vaultAssignList" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2"></div>
           </div>
 
-          <!-- Collapsible Vault Item Browser -->
           <div id="vaultBrowserDrawer" class="hidden mt-3 p-3 bg-[#0d0f13] border border-[#252a36]">
             <div class="flex flex-col sm:flex-row gap-2 mb-3">
               <input type="text" id="inpVaultBrowserSearch" oninput="renderVaultBrowser()" placeholder="Search fetched Vault weapons, armor, or origin traits..." class="d2-input flex-1 text-xs">
@@ -647,7 +626,7 @@
             <div id="vaultBrowserList" class="max-h-56 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 pr-1"></div>
           </div>
         </div>
-        </div><!-- /secBody-vault -->
+        </div>
       </div>
     </section>
 
@@ -668,7 +647,6 @@
         </div>
 
         <div id="secBody-rules">
-        <!-- Primary Rule Controls: Fireteam & Duplicate Rules -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
           <div>
             <label for="selFireteamSize" class="block text-[11px] font-mono-tech uppercase tracking-wider text-[#9aa2b2] mb-1">Fireteam Size</label>
@@ -828,7 +806,7 @@
             </div>
           </div>
         </div>
-        </div><!-- /secBody-rules -->
+        </div>
       </div>
     </section>
 
@@ -845,6 +823,9 @@
             </span>
           </div>
           <div class="flex flex-wrap items-center gap-2">
+            <button onclick="unlockAllWeaponTypes()" class="btn-ghost" title="Unlock all locked slot weapon archetypes across all Guardians">
+              🔓 Unlock All Weapon Types
+            </button>
             <button onclick="randomizeAllWeaponTypes()" class="btn-ghost" title="Randomize and lock a valid weapon archetype per slot for each Guardian (respecting their Vault & filters)">
               <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="11" width="18" height="11" rx="1"/>
@@ -870,12 +851,9 @@
         </div>
 
         <div id="secBody-guardians">
-          <!-- 6 Guardian Cards Grid -->
           <div id="guardianCardsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-4"></div>
 
-          <!-- Origin Trait Search & Weapon Exclusion Split Grid -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-3 border-t border-[#252a36]">
-            <!-- Origin Trait Search & Filter -->
             <div class="bg-[#0d0f13] border border-[#252a36] p-3">
               <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
                 <label for="inpOriginTraitSearch" class="text-xs font-mono-tech uppercase tracking-wider text-[#c7a86e] font-semibold">
@@ -899,7 +877,6 @@
                 <div id="sugOriginTraits" class="sugs"></div>
               </div>
 
-              <!-- Quick-Select Popular Origin Trait Pills -->
               <div id="quickOriginTraitRow" class="mt-2 flex flex-wrap items-center gap-1.5">
                 <span class="text-[10px] font-mono-tech uppercase text-[#60687a]">Quick Add:</span>
                 <button type="button" onclick="addOriginTraitFilter('Veist Stinger')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Veist Stinger</button>
@@ -910,13 +887,11 @@
                 <button type="button" onclick="addOriginTraitFilter('Bray Inheritance')" class="text-[11px] font-mono-tech px-2 py-0.5 bg-[#161a23] border border-[#252a36] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition">+ Bray Inheritance</button>
               </div>
 
-              <!-- Active Origin Trait Chips -->
               <div id="activeOriginTraitList" class="mt-2.5 flex flex-wrap gap-1.5 min-h-[28px] items-center">
                 <span class="text-xs text-[#60687a] italic">No Origin Trait filter active (all traits included).</span>
               </div>
             </div>
 
-            <!-- Specific Weapon Exclusions Search -->
             <div class="bg-[#0d0f13] border border-[#252a36] p-3">
               <div class="flex items-center justify-between gap-2 mb-2">
                 <label for="inpExcludeWeapon" class="text-xs font-mono-tech uppercase tracking-wider text-[#c7a86e] font-semibold">
@@ -939,13 +914,12 @@
                 </select>
               </div>
 
-              <!-- Active Excluded Weapons Chips -->
               <div id="excludedWeaponList" class="mt-2.5 flex flex-wrap gap-1.5 min-h-[28px] items-center">
                 <span class="text-xs text-[#60687a] italic">No specific weapons excluded.</span>
               </div>
             </div>
           </div>
-        </div><!-- /secBody-guardians -->
+        </div>
       </div>
     </section>
 
@@ -991,20 +965,18 @@
         </div>
 
         <div id="secBody-chart">
-        <!-- Matrix Cards / Table Output -->
         <div id="chartMatrixContainer" class="space-y-6">
           <div class="p-8 text-center border border-dashed border-[#252a36] bg-[#0d0f13]">
             <p class="font-destiny text-sm text-[#c7a86e] mb-1">Awaiting Tactical Generation</p>
             <p class="text-xs text-[#9aa2b2]">Configure your fireteam above and click <strong class="text-[#eceae4]">Generate Fireteam Weapon &amp; Loadout Chart</strong>.</p>
           </div>
         </div>
-        </div><!-- /secBody-chart -->
+        </div>
       </div>
     </section>
 
   </div>
 
-  <!-- Toast Container -->
   <div id="toastBox"></div>
 
 <script>
@@ -1042,9 +1014,8 @@ async function bungieApiFetch(path, options = {}) {
   return fetch(new URL(path, BUNGIE_API_ORIGIN), { ...options, headers });
 }
 
-// Comprehensive Built-In Weapon Database with Origin Traits
 const BUILTIN_WEAPONS = [
-  // KINETIC SLOT (Kinetic, Stasis, Strand)
+  // KINETIC SLOT
   { name: "The Call", slot: "Kinetic", type: "Sidearm", damage: "Strand", rarity: "Legendary", originTrait: "Dealer's Choice" },
   { name: "Mountaintop", slot: "Kinetic", type: "Grenade Launcher", damage: "Kinetic", rarity: "Legendary", originTrait: "Indomitability" },
   { name: "Succession", slot: "Kinetic", type: "Sniper Rifle", damage: "Kinetic", rarity: "Legendary", originTrait: "Bray Inheritance" },
@@ -1080,7 +1051,7 @@ const BUILTIN_WEAPONS = [
   { name: "New Pacific Epitaph", slot: "Kinetic", type: "Grenade Launcher", damage: "Stasis", rarity: "Legendary", originTrait: "Restoration Ritual" },
   { name: "Appetence", slot: "Kinetic", type: "Trace Rifle", damage: "Stasis", rarity: "Legendary", originTrait: "Dragon's Vengeance" },
 
-  // ENERGY SLOT (Solar, Arc, Void)
+  // ENERGY SLOT
   { name: "Zaouli's Bane", slot: "Energy", type: "Hand Cannon", damage: "Solar", rarity: "Legendary", originTrait: "Runneth Over" },
   { name: "Sunshot", slot: "Energy", type: "Hand Cannon", damage: "Solar", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
   { name: "Forbearance", slot: "Energy", type: "Grenade Launcher", damage: "Arc", rarity: "Legendary", originTrait: "Souldrinker" },
@@ -1120,7 +1091,7 @@ const BUILTIN_WEAPONS = [
   { name: "Trustee", slot: "Energy", type: "Scout Rifle", damage: "Solar", rarity: "Legendary", originTrait: "Bray Inheritance" },
   { name: "Posterity", slot: "Energy", type: "Hand Cannon", damage: "Arc", rarity: "Legendary", originTrait: "Bray Inheritance" },
 
-  // POWER SLOT (Solar, Arc, Void, Stasis, Strand)
+  // POWER SLOT
   { name: "Apex Predator", slot: "Power", type: "Rocket Launcher", damage: "Solar", rarity: "Legendary", originTrait: "Explosive Pact" },
   { name: "Edge Transit", slot: "Power", type: "Grenade Launcher", damage: "Void", rarity: "Legendary", originTrait: "Indomitability" },
   { name: "Gjallarhorn", slot: "Power", type: "Rocket Launcher", damage: "Solar", rarity: "Exotic", originTrait: "Exotic Intrinsic" },
@@ -1159,9 +1130,7 @@ const BUILTIN_WEAPONS = [
   { name: "The Other Half", slot: "Power", type: "Sword", damage: "Void", rarity: "Legendary", originTrait: "Hot Swap" }
 ];
 
-// Built-in Exotic Armor Database
 const BUILTIN_EXOTIC_ARMOR = [
-  // Hunter
   { name: "Celestial Nighthawk", classType: "Hunter", slot: "Helmet" },
   { name: "Star-Eater Scales", classType: "Hunter", slot: "Legs" },
   { name: "Orpheus Rig", classType: "Hunter", slot: "Legs" },
@@ -1177,7 +1146,6 @@ const BUILTIN_EXOTIC_ARMOR = [
   { name: "Relativism (Exotic Class Item)", classType: "Hunter", slot: "Class Item" },
   { name: "Mask of Fealty", classType: "Hunter", slot: "Helmet" },
   { name: "Gifted Conviction", classType: "Hunter", slot: "Chest" },
-  // Titan
   { name: "Cuirass of the Falling Star", classType: "Titan", slot: "Chest" },
   { name: "Synthoceps", classType: "Titan", slot: "Arms" },
   { name: "Pyrogale Gauntlets", classType: "Titan", slot: "Arms" },
@@ -1192,7 +1160,6 @@ const BUILTIN_EXOTIC_ARMOR = [
   { name: "Hazardous Propulsion", classType: "Titan", slot: "Chest" },
   { name: "Wishful Ignorance", classType: "Titan", slot: "Arms" },
   { name: "Stoicism (Exotic Class Item)", classType: "Titan", slot: "Class Item" },
-  // Warlock
   { name: "Speaker's Sight", classType: "Warlock", slot: "Helmet" },
   { name: "Starfire Protocol", classType: "Warlock", slot: "Chest" },
   { name: "Phoenix Protocol", classType: "Warlock", slot: "Chest" },
@@ -1211,9 +1178,7 @@ const BUILTIN_EXOTIC_ARMOR = [
   { name: "Solipsism (Exotic Class Item)", classType: "Warlock", slot: "Class Item" }
 ];
 
-// Built-in DestinyInventoryItemDefinition Hashes for Direct DIM Loadout URLs (?loadout=...)
 const BUILTIN_ITEM_HASHES = {
-  // Subclasses (18)
   "Gunslinger (Solar)": 2240888816,
   "Arcstrider (Arc)": 2328211300,
   "Nightstalker (Void)": 2453351420,
@@ -1232,8 +1197,6 @@ const BUILTIN_ITEM_HASHES = {
   "Shadebinder (Stasis)": 3291545503,
   "Broodweaver (Strand)": 4204413574,
   "Prismatic Warlock": 3893112950,
-
-  // Kinetic Slot Weapons
   "The Call": 1245655644,
   "Mountaintop": 3691881271,
   "Succession": 2990047042,
@@ -1268,8 +1231,6 @@ const BUILTIN_ITEM_HASHES = {
   "Lingering Dread": 3393130645,
   "New Pacific Epitaph": 2663075077,
   "Appetence": 2747177064,
-
-  // Energy Slot Weapons
   "Zaouli's Bane": 431721920,
   "Sunshot": 2907129557,
   "Forbearance": 613334176,
@@ -1308,8 +1269,6 @@ const BUILTIN_ITEM_HASHES = {
   "Chroma Rush": 1119734784,
   "Trustee": 1392919471,
   "Posterity": 3281285075,
-
-  // Power Slot Weapons
   "Apex Predator": 1851777734,
   "Edge Transit": 218335759,
   "Gjallarhorn": 1363886209,
@@ -1346,8 +1305,6 @@ const BUILTIN_ITEM_HASHES = {
   "Bequest": 3387602456,
   "Summum Bonum": 2409611889,
   "The Other Half": 2466919363,
-
-  // Exotic Armor — Hunter
   "Celestial Nighthawk": 1321354572,
   "Star-Eater Scales": 1001356380,
   "Orpheus Rig": 193869523,
@@ -1364,8 +1321,6 @@ const BUILTIN_ITEM_HASHES = {
   "Relativism": 2809120022,
   "Mask of Fealty": 1383148758,
   "Gifted Conviction": 3437107268,
-
-  // Exotic Armor — Titan
   "Cuirass of the Falling Star": 2321120637,
   "Synthoceps": 241462142,
   "Pyrogale Gauntlets": 2354840072,
@@ -1382,8 +1337,6 @@ const BUILTIN_ITEM_HASHES = {
   "Wishful Ignorance": 1906093346,
   "Stoicism (Exotic Class Item)": 266021826,
   "Stoicism": 266021826,
-
-  // Exotic Armor — Warlock
   "Speaker's Sight": 2124234385,
   "Starfire Protocol": 2082483156,
   "Phoenix Protocol": 4057299719,
@@ -1403,9 +1356,7 @@ const BUILTIN_ITEM_HASHES = {
   "Solipsism": 2273643087
 };
 
-// Built-in DestinyInventoryItemDefinition Plug Hashes for Subclass Aspects & Fragments (DIM Loadout socketOverrides)
 const BUILTIN_PLUG_HASHES = {
-  // ---- HUNTER ASPECTS ----
   "Knock 'Em Down": 1594736647,
   "On Your Mark": 3066103999,
   "Gunpowder Gamble": 1594736644,
@@ -1425,8 +1376,6 @@ const BUILTIN_PLUG_HASHES = {
   "Ensnaring Slam": 1861923633,
   "Threaded Specter": 1861923634,
   "Whirling Maelstrom": 1861923635,
-
-  // ---- TITAN ASPECTS ----
   "Sol Invictus": 2984351204,
   "Roaring Flames": 2984351205,
   "Consecration": 2984351206,
@@ -1446,8 +1395,6 @@ const BUILTIN_PLUG_HASHES = {
   "Into the Fray": 988980153,
   "Drengr's Lash": 988980154,
   "Flechette Storm": 988980155,
-
-  // ---- WARLOCK ASPECTS ----
   "Touch of Flame": 83039193,
   "Icarus Dash": 83039194,
   "Heat Rises": 83039195,
@@ -1467,8 +1414,6 @@ const BUILTIN_PLUG_HASHES = {
   "Weaver's Call": 262821317,
   "The Wanderer": 262821318,
   "Weavewalk": 262821319,
-
-  // ---- SOLAR FRAGMENTS (EMBERS) ----
   "Ember of Torches": 362132296,
   "Ember of Empyrean": 362132297,
   "Ember of Solace": 362132298,
@@ -1478,8 +1423,6 @@ const BUILTIN_PLUG_HASHES = {
   "Ember of Mercy": 1051276348,
   "Ember of Benevolence": 362132294,
   "Ember of Searing": 362132295,
-
-  // ---- ARC FRAGMENTS (SPARKS) ----
   "Spark of Resistance": 3277705904,
   "Spark of Shock": 3277705905,
   "Spark of Ions": 3277705906,
@@ -1490,8 +1433,6 @@ const BUILTIN_PLUG_HASHES = {
   "Spark of Magnitude": 3277705911,
   "Spark of Recharge": 1727069360,
   "Spark of Discharge": 1727069361,
-
-  // ---- VOID FRAGMENTS (ECHOES) ----
   "Echo of Persistence": 2272984656,
   "Echo of Undermining": 2272984657,
   "Echo of Starvation": 2272984658,
@@ -1504,8 +1445,6 @@ const BUILTIN_PLUG_HASHES = {
   "Echo of Expulsion": 2272984665,
   "Echo of Remnants": 2272984666,
   "Echo of Harvest": 2272984667,
-
-  // ---- STASIS FRAGMENTS (WHISPERS) ----
   "Whisper of Durance": 3469412968,
   "Whisper of Hedrons": 3469412969,
   "Whisper of Shards": 3469412970,
@@ -1516,8 +1455,6 @@ const BUILTIN_PLUG_HASHES = {
   "Whisper of Chains": 3469412975,
   "Whisper of Hunger": 2483898428,
   "Whisper of Refraction": 2483898429,
-
-  // ---- STRAND FRAGMENTS (THREADS) ----
   "Thread of Generation": 3192552688,
   "Thread of Warding": 3192552689,
   "Thread of Ascent": 3192552690,
@@ -1527,8 +1464,6 @@ const BUILTIN_PLUG_HASHES = {
   "Thread of Fury": 3192552694,
   "Thread of Evolution": 3192552695,
   "Thread of Rebirth": 4208512210,
-
-  // ---- PRISMATIC FRAGMENTS (FACETS) ----
   "Facet of Protection": 2733771744,
   "Facet of Purpose": 2733771745,
   "Facet of Dawn": 2733771746,
@@ -1543,144 +1478,49 @@ const BUILTIN_PLUG_HASHES = {
   "Facet of Devotion": 3897111011
 };
 
-// Subclasses, Aspects, and Fragments Matrix
 const SUBCLASS_DATA = {
   Hunter: [
-    {
-      name: "Gunslinger (Solar)",
-      element: "Solar",
-      aspects: ["Knock 'Em Down", "On Your Mark", "Gunpowder Gamble"],
-      fragments: ["Ember of Torches", "Ember of Empyrean", "Ember of Solace", "Ember of Ashes", "Ember of Singeing", "Ember of Char", "Ember of Mercy", "Ember of Benevolence"]
-    },
-    {
-      name: "Arcstrider (Arc)",
-      element: "Arc",
-      aspects: ["Flow State", "Lethal Current", "Tempest Strike", "Ascension"],
-      fragments: ["Spark of Resistance", "Spark of Shock", "Spark of Ions", "Spark of Feedback", "Spark of Amplitude", "Spark of Haste", "Spark of Beacons"]
-    },
-    {
-      name: "Nightstalker (Void)",
-      element: "Void",
-      aspects: ["Vanishing Step", "Stylish Executioner", "Trapper's Ambush", "On the Prowl"],
-      fragments: ["Echo of Persistence", "Echo of Undermining", "Echo of Starvation", "Echo of Obscurity", "Echo of Reprisal", "Echo of Cessation", "Echo of Instability"]
-    },
-    {
-      name: "Revenant (Stasis)",
-      element: "Stasis",
-      aspects: ["Grim Harvest", "Touch of Winter", "Shatterdive", "Winter's Shroud"],
-      fragments: ["Whisper of Durance", "Whisper of Hedrons", "Whisper of Shards", "Whisper of Rime", "Whisper of Torment", "Whisper of Fissures", "Whisper of Conduction"]
-    },
-    {
-      name: "Threadrunner (Strand)",
-      element: "Strand",
-      aspects: ["Widow's Silk", "Ensnaring Slam", "Threaded Specter", "Whirling Maelstrom"],
-      fragments: ["Thread of Generation", "Thread of Warding", "Thread of Ascent", "Thread of Continuity", "Thread of Mind", "Thread of Transmutation", "Thread of Fury"]
-    },
-    {
-      name: "Prismatic Hunter",
-      element: "Prismatic",
-      aspects: ["Stylish Executioner", "Winter's Shroud", "Gunpowder Gamble", "Threaded Specter", "Ascension"],
-      fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Dawn", "Facet of Courage", "Facet of Balance", "Facet of Ruin", "Facet of Hope", "Facet of Dominance"]
-    }
+    { name: "Gunslinger (Solar)", element: "Solar", aspects: ["Knock 'Em Down", "On Your Mark", "Gunpowder Gamble"], fragments: ["Ember of Torches", "Ember of Empyrean", "Ember of Solace", "Ember of Ashes", "Ember of Singeing", "Ember of Char", "Ember of Mercy", "Ember of Benevolence"] },
+    { name: "Arcstrider (Arc)", element: "Arc", aspects: ["Flow State", "Lethal Current", "Tempest Strike", "Ascension"], fragments: ["Spark of Resistance", "Spark of Shock", "Spark of Ions", "Spark of Feedback", "Spark of Amplitude", "Spark of Haste", "Spark of Beacons"] },
+    { name: "Nightstalker (Void)", element: "Void", aspects: ["Vanishing Step", "Stylish Executioner", "Trapper's Ambush", "On the Prowl"], fragments: ["Echo of Persistence", "Echo of Undermining", "Echo of Starvation", "Echo of Obscurity", "Echo of Reprisal", "Echo of Cessation", "Echo of Instability"] },
+    { name: "Revenant (Stasis)", element: "Stasis", aspects: ["Grim Harvest", "Touch of Winter", "Shatterdive", "Winter's Shroud"], fragments: ["Whisper of Durance", "Whisper of Hedrons", "Whisper of Shards", "Whisper of Rime", "Whisper of Torment", "Whisper of Fissures", "Whisper of Conduction"] },
+    { name: "Threadrunner (Strand)", element: "Strand", aspects: ["Widow's Silk", "Ensnaring Slam", "Threaded Specter", "Whirling Maelstrom"], fragments: ["Thread of Generation", "Thread of Warding", "Thread of Ascent", "Thread of Continuity", "Thread of Mind", "Thread of Transmutation", "Thread of Fury"] },
+    { name: "Prismatic Hunter", element: "Prismatic", aspects: ["Stylish Executioner", "Winter's Shroud", "Gunpowder Gamble", "Threaded Specter", "Ascension"], fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Dawn", "Facet of Courage", "Facet of Balance", "Facet of Ruin", "Facet of Hope", "Facet of Dominance"] }
   ],
   Titan: [
-    {
-      name: "Sunbreaker (Solar)",
-      element: "Solar",
-      aspects: ["Sol Invictus", "Roaring Flames", "Consecration"],
-      fragments: ["Ember of Torches", "Ember of Empyrean", "Ember of Solace", "Ember of Ashes", "Ember of Searing", "Ember of Singeing", "Ember of Mercy"]
-    },
-    {
-      name: "Striker (Arc)",
-      element: "Arc",
-      aspects: ["Touch of Thunder", "Knockout", "Juggernaut", "Storm's Keep"],
-      fragments: ["Spark of Resistance", "Spark of Shock", "Spark of Magnitude", "Spark of Ions", "Spark of Feedback", "Spark of Recharge", "Spark of Haste"]
-    },
-    {
-      name: "Sentinel (Void)",
-      element: "Void",
-      aspects: ["Controlled Demolition", "Bastion", "Offensive Bulwark", "Unbreakable"],
-      fragments: ["Echo of Undermining", "Echo of Persistence", "Echo of Starvation", "Echo of Leeching", "Echo of Instability", "Echo of Vigilance", "Echo of Expulsion"]
-    },
-    {
-      name: "Behemoth (Stasis)",
-      element: "Stasis",
-      aspects: ["Tectonic Harvest", "Diamond Lance", "Howl of the Storm", "Cryoclasm"],
-      fragments: ["Whisper of Shards", "Whisper of Rime", "Whisper of Fissures", "Whisper of Conduction", "Whisper of Chains", "Whisper of Torment", "Whisper of Hunger"]
-    },
-    {
-      name: "Berserker (Strand)",
-      element: "Strand",
-      aspects: ["Banner of War", "Into the Fray", "Drengr's Lash", "Flechette Storm"],
-      fragments: ["Thread of Warding", "Thread of Generation", "Thread of Fury", "Thread of Transmutation", "Thread of Continuity", "Thread of Mind", "Thread of Ascent"]
-    },
-    {
-      name: "Prismatic Titan",
-      element: "Prismatic",
-      aspects: ["Consecration", "Knockout", "Diamond Lance", "Drengr's Lash", "Unbreakable"],
-      fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Balance", "Facet of Dawn", "Facet of Ruin", "Facet of Courage", "Facet of Sacrifice", "Facet of Blessing"]
-    }
+    { name: "Sunbreaker (Solar)", element: "Solar", aspects: ["Sol Invictus", "Roaring Flames", "Consecration"], fragments: ["Ember of Torches", "Ember of Empyrean", "Ember of Solace", "Ember of Ashes", "Ember of Searing", "Ember of Singeing", "Ember of Mercy"] },
+    { name: "Striker (Arc)", element: "Arc", aspects: ["Touch of Thunder", "Knockout", "Juggernaut", "Storm's Keep"], fragments: ["Spark of Resistance", "Spark of Shock", "Spark of Magnitude", "Spark of Ions", "Spark of Feedback", "Spark of Recharge", "Spark of Haste"] },
+    { name: "Sentinel (Void)", element: "Void", aspects: ["Controlled Demolition", "Bastion", "Offensive Bulwark", "Unbreakable"], fragments: ["Echo of Undermining", "Echo of Persistence", "Echo of Starvation", "Echo of Leeching", "Echo of Instability", "Echo of Vigilance", "Echo of Expulsion"] },
+    { name: "Behemoth (Stasis)", element: "Stasis", aspects: ["Tectonic Harvest", "Diamond Lance", "Howl of the Storm", "Cryoclasm"], fragments: ["Whisper of Shards", "Whisper of Rime", "Whisper of Fissures", "Whisper of Conduction", "Whisper of Chains", "Whisper of Torment", "Whisper of Hunger"] },
+    { name: "Berserker (Strand)", element: "Strand", aspects: ["Banner of War", "Into the Fray", "Drengr's Lash", "Flechette Storm"], fragments: ["Thread of Warding", "Thread of Generation", "Thread of Fury", "Thread of Transmutation", "Thread of Continuity", "Thread of Mind", "Thread of Ascent"] },
+    { name: "Prismatic Titan", element: "Prismatic", aspects: ["Consecration", "Knockout", "Diamond Lance", "Drengr's Lash", "Unbreakable"], fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Balance", "Facet of Dawn", "Facet of Ruin", "Facet of Courage", "Facet of Sacrifice", "Facet of Blessing"] }
   ],
   Warlock: [
-    {
-      name: "Dawnblade (Solar)",
-      element: "Solar",
-      aspects: ["Touch of Flame", "Icarus Dash", "Heat Rises", "Hellion"],
-      fragments: ["Ember of Empyrean", "Ember of Torches", "Ember of Benevolence", "Ember of Ashes", "Ember of Solace", "Ember of Singeing", "Ember of Mercy"]
-    },
-    {
-      name: "Stormcaller (Arc)",
-      element: "Arc",
-      aspects: ["Arc Soul", "Electrostatic Mind", "Lightning Surge", "Ionic Sentry"],
-      fragments: ["Spark of Ions", "Spark of Shock", "Spark of Resistance", "Spark of Beacons", "Spark of Amplitude", "Spark of Discharge", "Spark of Haste"]
-    },
-    {
-      name: "Voidwalker (Void)",
-      element: "Void",
-      aspects: ["Feed the Void", "Child of the Old Gods", "Chaos Accelerant"],
-      fragments: ["Echo of Undermining", "Echo of Persistence", "Echo of Instability", "Echo of Expulsion", "Echo of Remnants", "Echo of Harvest", "Echo of Obscurity"]
-    },
-    {
-      name: "Shadebinder (Stasis)",
-      element: "Stasis",
-      aspects: ["Bleak Watcher", "Iceflare Bolts", "Glacial Harvest", "Frostpulse"],
-      fragments: ["Whisper of Durance", "Whisper of Torment", "Whisper of Chains", "Whisper of Shards", "Whisper of Refraction", "Whisper of Fissures", "Whisper of Conduction"]
-    },
-    {
-      name: "Broodweaver (Strand)",
-      element: "Strand",
-      aspects: ["Mindspun Invocation", "Weaver's Call", "The Wanderer", "Weavewalk"],
-      fragments: ["Thread of Generation", "Thread of Evolution", "Thread of Warding", "Thread of Continuity", "Thread of Rebirth", "Thread of Ascent", "Thread of Mind"]
-    },
-    {
-      name: "Prismatic Warlock",
-      element: "Prismatic",
-      aspects: ["Feed the Void", "Bleak Watcher", "Hellion", "Lightning Surge", "Weaver's Call"],
-      fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Dominance", "Facet of Balance", "Facet of Awakening", "Facet of Courage", "Facet of Dawn", "Facet of Devotion"]
-    }
+    { name: "Dawnblade (Solar)", element: "Solar", aspects: ["Touch of Flame", "Icarus Dash", "Heat Rises", "Hellion"], fragments: ["Ember of Empyrean", "Ember of Torches", "Ember of Benevolence", "Ember of Ashes", "Ember of Solace", "Ember of Singeing", "Ember of Mercy"] },
+    { name: "Stormcaller (Arc)", element: "Arc", aspects: ["Arc Soul", "Electrostatic Mind", "Lightning Surge", "Ionic Sentry"], fragments: ["Spark of Ions", "Spark of Shock", "Spark of Resistance", "Spark of Beacons", "Spark of Amplitude", "Spark of Discharge", "Spark of Haste"] },
+    { name: "Voidwalker (Void)", element: "Void", aspects: ["Feed the Void", "Child of the Old Gods", "Chaos Accelerant"], fragments: ["Echo of Undermining", "Echo of Persistence", "Echo of Instability", "Echo of Expulsion", "Echo of Remnants", "Echo of Harvest", "Echo of Obscurity"] },
+    { name: "Shadebinder (Stasis)", element: "Stasis", aspects: ["Bleak Watcher", "Iceflare Bolts", "Glacial Harvest", "Frostpulse"], fragments: ["Whisper of Durance", "Whisper of Torment", "Whisper of Chains", "Whisper of Shards", "Whisper of Refraction", "Whisper of Fissures", "Whisper of Conduction"] },
+    { name: "Broodweaver (Strand)", element: "Strand", aspects: ["Mindspun Invocation", "Weaver's Call", "The Wanderer", "Weavewalk"], fragments: ["Thread of Generation", "Thread of Evolution", "Thread of Warding", "Thread of Continuity", "Thread of Rebirth", "Thread of Ascent", "Thread of Mind"] },
+    { name: "Prismatic Warlock", element: "Prismatic", aspects: ["Feed the Void", "Bleak Watcher", "Hellion", "Lightning Surge", "Weaver's Call"], fragments: ["Facet of Protection", "Facet of Purpose", "Facet of Dominance", "Facet of Balance", "Facet of Awakening", "Facet of Courage", "Facet of Dawn", "Facet of Devotion"] }
   ]
 };
 
-// Runtime Databases
 let WEAPON_DB = [...BUILTIN_WEAPONS];
 let EXOTIC_ARMOR_DB = [...BUILTIN_EXOTIC_ARMOR];
 let MANIFEST_HASH_MAP = {};
 
-// Valid damage types per weapon slot
 const VALID_SLOT_DAMAGE = {
   Kinetic: new Set(["Kinetic", "Stasis", "Strand"]),
   Energy: new Set(["Solar", "Arc", "Void"]),
   Power: new Set(["Kinetic", "Solar", "Arc", "Void", "Stasis", "Strand"])
 };
 
-// Elements selectable in each slot's element filter ("ALL" = any)
 const SLOT_ELEMENT_OPTIONS = {
   Kinetic: ["ALL", "Kinetic", "Stasis", "Strand"],
   Energy: ["ALL", "Arc", "Solar", "Void"],
   Power: ["ALL", "Kinetic", "Stasis", "Strand", "Solar", "Arc", "Void"]
 };
 
-// Weapon archetypes/types valid per weapon slot (canonical values matching <select> options)
 const SLOT_WEAPON_TYPES = {
   Kinetic: [
     "Auto Rifle", "Hand Cannon", "Pulse Rifle", "Scout Rifle",
@@ -1755,15 +1595,10 @@ function sanitizeWeaponDb() {
       const validSet = VALID_SLOT_DAMAGE[w.slot];
       if (!validSet) return false;
       const isExotic = w.rarity === "Exotic";
-      const valid = validSet.has(w.damage) || (isExotic && w.damage === "Kinetic");
-      if (!valid) {
-        console.warn("Excluded weapon with impossible slot/damage combination:", w.name, "|", w.slot, "slot /", w.damage, "damage");
-      }
-      return valid;
+      return validSet.has(w.damage) || (isExotic && w.damage === "Kinetic");
     });
 }
 
-// Application State
 let appState = {
   fireteamSize: 6,
   exoticRule: "enforce1",
@@ -1790,10 +1625,6 @@ let appState = {
   ],
   lastGeneratedChart: null
 };
-
-// ============================================================================
-// INITIALIZATION & PERSISTENCE
-// ============================================================================
 
 window.onload = function () {
   loadState();
@@ -2475,10 +2306,6 @@ async function fetchBungieVault() {
   }
 }
 
-// ============================================================================
-// MULTI-VAULT STORE (UP TO 6 VAULTS, ONE ASSIGNABLE PER GUARDIAN)
-// ============================================================================
-
 function addVault(displayName, weaponNames, armorNames) {
   if (appState.vaults.length >= 6) {
     showToast("Vault limit reached (6 vaults). Remove one with the X button before adding another.");
@@ -2608,10 +2435,6 @@ function showVaultAlert(html, level = "info") {
   box.style.borderLeftColor = level === "error" ? "#d9534f" : "#c7a86e";
   box.innerHTML = html;
 }
-
-// ============================================================================
-// VAULT ASSIGNMENT PANEL (RENAME GUARDIANS 1-6 & ASSIGN EACH VAULT TO A PLAYER)
-// ============================================================================
 
 function renameGuardianFromVaultSection(idx, newName, syncCard = false) {
   const g = appState.guardians[idx];
@@ -2961,7 +2784,7 @@ function selectExcludeWeaponSug(name) {
 }
 
 // ============================================================================
-// ELIGIBLE WEAPON & ARMOR POOL ENGINE
+// ELIGIBLE WEAPON & ARMOR POOL ENGINE (NO SILENT LOCK DROPPING)
 // ============================================================================
 
 function getFilteredWeapons(slot = null, guardian = null, overrideSlotType = null) {
@@ -2974,7 +2797,7 @@ function getFilteredWeapons(slot = null, guardian = null, overrideSlotType = nul
   const traitMode = appState.originFilterMode || "require";
   const originLegendaryOnly = appState.originLegendaryOnly !== false;
 
-  const baseFilter = (w, enforcePersonalLock) => {
+  return WEAPON_DB.filter(w => {
     if (slot && w.slot !== slot) return false;
     if (excludedSet.has(w.name.toLowerCase())) return false;
     if (vaultWeaponSet && !vaultWeaponSet.has(w.name.toLowerCase())) return false;
@@ -2988,7 +2811,7 @@ function getFilteredWeapons(slot = null, guardian = null, overrideSlotType = nul
       }
     }
 
-    if (enforcePersonalLock && overrideSlotType !== "IGNORE" && overrideSlotType !== "IGNORE_ALL") {
+    if (overrideSlotType !== "IGNORE" && overrideSlotType !== "IGNORE_ALL") {
       const guardianSlotType = overrideSlotType || (guardian && guardian.slotTypes && guardian.slotTypes[w.slot]);
       if (guardianSlotType && guardianSlotType !== "ANY" && guardianSlotType !== "ALL" && guardianSlotType !== "RANDOM" && normalizedWType !== guardianSlotType) {
         return false;
@@ -3009,18 +2832,7 @@ function getFilteredWeapons(slot = null, guardian = null, overrideSlotType = nul
     }
 
     return true;
-  };
-
-  const strictMatches = WEAPON_DB.filter(w => baseFilter(w, true));
-  if (strictMatches.length > 0) return strictMatches;
-
-  const guardianHasLock = guardian && guardian.slotTypes && slot &&
-    guardian.slotTypes[slot] && !["ANY", "ALL", "RANDOM"].includes(guardian.slotTypes[slot]);
-  if (guardianHasLock && overrideSlotType !== "IGNORE" && overrideSlotType !== "IGNORE_ALL") {
-    return WEAPON_DB.filter(w => baseFilter(w, false));
-  }
-
-  return strictMatches;
+  });
 }
 
 function randomizeGlobalSlotElements() {
@@ -3165,7 +2977,7 @@ function updatePoolReadout() {
 }
 
 // ============================================================================
-// 3. GUARDIAN LOADOUT CARDS
+// 3. GUARDIAN LOADOUT CARDS + EXPLICIT UNLOCK CONTROLS
 // ============================================================================
 
 function renderGuardianCards() {
@@ -3184,11 +2996,11 @@ function renderGuardianCards() {
       Power: sanitizeSlotTypeForSlot("Power", rawSlotTypes.Power, "ANY")
     };
     g.slotTypes = gSlotTypes;
+    const anyLocked = ["Kinetic", "Energy", "Power"].some(s => gSlotTypes[s] !== "ANY" && gSlotTypes[s] !== "RANDOM");
 
     return `
       <div class="vex-subcard ${elStripeClass} p-3.5 flex flex-col justify-between gap-3">
         <div>
-          <!-- Card Header: Guardian Name + Randomize -->
           <div class="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-[#252a36]">
             <div class="flex items-center gap-2 flex-1 min-w-0">
               <span class="text-[11px] font-mono-tech px-1.5 py-0.5 bg-[#0d0f13] border border-[#252a36] text-[#c7a86e]">G${idx + 1}</span>
@@ -3199,7 +3011,6 @@ function renderGuardianCards() {
             </button>
           </div>
 
-          <!-- Per-Guardian Vault Restriction Selector -->
           <div class="mb-2.5">
             <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Vault Restriction <span class="text-[#60687a]">(Personal Vault)</span></label>
             <select onchange="changeGuardianVault(${idx}, this.value)" class="d2-select w-full text-xs py-1.5 ${appState.restrictToVault && getGuardianVault(g) ? 'border-[#c7a86e]/60' : ''}">
@@ -3209,13 +3020,20 @@ function renderGuardianCards() {
             </select>
           </div>
 
-          <!-- Per-Guardian Slot Weapon Type Locks -->
+          <!-- Per-Guardian Slot Weapon Type Locks + Unlock Controls -->
           <div class="mb-2.5 p-2 bg-[#0d0f13] border border-[#252a36]">
             <div class="flex items-center justify-between gap-1 mb-1.5">
               <span class="text-[10px] font-mono-tech uppercase text-[#c7a86e] font-semibold">Slot Weapon Type Locks</span>
-              <button type="button" onclick="randomizeGuardianWeaponTypes(${idx})" class="text-[10px] font-mono-tech uppercase px-1.5 py-0.5 bg-[#161a23] border border-[#2b3140] hover:border-[#c7a86e] text-[#c7a86e] transition" title="Randomize &amp; lock valid weapon archetypes for Kinetic, Energy &amp; Heavy slots from this Guardian's eligible pool/vault">
-                🎲 Lock Random Types
-              </button>
+              <div class="flex items-center gap-1">
+                ${anyLocked ? `
+                  <button type="button" onclick="unlockGuardianWeaponTypes(${idx})" class="text-[10px] font-mono-tech uppercase px-1.5 py-0.5 bg-[#161a23] border border-[#2b3140] hover:border-[#c7a86e] text-[#9aa2b2] hover:text-[#eceae4] transition" title="Unlock all locked slot weapon types for this Guardian">
+                    🔓 Unlock All
+                  </button>
+                ` : ''}
+                <button type="button" onclick="randomizeGuardianWeaponTypes(${idx})" class="text-[10px] font-mono-tech uppercase px-1.5 py-0.5 bg-[#161a23] border border-[#2b3140] hover:border-[#c7a86e] text-[#c7a86e] transition" title="Randomize &amp; lock valid weapon archetypes for Kinetic, Energy &amp; Heavy slots from this Guardian's eligible pool/vault">
+                  🎲 Lock Random Types
+                </button>
+              </div>
             </div>
             <div class="grid grid-cols-3 gap-1.5">
               ${["Kinetic", "Energy", "Power"].map(slotKey => {
@@ -3224,10 +3042,17 @@ function renderGuardianCards() {
                 const slotLabel = slotKey === "Power" ? "Heavy" : slotKey;
                 return `
                   <div>
-                    <label class="block text-[9px] font-mono-tech uppercase text-[#9aa2b2] mb-0.5">${slotLabel}</label>
+                    <div class="flex items-center justify-between mb-0.5">
+                      <label class="block text-[9px] font-mono-tech uppercase text-[#9aa2b2]">${slotLabel}</label>
+                      ${isLocked ? `
+                        <button type="button" onclick="unlockGuardianSlotType(${idx}, '${slotKey}')" class="text-[9px] font-mono-tech text-[#c7a86e] hover:text-white leading-none px-0.5" title="Unlock ${slotLabel} weapon type lock">
+                          🔓 Unlock
+                        </button>
+                      ` : ''}
+                    </div>
                     <select onchange="changeGuardianSlotType(${idx}, '${slotKey}', this.value)" class="d2-select w-full text-[10px] py-1 px-1.5 pr-5 ${isLocked ? 'border-[#c7a86e] text-[#eceae4]' : ''}" title="${slotLabel} slot weapon archetype lock">
-                      <option value="ANY" ${curVal === 'ANY' ? 'selected' : ''}>Any (Use Global Rule)</option>
-                      <option value="RANDOM" ${curVal === 'RANDOM' ? 'selected' : ''}>🎲 Randomize</option>
+                      <option value="ANY" ${curVal === 'ANY' ? 'selected' : ''}>Any (Unlocked)</option>
+                      <option value="RANDOM" ${curVal === 'RANDOM' ? 'selected' : ''}>🎲 Randomize &amp; Lock</option>
                       ${SLOT_WEAPON_TYPES[slotKey].map(t => `<option value="${escapeHtml(t)}" ${curVal === t ? 'selected' : ''}>${escapeHtml(formatWeaponTypeLabel(t))}</option>`).join('')}
                     </select>
                   </div>
@@ -3236,7 +3061,6 @@ function renderGuardianCards() {
             </div>
           </div>
 
-          <!-- Class & Subclass Row -->
           <div class="grid grid-cols-2 gap-2 mb-2.5">
             <div>
               <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Class</label>
@@ -3254,7 +3078,6 @@ function renderGuardianCards() {
             </div>
           </div>
 
-          <!-- Exotic Armor Selector + Slot Filter -->
           <div class="mb-2.5">
             <div class="flex items-center justify-between mb-1">
               <label class="text-[10px] font-mono-tech uppercase text-[#ceae33]">Exotic Armor</label>
@@ -3274,7 +3097,6 @@ function renderGuardianCards() {
             </select>
           </div>
 
-          <!-- Aspects (2 Slots) -->
           <div class="mb-2.5">
             <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Aspects (Select up to 2)</label>
             <div class="grid grid-cols-2 gap-1.5">
@@ -3286,7 +3108,6 @@ function renderGuardianCards() {
             </div>
           </div>
 
-          <!-- Fragments (4-5 Slots) -->
           <div>
             <label class="block text-[10px] font-mono-tech uppercase text-[#9aa2b2] mb-1">Fragments (${activeSub.element === 'Prismatic' ? '5' : '4'} Slots)</label>
             <div class="grid grid-cols-2 gap-1.5">
@@ -3301,6 +3122,49 @@ function renderGuardianCards() {
       </div>
     `;
   }).join('');
+}
+
+function unlockGuardianSlotType(idx, slotKey) {
+  const g = appState.guardians[idx];
+  if (!g) return;
+  if (!g.slotTypes) g.slotTypes = { Kinetic: "ANY", Energy: "ANY", Power: "ANY" };
+  g.slotTypes[slotKey] = "ANY";
+  saveState();
+  renderGuardianCards();
+  updatePoolReadout();
+  if (appState.lastGeneratedChart) {
+    generateFireteamChart();
+  }
+  const slotLabel = slotKey === "Power" ? "Heavy" : slotKey;
+  showToast(`Unlocked ${g.name}'s ${slotLabel} weapon type.`);
+}
+
+function unlockGuardianWeaponTypes(idx, silent = false) {
+  const g = appState.guardians[idx];
+  if (!g) return;
+  g.slotTypes = { Kinetic: "ANY", Energy: "ANY", Power: "ANY" };
+  if (!silent) {
+    saveState();
+    renderGuardianCards();
+    updatePoolReadout();
+    if (appState.lastGeneratedChart) {
+      generateFireteamChart();
+    }
+    showToast(`Unlocked all slot weapon types for ${g.name}.`);
+  }
+}
+
+function unlockAllWeaponTypes() {
+  for (let i = 0; i < appState.guardians.length; i++) {
+    unlockGuardianWeaponTypes(i, true);
+  }
+  saveState();
+  renderGuardianCards();
+  updatePoolReadout();
+  if (appState.lastGeneratedChart) {
+    generateFireteamChart();
+  }
+  showToast("Unlocked all slot weapon types across all Guardians.");
 }
 
 function updateGuardianField(idx, field, val) {
@@ -3341,12 +3205,11 @@ function changeGuardianSlotType(idx, slotKey, typeVal) {
 function pickRandomSlotArchetypeForGuardian(g, slotKey) {
   const allowedSlotTypes = SLOT_WEAPON_TYPES[slotKey] || [];
   const pool = getFilteredWeapons(slotKey, g, "IGNORE");
-  const availableCanonicalSet = new Set(
-    pool.map(w => normalizeWeaponType(w.type)).filter(t => allowedSlotTypes.includes(t))
-  );
-  const intersectedTypes = allowedSlotTypes.filter(t => availableCanonicalSet.has(t));
-  if (intersectedTypes.length > 0) {
-    return pickRandom(intersectedTypes);
+  if (pool.length > 0) {
+    // Equal odds per eligible weapon in the pool rather than skewing toward sparse types
+    const chosenWeapon = pickRandom(pool);
+    const normalized = normalizeWeaponType(chosenWeapon.type);
+    if (allowedSlotTypes.includes(normalized)) return normalized;
   }
   const globalType = appState.slotTypes && appState.slotTypes[slotKey];
   if (globalType && globalType !== "ALL" && allowedSlotTypes.includes(globalType)) return globalType;
@@ -3435,7 +3298,6 @@ function pickUniqueSubset(arr, count) {
   return copy.slice(0, count);
 }
 
-// Strictly enforces max 1 Exotic weapon across Kinetic, Energy, and Heavy (Power) slots per guardian
 function buildGuardianWeapons(g, usedGlobal, usedPerSlot) {
   const exoticRule = document.getElementById('selExoticRule').value;
   const dupRule = document.getElementById('selDuplicateRule').value;
@@ -3518,10 +3380,20 @@ function buildGuardianWeapons(g, usedGlobal, usedPerSlot) {
     return chosen;
   };
 
+  // Shuffle roll order when enforcing max 1 Exotic so no slot gets sequential priority
+  const rollOrder = enforceSingleExotic
+    ? pickUniqueSubset(["Kinetic", "Energy", "Power"], 3)
+    : ["Kinetic", "Energy", "Power"];
+
+  const pickedBySlot = {};
+  for (const slotName of rollOrder) {
+    pickedBySlot[slotName] = pickSlotWeapon(slotName, slotPools[slotName]);
+  }
+
   return {
-    kinetic: pickSlotWeapon("Kinetic", slotPools.Kinetic),
-    energy: pickSlotWeapon("Energy", slotPools.Energy),
-    power: pickSlotWeapon("Power", slotPools.Power),
+    kinetic: pickedBySlot.Kinetic,
+    energy: pickedBySlot.Energy,
+    power: pickedBySlot.Power,
     vaultSource: gVault ? gVault.displayName : null,
     lockedTypes: { ...g.slotTypes }
   };
